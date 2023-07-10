@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
@@ -8,13 +7,37 @@ import sellerRoutes from "./routes/sellerRoutes.js";
 import verifySeller from "./src/middleware/verifySeller.js";
 import { decryptAccessToken } from "./src/helper/jwtToken.js";
 import setType from "./src/helper/setType.js";
+import cors from "cors";
+import bodyParser from "body-parser";
+import http from "http";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServer } from "@apollo/server";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolver.js";
 
-// SETUP
+// SETUP FOR REST AND GRAPHQL
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
-app.use(bodyParser.json());
+const port = process.env.PORT || 4000;
+const httpServer = http.createServer(app);
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+});
+await server.start();
+app.use(
+  "/graphql",
+  cors(),
+  bodyParser.json(),
+  expressMiddleware(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+  })
+);
+
+await new Promise((resolve) => httpServer.listen({ port }, resolve));
+console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 
 // MONGOOSE
 const { connect, connection: conn } = mongoose;
