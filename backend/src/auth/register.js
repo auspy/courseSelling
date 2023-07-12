@@ -32,20 +32,18 @@ export default async function register(req, res) {
         .status(403)
         .json({ error: "Invalid user, user already exists" });
     }
-    const token = encryptAccessToken({ username, id: doc._id });
-    if (!token) {
-      return res
-        .status(500)
-        .json({ error: "Token was not created", status: "failed" });
-    }
+    // const token = encryptAccessToken({ username, id: doc._id });
+    // if (!token) {
+    //   return res
+    //     .status(500)
+    //     .json({ error: "Token was not created", status: "failed" });
+    // }
     const newUser = await new type({
       username,
       password,
     }).save();
     console.log("user created", newUser);
-    res
-      .status(200)
-      .json({ token, msg: "user created successfully", data: newUser }); // token is sent to the user
+    res.status(200).json({ msg: "user created successfully", data: newUser }); // token is sent to the user
   } catch (error) {
     console.log(`Error in register: ${error.message}`);
     res.status(401).json({ error: error.message, status: "failed" });

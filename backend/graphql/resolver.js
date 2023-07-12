@@ -1,9 +1,10 @@
 import resolverCourses from "./resolvers/resolver.courses.js";
+import resolverAuth from "./resolvers/resolvers.auth.js";
 
 const resolvers = {
   Query: {
-    books: () => books,
+    ...resolverCourses,
+    ...resolverAuth,
   },
-  ...resolverCourses,
 };
 export default resolvers;

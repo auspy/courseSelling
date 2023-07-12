@@ -29,21 +29,15 @@ const server = new ApolloServer({
 await server.start();
 
 // PATHS
+// to bypass cors error, accept json data
 app.use(cors(), bodyParser.json());
 // user
 app.use("/u", userRoutes);
 // seller
-app.use(
-  "/s",
-  (req, res, next) => {
-    console.log(req.body);
-    setType("admin", req, next);
-  },
-  authRoutes
-); // not encrypted routes
+app.use("/s", (req, res, next) => setType("admin", req, next), authRoutes); // not encrypted routes
 app.use("/s", decryptAccessToken, verifySeller, sellerRoutes); // s stands for seller
 
-// ATTCHING GRAPHQL MIDDLEWARE TO EXPRESS
+// ATTACHING GRAPHQL MIDDLEWARE TO EXPRESS
 app.use(
   "/graphql",
   expressMiddleware(server, {
