@@ -1,4 +1,4 @@
-import { Course } from "../../mongoose/modals/modals.js";
+import { Admin, Course } from "../../mongoose/modals/modals.js";
 
 export default async function AddCourse(req, res) {
   try {
@@ -18,10 +18,37 @@ export default async function AddCourse(req, res) {
       published: published || false,
       createdAt: new Date().getTime(),
     };
-    if (creator || req.user.id) {
-      newCourseData.creator = creator || req.user.id;
+    // add creator id if present
+    if (!(creator || req.user._id)) {
+      return res
+        .status(400)
+        .json({ msg: "missing creator id", status: "failed" });
     }
+    newCourseData.creator = creator || req.user._id;
     const course = new Course(newCourseData);
+
+    // add course to user's created Courses
+    if (newCourseData.creator) {
+      console.log(newCourseData.creator, course);
+      const updateCreatedCourses = await Admin.updateOne(
+        { _id: newCourseData.creator },
+        { $push: { createdCourses: course._id } }
+      );
+      // updateOne is faster than findByIdAndUpdate because it doesn't have to scan entire collection, it will stop once it finds the first match
+      if (
+        updateCreatedCourses.acknowledged === false ||
+        updateCreatedCourses.modifiedCount === 0 ||
+        updateCreatedCourses.matchedCount === 0
+      )
+        // not updated
+        return res.status(400).json({
+          msg: "update admin created courses failed",
+          status: "failed",
+          data: updateCreatedCourses,
+        });
+    }
+
+    // save course
     const data = await course.save();
     res.status(200).json({
       msg: "Course added successfully",

@@ -27,10 +27,25 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 await server.start();
+
+// PATHS
+app.use(cors(), bodyParser.json());
+// user
+app.use("/u", userRoutes);
+// seller
+app.use(
+  "/s",
+  (req, res, next) => {
+    console.log(req.body);
+    setType("admin", req, next);
+  },
+  authRoutes
+); // not encrypted routes
+app.use("/s", decryptAccessToken, verifySeller, sellerRoutes); // s stands for seller
+
+// ATTCHING GRAPHQL MIDDLEWARE TO EXPRESS
 app.use(
   "/graphql",
-  cors(),
-  bodyParser.json(),
   expressMiddleware(server, {
     context: async ({ req }) => ({ token: req.headers.token }),
   })
@@ -55,10 +70,3 @@ conn.once("open", (_) => {
 conn.on("error", (err) => {
   console.error("connection error:", err);
 });
-
-// PATHS
-// user
-app.use("/u", userRoutes);
-// seller
-app.use("/s", (req, res, next) => setType("admin", req, next), authRoutes); // not encrypted routes
-app.use("/s", decryptAccessToken, verifySeller, sellerRoutes); // s stands for seller

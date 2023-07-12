@@ -1,4 +1,4 @@
-import { Course } from "../../mongoose/modals/modals.js";
+import { Course, User } from "../../mongoose/modals/modals.js";
 
 const resolverCourses = {
   Query: {
@@ -14,6 +14,16 @@ const resolverCourses = {
         return data;
       } catch (error) {
         throw new Error(`Error in getCourse: ${error.message}`);
+      }
+    },
+    getPurchasedCourses: async (_, args) => {
+      try {
+        const courses = await User.findById(args.id)
+          .populate("purchasedCourses")
+          .exec();
+        return courses || [];
+      } catch (error) {
+        console.log(`Error in getPurchasedCourses: ${error.message}`);
       }
     },
   },

@@ -4,13 +4,13 @@ import { encryptAccessToken } from "../helper/jwtToken.js";
 export default async function login(req, res) {
   try {
     const tp = req.type;
+    console.log("type of login", tp);
     const { username, password } = req.body;
     if (!(username && password)) {
       return res
         .status(401)
         .json({ error: "Invalid user, missing login data", status: "failed" });
     }
-    console.log("type of login", tp);
     let type;
     if (tp === "admin") {
       // seller login
