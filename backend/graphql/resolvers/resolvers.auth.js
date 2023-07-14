@@ -9,7 +9,7 @@ const resolverAuth = {
       type = Admin;
     }
     const user = await type.findOne({ username });
-    const token = encryptAccessToken({ username });
+    const token = encryptAccessToken({ username, _id: user._id, role });
     if (!token) {
       return {
         msg: "Token was not created",

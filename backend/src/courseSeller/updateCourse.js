@@ -6,7 +6,7 @@ export default async function updateCourse(req, res) {
     if (!id) return res.status(400).json({ msg: "id is required" });
 
     const updateData = await Course.updateOne(
-      { _id: req.params.id, creator: req.user.id }, // using creator to make sure that only the creator can update the course
+      { _id: id, creator: req.user.id }, // using creator to make sure that only the creator can update the course
       req.body
     );
 

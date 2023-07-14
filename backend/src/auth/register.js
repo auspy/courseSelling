@@ -4,7 +4,7 @@
 // if the password is correct, we send the user a token
 
 import { Admin, User } from "../../mongoose/modals/modals.js";
-import { encryptAccessToken } from "../helper/jwtToken.js";
+// import { encryptAccessToken } from "../helper/jwtToken.js";
 
 // if no user exists then new user is created
 export default async function register(req, res) {

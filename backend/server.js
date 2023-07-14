@@ -4,8 +4,11 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import sellerRoutes from "./routes/sellerRoutes.js";
-import verifySeller from "./src/middleware/verifySeller.js";
-import { decryptAccessToken } from "./src/helper/jwtToken.js";
+import verifySellerMW, { verifyUser } from "./src/middleware/verifySeller.js";
+import {
+  decryptAccessToken,
+  decryptAccessTokenMW,
+} from "./src/helper/jwtToken.js";
 import setType from "./src/helper/setType.js";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -35,13 +38,26 @@ app.use(cors(), bodyParser.json());
 app.use("/u", userRoutes);
 // seller
 app.use("/s", (req, res, next) => setType("admin", req, next), authRoutes); // not encrypted routes
-app.use("/s", decryptAccessToken, verifySeller, sellerRoutes); // s stands for seller
+app.use("/s", decryptAccessTokenMW, verifySellerMW, sellerRoutes); // s stands for seller
 
 // ATTACHING GRAPHQL MIDDLEWARE TO EXPRESS
 app.use(
   "/graphql",
   expressMiddleware(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: async ({ req }) => {
+      // Verify and decode JWT token from request headers
+      const token = req.headers.authorization || "";
+      try {
+        if (!token) return null;
+        const user = decryptAccessToken(token);
+        console.log("User found in token", user);
+        return { user };
+      } catch (error) {
+        // Handle token verification errors, if any
+        console.error("Token verification error:", error);
+        return null;
+      }
+    },
   })
 );
 
