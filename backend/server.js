@@ -20,7 +20,9 @@ import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolver.js";
 
 // SETUP FOR REST AND GRAPHQL
-dotenv.config();
+const env = process.env.NODE_ENV || "development";
+dotenv.config({ path: `.env.${env}` });
+console.log("NODE_ENV", process.env.ENV, env);
 const app = express();
 const port = process.env.PORT || 4000;
 const httpServer = http.createServer(app);

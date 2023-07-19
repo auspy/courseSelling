@@ -26,16 +26,21 @@ const decryptAccessTokenMW = (req, res, next) => {
 };
 
 const decryptAccessToken = (accessToken) => {
-  if (accessToken) {
-    const token = accessToken.split(" ")[1];
-    return jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-      if (err || !data || !data.user?.username) {
-        console.log("Error in decryptAccessToken", data, data.user.username);
-        return null;
-      }
-      console.log("User found in token", data.user);
-      return data.user;
-    });
+  try {
+    if (accessToken) {
+      const token = accessToken.split(" ")[1];
+      return jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+        if (err || !data || !data.user?.username) {
+          console.log("Error in decryptAccessToken", data, data.user?.username);
+          return null;
+        }
+        console.log("User found in token", data.user);
+        return data.user;
+      });
+    }
+  } catch (error) {
+    console.log("Error in decryptAccessToken", error);
+    return null;
   }
 };
 
