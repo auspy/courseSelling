@@ -1,0 +1,349 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* LINK */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+/* TEXT */
+/* semi, regu, medi, medi12, medi14, regu14, regu13, regu12 */
+
+.semi {
+  font-weight: 600;
+}
+
+.medi,
+.medi13 {
+  font-weight: 500;
+}
+
+.medi14,
+.medi12,
+.regu14 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.regu14,
+.regu,
+.regu13,
+.regu12 {
+  font-weight: 400;
+}
+
+.medi12,
+.regu12 {
+  font-size: 12px;
+}
+
+.regu13,
+.medi13 {
+  font-size: 13px;
+}
+
+/* TEXT TRANSFORM */
+/* upper, caps */
+
+.upper {
+  text-transform: uppercase;
+}
+
+.caps {
+  text-transform: capitalize;
+}
+
+/* FLEX */
+/* f1, fcfs, fcfssb, frfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, frcc, fccc */
+.f1 {
+  flex: 1;
+}
+
+.fcfs,
+.fcfssb,
+.frc,
+.fcc,
+.frcsb,
+.fccsb,
+.frcsa,
+.frfs,
+.fcfe,
+.frcc,
+.fccc,
+.frfssb {
+  display: flex;
+}
+
+.frc,
+.fcc,
+.frcsb,
+.fccsb,
+.frcsa,
+.frfs,
+.frcc,
+.fccc {
+  flex-direction: row;
+  align-items: center;
+}
+
+.fcfe {
+  align-items: flex-end;
+}
+
+.fcc,
+.fccsb,
+.fcfs,
+.fcfssb,
+.fcfe,
+.fccc {
+  flex-direction: column;
+}
+
+.fcfs,
+.fcfssb,
+.frfs,
+.frfssb {
+  align-items: flex-start;
+}
+
+.frcsb,
+.fccsb,
+.fcfssb,
+.frfssb {
+  justify-content: space-between;
+}
+
+.frcsa {
+  justify-content: space-around;
+}
+
+.frcc,
+.fccc {
+  justify-content: center;
+}
+
+.gcc,
+button {
+  display: grid;
+  align-items: center;
+  /* justify-content: center; */
+  justify-items: center;
+}
+
+/* MARGIN */
+/* mr30, mr20, mr5, mb20, mb15, mv10,mv20, mh10, mt30, mt40, mt15, mt5,mt60, ml15, ml30 */
+
+.mr30 {
+  margin-right: 30px;
+}
+.mr25 {
+  margin-right: 30px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.mr15 {
+  margin-right: 15px;
+}
+.mr5 {
+  margin-right: 5px;
+}
+.mr10 {
+  margin-right: 10px;
+}
+/* bottom */
+.mb30 {
+  margin-bottom: 30px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.mb15 {
+  margin-bottom: 15px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.mb5 {
+  margin-bottom: 5px;
+}
+/* vertical */
+.mv20 {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.mv10 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+/* horizontal */
+.mh10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.mh15 {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+/* top */
+.mt30 {
+  margin-top: 30px;
+}
+.mt40 {
+  margin-top: 40px;
+}
+.mt60 {
+  margin-top: 60px;
+}
+.mt20 {
+  margin-top: 20px;
+}
+.mt15 {
+  margin-top: 15px;
+}
+.mt10 {
+  margin-top: 10px;
+}
+.mt5 {
+  margin-top: 5px;
+}
+
+/* left */
+.ml15 {
+  margin-left: 15px;
+}
+.ml20 {
+  margin-left: 20px;
+}
+.ml10 {
+  margin-left: 10px;
+}
+.ml5 {
+  margin-left: 5px;
+}
+.ml30 {
+  margin-left: 30px;
+}
+
+/* PADDING */
+/* p30 */
+.p30,
+.pv10,
+.p10,
+.p20 {
+  box-sizing: border-box;
+}
+.p30 {
+  padding: 30px;
+}
+.pv10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.p10 {
+  padding: 10px;
+}
+.p20 {
+  padding: 20px;
+}
+
+/* COMMON */
+/* aPosi, rPosi, z10, w100, dNone, textCenter, bgNone */
+.aPosi {
+  position: absolute;
+}
+.rPosi {
+  position: relative;
+}
+.z10 {
+  z-index: 10;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.dNone {
+  display: none;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.bgNone,
+.bgNone:disabled {
+  background: none;
+  border: none;
+}
+
+.alignCenter {
+  align-self: center;
+}
+
+/* HOVER */
+button:hover:enabled,
+input[type="button"]:hover:enabled,
+input[type="submit"]:hover:enabled,
+.hover:enabled:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+/* TEXT */
+/* family */
+/* .bold10,
+  .bold12,
+  .regu12,
+  .semi14,
+  .semi10 {
+    font-family: "Montserrat", sans-serif;
+  } */
+/* weight */
+.regu12,
+.regu10 {
+  font-weight: 400;
+}
+.semi14,
+.semi10 {
+  font-weight: 600;
+}
+.bold10,
+.bold12,
+.bold14 {
+  font-weight: 700;
+}
+/* size */
+.regu10,
+.semi10,
+.bold10 {
+  font-size: 0.625rem;
+}
+.regu12,
+.semi12,
+.bold12 {
+  font-size: 0.75rem;
+}
+.semi14,
+.bold14 {
+  font-size: 0.875rem;
+}
