@@ -70,10 +70,11 @@
 
 .boxTransform {
   background: none;
-  box-shadow: drop-shodow(11px 10px 4px var(--dark-bg));
+  box-shadow: 11px 10px 4px var(--dark-bg);
   transform: translate(-50%, 0);
   transition: transform 0.5s ease-in-out;
   &:hover {
     transform: scale(1.025) translate(-49%, 0);
+    // transform: scale(1.025);
   }
 }

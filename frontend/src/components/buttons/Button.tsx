@@ -16,7 +16,7 @@ const Button = ({
         backgroundColor: "transparent",
         ...buttonStyle,
       }}
-      className={`${styles.hover} ${styles.parent} ${buttonClass}`}
+      className={`${styles.hover} ${styles.parent} zoom ${buttonClass}`}
     >
       <div className={styles.bottom}>
         <PartBtnBtm />

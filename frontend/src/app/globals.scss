@@ -44,10 +44,12 @@ button {
   line-height: normal;
   text-transform: uppercase;
   background-color: var(--dark-bg);
-  transition: transform 0.5s ease-in-out;
   &svg {
     box-shadow: 3px 2px 2px 0px var(--shadow);
   }
+}
+.zoom {
+  transition: transform 0.5s ease-in-out;
   &:hover {
     transform: scale(1.05);
   }
@@ -55,22 +57,31 @@ button {
 
 // TEXT
 h2,
-h1 {
+h1,
+h4 {
   color: var(--white);
   font-family: Raleway, sans-serif;
   font-style: normal;
   font-weight: 700;
 }
 
+h2,
+h4 {
+  text-transform: capitalize;
+}
 h2 {
   font-size: 36px;
   line-height: 50px;
-  text-transform: capitalize;
 }
 
 h1 {
   font-size: 64px;
   line-height: normal;
+}
+h4 {
+  font-size: 15px;
+  line-height: 150%;
+  font-weight: 600;
 }
 
 // CONTAINERS
@@ -83,5 +94,6 @@ h1 {
 }
 
 .container1200 {
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
 }

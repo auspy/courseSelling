@@ -1,5 +1,5 @@
 import Heading from "@/components/text/Heading";
-import { ImgProps } from "@/types/interface.img";
+import { ImgProps } from "@/types/types.img";
 import Image from "next/image";
 
 const logos: ImgProps[] = [
@@ -28,15 +28,15 @@ const logos: ImgProps[] = [
     height: 109,
   },
   {
-    img: "/images/trust/4.png",
-    alt: "4",
+    img: "/images/trust/5.png",
+    alt: "5",
     width: 100,
     height: 105,
   },
 ];
 const Trust = () => {
   return (
-    <div className="fcc" style={{ padding: "100px 0" }}>
+    <div className="container1200 fcc pv100" style={{}}>
       <Heading
         text="We"
         highlightText="Collaborate"

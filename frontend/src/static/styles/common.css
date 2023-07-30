@@ -24,6 +24,10 @@ textarea:focus,
 button:focus {
   outline: none;
 }
+button {
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
 
 /* TEXT */
 /* semi, regu, medi, medi12, medi14, regu14, regu13, regu12 */
@@ -268,7 +272,9 @@ button {
 .p20 {
   padding: 20px;
 }
-
+.pv100 {
+  padding: 100px 0;
+}
 /* COMMON */
 /* aPosi, rPosi, z10, w100, dNone, textCenter, bgNone */
 .aPosi {
@@ -332,7 +338,8 @@ input[type="submit"]:hover:enabled,
 }
 .bold10,
 .bold12,
-.bold14 {
+.bold14,
+.bold16 {
   font-weight: 700;
 }
 /* size */
@@ -349,4 +356,8 @@ input[type="submit"]:hover:enabled,
 .semi14,
 .bold14 {
   font-size: 0.875rem;
+}
+
+.bold16 {
+  font-size: 1rem;
 }

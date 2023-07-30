@@ -1,6 +1,6 @@
 import Heading from "@/components/text/Heading";
 import RightText from "./RightText";
-import OfferBox from "../trust/OfferBox";
+import OfferBox from "./OfferBox";
 
 const Offer = () => {
   return (

@@ -1,4 +1,4 @@
-import { ImgProps } from "./interface.img";
+import { ImgProps } from "./types.img";
 
 export interface HeroImgContainerProps extends ImgProps {
   img: string;

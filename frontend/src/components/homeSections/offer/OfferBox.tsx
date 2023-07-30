@@ -7,6 +7,14 @@ import ButtonPlay from "@/components/buttons/ButtonPlay";
 
 const OfferBox = () => {
   return (
+    // <div
+    //   style={{
+    //     position: "absolute",
+    //     bottom: 8,
+    //     left: "50%",
+    //     transform: "translate(-50%, 0)",
+    //   }}
+    // >
     <div
       className={`${styles.hover} ${styles.parent} ${styles.boxTransform}`}
       style={{
@@ -41,6 +49,8 @@ on starter pack"
         <ButtonPlay />
       </div>
     </div>
+
+    // </div>
   );
 };
 
