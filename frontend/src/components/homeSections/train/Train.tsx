@@ -2,12 +2,12 @@
 import TabButtonsRow from "@/components/buttons/TabButtons/TabButtonsRow";
 import CourseCard from "@/components/cards/CourseCard";
 import Heading from "@/components/text/Heading";
-import { CardProps } from "@/types/types.card";
+import { CourseCardProps } from "@/types/types.card";
 import { useState } from "react";
 
 const Train = () => {
   const [active, setActive] = useState("Designs");
-  const cardData: { [key: string]: CardProps[] } = {
+  const cardData: { [key: string]: CourseCardProps[] } = {
     Designs: [
       {
         img: {

@@ -58,7 +58,8 @@ button {
 // TEXT
 h2,
 h1,
-h4 {
+h4,
+h3 {
   color: var(--white);
   font-family: Raleway, sans-serif;
   font-style: normal;
@@ -77,6 +78,9 @@ h2 {
 h1 {
   font-size: 64px;
   line-height: normal;
+}
+h3 {
+  font-size: 16px;
 }
 h4 {
   font-size: 15px;

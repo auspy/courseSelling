@@ -29,42 +29,6 @@ button {
   transition: opacity 0.15s ease-in-out;
 }
 
-/* TEXT */
-/* semi, regu, medi, medi12, medi14, regu14, regu13, regu12 */
-
-.semi {
-  font-weight: 600;
-}
-
-.medi,
-.medi13 {
-  font-weight: 500;
-}
-
-.medi14,
-.medi12,
-.regu14 {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.regu14,
-.regu,
-.regu13,
-.regu12 {
-  font-weight: 400;
-}
-
-.medi12,
-.regu12 {
-  font-size: 12px;
-}
-
-.regu13,
-.medi13 {
-  font-size: 13px;
-}
-
 /* TEXT TRANSFORM */
 /* upper, caps */
 
@@ -93,7 +57,8 @@ button {
 .fcfe,
 .frcc,
 .fccc,
-.frfssb {
+.frfssb,
+.frfe {
   display: flex;
 }
 
@@ -104,12 +69,14 @@ button {
 .frcsa,
 .frfs,
 .frcc,
-.fccc {
+.fccc,
+.frfe {
   flex-direction: row;
   align-items: center;
 }
 
-.fcfe {
+.fcfe,
+.frfe {
   align-items: flex-end;
 }
 
@@ -328,12 +295,28 @@ input[type="submit"]:hover:enabled,
     font-family: "Montserrat", sans-serif;
   } */
 /* weight */
+/* TEXT */
+/* semi, regu, medi, medi12, medi14, regu14, regu13, regu12 */
+
+.regu,
+.regu10,
 .regu12,
-.regu10 {
+.regu13,
+.regu14,
+.regu16 {
   font-weight: 400;
 }
+.medi,
+.medi12,
+.medi13,
+.medi14,
+.medu16 {
+  font-weight: 500;
+}
+.semi,
 .semi14,
-.semi10 {
+.semi10,
+.semi16 {
   font-weight: 600;
 }
 .bold10,
@@ -349,15 +332,23 @@ input[type="submit"]:hover:enabled,
   font-size: 0.625rem;
 }
 .regu12,
+.medi12,
 .semi12,
 .bold12 {
   font-size: 0.75rem;
 }
+.regu13,
+.medi13 {
+  font-size: 13px;
+}
+.medi14,
 .semi14,
 .bold14 {
   font-size: 0.875rem;
 }
-
+.regu16,
+.medi16,
+.semi16,
 .bold16 {
   font-size: 1rem;
 }

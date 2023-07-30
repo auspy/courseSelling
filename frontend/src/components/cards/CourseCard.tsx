@@ -1,12 +1,12 @@
 "use client";
-import { CardProps } from "@/types/types.card";
+import { CourseCardProps } from "@/types/types.card";
 import { Avatar, AvatarGroup } from "@mui/material";
 import Image from "next/image";
 
 const CourseCard = ({
   img: { img, alt },
   course: { title, price, creator, purchaseCount },
-}: CardProps) => {
+}: CourseCardProps) => {
   const avatarStyle = { border: "2px solid #2e2e2e", height: 30, width: 30 };
   return (
     <div
