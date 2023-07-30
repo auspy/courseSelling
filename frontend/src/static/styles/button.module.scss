@@ -36,7 +36,7 @@
 }
 
 .buttonThird {
-  background: var(--bg);
+  // background: var(--bg);
   &:hover {
     transform: unset;
   }
@@ -55,4 +55,25 @@
   padding: 1px;
   border-radius: 40px;
   overflow: hidden;
+}
+
+// PLAY BUTTON
+.triangle {
+  width: 26px;
+  height: 26px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent; /* Change the color as needed */
+  border-left: 25px solid var(--dark-bg);
+  position: relative;
+  left: 3px;
+}
+
+.boxTransform {
+  background: none;
+  box-shadow: drop-shodow(11px 10px 4px var(--dark-bg));
+  transform: translate(-50%, 0);
+  transition: transform 0.5s ease-in-out;
+  &:hover {
+    transform: scale(1.025) translate(-49%, 0);
+  }
 }

@@ -4,14 +4,16 @@ const Heading = ({
   text,
   highlightText,
   afterHighlightText,
-  type,
+  type = 1,
   capitalise = false,
   uppercase = false,
   highlightTextStyle,
   highlightTextClass,
-  highlightTextContaineClass,
+  headingStyle,
 }: HeadingProps) => {
-  const headingStyles: React.CSSProperties = {};
+  const headingStyles: React.CSSProperties = {
+    ...headingStyle,
+  };
   if (capitalise) {
     headingStyles["textTransform"] = "capitalize";
   }
@@ -22,17 +24,17 @@ const Heading = ({
     <>
       {text}
       {highlightText && (
-        <div className={`frc ${highlightTextContaineClass}`}>
-          <div
-            className={`h${type + 1}Highlight mr15 ${highlightTextClass}`}
+        <>
+          <span
+            className={`h${type + 1}Highlight ${highlightTextClass}`}
             style={highlightTextStyle}
           >
             {" "}
             {highlightText}{" "}
-          </div>
-          {afterHighlightText}
-        </div>
+          </span>
+        </>
       )}
+      {afterHighlightText}
     </>
   );
   const HeadingElement = () => {

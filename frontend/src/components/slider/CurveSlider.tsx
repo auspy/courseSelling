@@ -1,8 +1,6 @@
 "use client";
-import styles from "../../static/styles/slider.module.scss";
 import FullCurve from "../../static/parts/curves/FullCurve";
 import { useEffect, useState } from "react";
-import Heading from "../text/Heading";
 const CurveSlider = () => {
   const [percent, setPercent] = useState(0.5);
   const [width, setWidth] = useState(1200);
@@ -14,7 +12,6 @@ const CurveSlider = () => {
   }, []);
   return (
     <>
-      <Heading text="testing" highlightText="wow" />
       <FullCurve
         percent={String(width * percent)}
         bgLineColor="var(--dark-bg)"

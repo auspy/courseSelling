@@ -42,6 +42,7 @@ const HeroImgContainer = ({
           width={width}
           height={height}
           style={{ borderRadius: 5 }}
+          priority={true} // this is to make sure the image is loaded first. as the image is above the fold which means it is visible to the user without scrolling
         />
       </div>
     </>

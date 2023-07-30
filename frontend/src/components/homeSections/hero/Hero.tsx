@@ -1,16 +1,15 @@
 import Heading from "@/components/text/Heading";
-import HeroLeftContainer from "../HeroLeftContainer";
+import HeroLeftContainer from "./HeroLeftContainer";
 import HeroImgs from "./HeroImgs";
 import Button from "@/components/buttons/Button";
 import ButtonSec from "@/components/buttons/ButtonSec";
 
 const Hero = () => {
   return (
-    <>
+    <div className="topContainer">
       <div
-        className="topContainer"
+        className="container1200"
         style={{
-          width: "100%",
           overflow: "hidden",
           maxHeight: 656,
           height: 656,
@@ -30,12 +29,13 @@ const Hero = () => {
                   highlightText={"skills"}
                   afterHighlightText={"faster"}
                   highlightTextStyle={{
-                    width: 154,
+                    display: "inline-block",
+                    width: 152,
                     backgroundColor: "var(--white)",
                     borderRadius: 20,
                     height: 74,
                   }}
-                  highlightTextClass="frc"
+                  highlightTextClass="mr10"
                   type={0}
                 />
               </>
@@ -44,6 +44,9 @@ const Hero = () => {
               "Speed up the skill acquisition process by finding unlimited courses that matches your niche."
             }
             descClass="mt20"
+            descStyle={{
+              opacity: 0.8,
+            }}
             containerStyle={{ maxWidth: 438, maxHeight: "inherit" }}
             buttons={
               <div className="frc mt60">
@@ -64,7 +67,7 @@ const Hero = () => {
           <HeroImgs />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

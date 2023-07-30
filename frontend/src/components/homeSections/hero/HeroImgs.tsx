@@ -4,20 +4,20 @@ import HeroImgContainer from "./HeroImgContainer";
 const imgs: HeroImgContainerProps[][] = [
   [
     {
-      img: "/images/management.png",
+      img: "/images/hero/management.png",
       alt: "management",
       width: 235,
       height: 241,
     },
     {
-      img: "/images/interior.png",
+      img: "/images/hero/interior.png",
       alt: "interior",
       width: 235,
       height: 287,
       heading: "interior design",
     },
     {
-      img: "/images/video.png",
+      img: "/images/hero/video.png",
       alt: "video",
       width: 235,
       height: 204,
@@ -26,20 +26,20 @@ const imgs: HeroImgContainerProps[][] = [
   ],
   [
     {
-      img: "/images/business.png",
+      img: "/images/hero/business.png",
       alt: "business",
       width: 235,
       height: 179,
       needGradient: true,
     },
     {
-      img: "/images/teaching.png",
+      img: "/images/hero/teaching.png",
       alt: "teaching",
       width: 235,
       height: 256,
     },
     {
-      img: "/images/art.png",
+      img: "/images/hero/art.png",
       alt: "art",
       width: 235,
       height: 204,

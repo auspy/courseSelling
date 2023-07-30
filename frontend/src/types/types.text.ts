@@ -1,12 +1,11 @@
 export type HeadingProps = {
   text: string;
+  headingStyle?: React.CSSProperties;
   highlightText?: string;
   highlightTextStyle?: React.CSSProperties;
   highlightTextClass?: string;
-  highlightTextContainerStyle?: React.CSSProperties;
-  highlightTextContaineClass?: string;
   afterHighlightText?: string;
-  type: HeadingType;
+  type?: HeadingType;
   capitalise?: boolean;
   uppercase?: boolean;
 };

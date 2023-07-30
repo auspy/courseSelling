@@ -1,4 +1,6 @@
-export type HeroImgContainerProps = {
+import { ImgProps } from "./interface.img";
+
+export interface HeroImgContainerProps extends ImgProps {
   img: string;
   alt: string;
   width: number;
@@ -6,7 +8,7 @@ export type HeroImgContainerProps = {
   needGradient?: boolean;
   style?: React.CSSProperties;
   heading?: string;
-};
+}
 
 export type HeroLeftContainerProps = {
   heading: string | React.ReactNode;
