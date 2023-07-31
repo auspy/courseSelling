@@ -23,12 +23,12 @@ const PricingCard = ({
         break;
     }
   };
-  console.log(active);
   return (
     <div
       onClick={() => {
         setActive(type);
       }}
+      className="hover"
       style={{
         transition: "opacity 0.3s ease-in-out",
         transform: rotate(),

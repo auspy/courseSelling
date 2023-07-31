@@ -3,4 +3,5 @@ export interface ImgProps {
   alt: string;
   width: number;
   height: number;
+  style?: React.CSSProperties;
 }

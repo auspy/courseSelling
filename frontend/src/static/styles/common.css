@@ -277,6 +277,7 @@ button {
 }
 
 /* HOVER */
+.hover:hover,
 button:hover:enabled,
 input[type="button"]:hover:enabled,
 input[type="submit"]:hover:enabled,
