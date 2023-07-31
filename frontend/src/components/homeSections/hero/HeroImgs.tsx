@@ -49,7 +49,15 @@ const imgs: HeroImgContainerProps[][] = [
 const HeroImgs = () => {
   return (
     <>
-      <div className="frfs" style={{ gap: 25, alignSelf: "flex-start" }}>
+      <div
+        className="frfs"
+        style={{
+          gap: 25,
+          alignSelf: "flex-start",
+          height: "inherit",
+          overflow: "hidden",
+        }}
+      >
         {/* rows */}
         {imgs.map((row, index) => (
           <div key={index}>

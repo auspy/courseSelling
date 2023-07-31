@@ -1,6 +1,7 @@
 import Heading from "@/components/text/Heading";
 import RightText from "./RightText";
 import OfferBox from "./OfferBox";
+import OfferCurve from "@/static/parts/curves/OfferCurve";
 
 const Offer = () => {
   return (
@@ -19,7 +20,14 @@ const Offer = () => {
           highlightText="offer"
         />
         <OfferBox />
-        <RightText />
+        <div style={{ position: "relative" }}>
+          <RightText />
+          <div
+            style={{ position: "absolute", right: -947, top: -54, zIndex: 0 }}
+          >
+            <OfferCurve />
+          </div>
+        </div>
       </div>
     </div>
   );

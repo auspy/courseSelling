@@ -1,6 +1,7 @@
 export type ButtonProps = {
   value: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
   buttonStyle?: React.CSSProperties;
   buttonClass?: string;
   buttonTextStyle?: React.CSSProperties;

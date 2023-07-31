@@ -43,7 +43,8 @@ const Train = () => {
     <div
       className="topContainer"
       style={{
-        background: "linear-gradient(135deg, #383838 0%, #292929 100%)",
+        // background: "linear-gradient(135deg, #383838 0%, #292929 100%)",
+        background: "none",
       }}
     >
       <div className="container1200 fcc pv100" style={{}}>

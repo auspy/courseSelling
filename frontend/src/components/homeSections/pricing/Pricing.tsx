@@ -6,7 +6,7 @@ import { PricingCardProps, PricingType } from "@/types/types.card";
 import { useState } from "react";
 
 const Pricing = () => {
-  const [active, setActive] = useState(PricingType.Free);
+  const [active, setActive] = useState(PricingType.Basic);
   const pricingData: { [key in PricingType]: PricingCardProps } = {
     [PricingType.Basic]: {
       active: active,
@@ -34,7 +34,14 @@ const Pricing = () => {
     },
   };
   return (
-    <div className="topContainer pv100">
+    <div
+      className="topContainer pv100"
+      style={{
+        maxWidth: 1380,
+        borderRadius: 30,
+        overflow: "hidden",
+      }}
+    >
       <div className="fcc container1200">
         <Heading
           headingStyle={{

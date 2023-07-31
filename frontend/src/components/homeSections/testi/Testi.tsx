@@ -6,10 +6,18 @@ import IconRightArrow from "@/../public/icons/IconRightArrow";
 import ArrowButtonCurve from "@/static/parts/curves/ArrowButtonCurve";
 import Image from "next/image";
 import { TestiAuthorProps } from "@/types/types.testi";
+import TestiImgCurve from "@/static/parts/curves/TestiImgCurve";
 
 const Testi = () => {
   const [active, setActive] = useState(0);
   const activeRef = useRef(active);
+  const imgStyle: React.CSSProperties = {
+    position: "absolute",
+    bottom: 13.5,
+    left: "50%",
+    zIndex: 2,
+    transform: "translateX(-50%)",
+  };
   const testies: TestiAuthorProps[] = [
     {
       name: "John Doe",
@@ -19,11 +27,6 @@ const Testi = () => {
         alt: "John Doe",
         height: 407,
         width: 253,
-        style: {
-          position: "relative",
-          bottom: 25.5,
-          left: 6,
-        },
       },
       msg: {
         text: "I was struggling to learn a new language, but",
@@ -36,10 +39,10 @@ const Testi = () => {
       name: "John Doe 2",
       designation: "CEO, ABC Company",
       img: {
-        img: "/images/testi1.png",
+        img: "/images/testi/user.png",
         alt: "John Doe",
-        height: 100,
-        width: 100,
+        height: 407,
+        width: 253,
       },
       msg: {
         text: "I was struggling to learn a new language, but",
@@ -60,7 +63,7 @@ const Testi = () => {
     const interval = setInterval(() => {
       changeActive(activeRef.current + 1);
       activeRef.current === testies.length - 1;
-    }, 5000);
+    }, 15000);
     return () => clearInterval(interval);
   }, []);
   return (
@@ -113,19 +116,32 @@ const Testi = () => {
       {/* IMAGE */}
       <div
         style={{
-          backgroundImage: `url(/svgs/bgbox.svg)`,
           height: 395,
           width: 390,
+          position: "relative",
+          zIndex: 1,
         }}
         className="fcc"
       >
+        <div
+          style={{
+            backgroundImage: `url(/svgs/bgbox.svg)`,
+            height: "inherit",
+            width: "inherit",
+            position: "relative",
+            zIndex: 1,
+          }}
+        />
         <Image
           src={testies[active].img.img}
           alt={testies[active].img.alt}
           height={testies[active].img.height}
           width={testies[active].img.width}
-          style={testies[active].img.style}
+          style={{ ...imgStyle, ...testies[active].img.style }}
         />
+        <div style={{ position: "absolute", right: -950, top: 40, zIndex: 0 }}>
+          <TestiImgCurve />
+        </div>
       </div>
     </div>
   );
