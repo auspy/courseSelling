@@ -277,6 +277,14 @@ button {
 }
 
 /* HOVER */
+.hover,
+#logo,
+a,
+input[type="button"],
+input[type="submit"],
+button {
+  transition: opacity 0.18s ease-in-out;
+}
 .hover:hover,
 button:hover:enabled,
 input[type="button"]:hover:enabled,

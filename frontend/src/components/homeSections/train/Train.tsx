@@ -1,6 +1,6 @@
 "use client";
 import TabButtonsRow from "@/components/buttons/TabButtons/TabButtonsRow";
-import CourseCard from "@/components/cards/CourseCard";
+import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import Heading from "@/components/text/Heading";
 import { CourseCardProps } from "@/types/types.card";
 import { useState } from "react";
@@ -10,31 +10,33 @@ const Train = () => {
   const cardData: { [key: string]: CourseCardProps[] } = {
     Designs: [
       {
-        img: {
-          img: "/images/hero/business.png",
-          alt: "business",
-          height: 1,
-          width: 1,
-        },
         course: {
+          id: "1",
           title: "creative writing: Crafting personal essays with impact",
           price: 649,
           creator: "John Doe",
           purchaseCount: 156000,
+          img: {
+            img: "/images/hero/business.png",
+            alt: "business",
+            height: 1,
+            width: 1,
+          },
         },
       },
       {
-        img: {
-          img: "/images/hero/art.png",
-          alt: "art",
-          height: 1,
-          width: 1,
-        },
         course: {
+          id: "2",
           title: "creative writing: Crafting personal essays with impact",
           price: 321,
           creator: "Josh Doance",
           purchaseCount: 123000,
+          img: {
+            img: "/images/hero/art.png",
+            alt: "art",
+            height: 1,
+            width: 1,
+          },
         },
       },
     ],
@@ -68,26 +70,7 @@ const Train = () => {
           />
         </div>
         {/* CARDS */}
-        <div
-          className="mt30 frc container1200"
-          style={{
-            gap: 31,
-            flexWrap: "wrap",
-            justifyContent:
-              cardData[active].length > 2 ? "space-evenly" : "start",
-          }}
-        >
-          {cardData[active]?.map(
-            (card, index) =>
-              index < 4 && (
-                <CourseCard
-                  key={index + card.course.title}
-                  img={card.img}
-                  course={card.course}
-                />
-              )
-          )}
-        </div>
+        <CourseCardGrid cardData={cardData[active]} gridClass="mt30" />
       </div>
     </div>
   );

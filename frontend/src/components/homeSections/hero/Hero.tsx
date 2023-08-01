@@ -3,10 +3,9 @@ import HeroLeftContainer from "./HeroLeftContainer";
 import HeroImgs from "./HeroImgs";
 import Button from "@/components/buttons/Button";
 import ButtonSec from "@/components/buttons/ButtonSec";
-import Logo from "@/components/header/Logo";
-import Navigation from "@/components/header/Navigation";
 import HeroStyleCurve from "@/static/parts/curves/HeroStyleCurve";
 import HeroBtnCurve from "@/static/parts/curves/HeroBtnCurve";
+import Header from "@/components/header/Header";
 
 const Hero = () => {
   return (
@@ -22,10 +21,7 @@ const Hero = () => {
         }}
       >
         {/* HEADER */}
-        <div className="frcsb container1200" style={{ height: 80 }}>
-          <Logo />
-          <Navigation />
-        </div>
+        <Header />
         {/* HERO */}
         <div
           className="container1200"
@@ -84,12 +80,7 @@ const Hero = () => {
               buttons={
                 <div className="frc mt60" style={{ position: "relative" }}>
                   <Button
-                    buttonStyle={{
-                      height: 54,
-                      width: 179,
-                      alignSelf: "flex-start",
-                      position: "relative",
-                    }}
+                    buttonStyle={{}}
                     buttonClass="mr25"
                     value="Try demo"
                   />

@@ -10,25 +10,30 @@ const Button = ({
   buttonClass,
 }: ButtonProps) => {
   return (
-    <button
-      style={{
-        position: "absolute",
-        backgroundColor: "transparent",
-        ...buttonStyle,
-      }}
-      className={`${styles.hover} ${styles.parent} zoom ${buttonClass}`}
-    >
-      <div className={styles.bottom}>
-        <PartBtnBtm />
-      </div>
-      <div style={{ position: "relative", zIndex: 2 }}>
-        <div className={styles.text}>{value}</div>
-        <PartBtnBody />
-      </div>
-      <div className={styles.top}>
-        <PartBtnTop />
-      </div>
-    </button>
+    <div style={{ position: "relative" }}>
+      <button
+        style={{
+          height: 54,
+          width: 179,
+          alignSelf: "flex-start",
+          position: "relative",
+          backgroundColor: "transparent",
+          ...buttonStyle,
+        }}
+        className={`${styles.hover} ${styles.parent} zoom ${buttonClass}`}
+      >
+        <div className={styles.bottom}>
+          <PartBtnBtm />
+        </div>
+        <div style={{ position: "relative", zIndex: 2 }}>
+          <div className={styles.text}>{value}</div>
+          <PartBtnBody />
+        </div>
+        <div className={styles.top}>
+          <PartBtnTop />
+        </div>
+      </button>
+    </div>
   );
 };
 

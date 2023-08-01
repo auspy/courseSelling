@@ -10,9 +10,15 @@ export type CardProps = {
   cardTitleStyle?: React.CSSProperties;
 };
 
+// COURSE
 export type CourseCardProps = CardProps & {
-  img: ImgProps;
   course: CourseProps;
+};
+
+export type CourseCardGridProps = {
+  cardData: CourseCardProps[];
+  gridClass?: string;
+  gridStyle?: React.CSSProperties;
 };
 
 // PRICING

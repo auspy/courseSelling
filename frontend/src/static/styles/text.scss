@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&family=Open+Sans:wght@400;600&family=Oswald:wght@400;600&family=Raleway:wght@300;500;600;700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&family=Open+Sans:wght@400;600&family=Oswald:wght@400;600&family=Raleway:wght@300;500;600;700&display=swap"); // without normal style for merriweather. can be used as ref
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,700&family=Open+Sans:wght@400;600&family=Oswald:wght@400;600&family=Raleway:wght@300;500;600;700&display=swap");
+
+// MERIWEATHER
+.mw {
+  font-family: Merriweather, serif;
+}
 
 // OPEN SANS
 .os,
@@ -39,9 +45,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  letter-spacing: -2.25px;
+  letter-spacing: -2.7px;
   text-transform: uppercase;
-  background: linear-gradient(102deg, #cf4e16 0%, #ffc9b1 100%);
+  background: linear-gradient(117deg, #cf4e16 70%, #e0784b 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

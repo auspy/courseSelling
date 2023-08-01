@@ -2,17 +2,25 @@
 import { CourseCardProps } from "@/types/types.card";
 import { Avatar, AvatarGroup } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const CourseCard = ({
-  img: { img, alt },
-  course: { title, price, creator, purchaseCount },
+  course: {
+    id,
+    title,
+    price,
+    creator,
+    purchaseCount,
+    img: { img, alt },
+  },
 }: CourseCardProps) => {
   const avatarStyle = { border: "2px solid #2e2e2e", height: 30, width: 30 };
   return (
-    <div
+    <Link
+      href={`/courses/${id}`}
+      className="hover"
       style={{
         width: 260,
-        // height: 300,
         border: "1px solid #565656",
         overflow: "hidden",
         borderRadius: 5,
@@ -33,9 +41,9 @@ const CourseCard = ({
           {creator}
         </p>
         {/* title */}
-        <h4>{title}</h4>
+        <h5>{title}</h5>
         {/* price */}
-        <h4 className="os">₹ {price}</h4>
+        <h5 className="os">₹ {price}</h5>
         {/* purchase count */}
         <div className="frc">
           <AvatarGroup max={3} spacing={"small"}>
@@ -48,7 +56,7 @@ const CourseCard = ({
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

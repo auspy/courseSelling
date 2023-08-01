@@ -1,4 +1,5 @@
 import { HeadingProps, HeadingType } from "@/types/types.text";
+import { memo } from "react";
 
 const Heading = ({
   text,
@@ -56,4 +57,4 @@ const Heading = ({
   return HeadingElement();
 };
 
-export default Heading;
+export default memo(Heading);

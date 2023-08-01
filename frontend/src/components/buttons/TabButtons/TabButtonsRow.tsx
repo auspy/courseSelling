@@ -1,4 +1,5 @@
 import TabButton from "./TabButton";
+import { memo } from "react";
 
 type TabButtonsRowProps = {
   width: number;

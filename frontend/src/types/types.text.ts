@@ -10,6 +10,12 @@ export type HeadingProps = {
   uppercase?: boolean;
 };
 
+export type LinkItem = {
+  name: string;
+  href: string;
+  class: string;
+};
+
 export enum HeadingType {
   h1,
   h2,
@@ -17,3 +23,12 @@ export enum HeadingType {
   h4,
   h5,
 }
+
+export type DetailTabProps = {
+  title: string;
+  value: string;
+};
+
+export type DetailTabGroupProps = {
+  data: DetailTabProps[];
+};

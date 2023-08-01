@@ -59,7 +59,7 @@ const PricingCard = ({
           }}
         >
           <PricingCurve />
-          <h3
+          <h4
             style={{
               color: "var(--light-bg)",
               fontStyle: "normal",
@@ -72,7 +72,7 @@ const PricingCard = ({
             }}
           >
             {type}
-          </h3>
+          </h4>
         </div>
         {/* PRICE */}
         <div className="frfe">

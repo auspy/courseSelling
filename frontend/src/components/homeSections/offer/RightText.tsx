@@ -1,15 +1,7 @@
 const RightText = () => {
   return (
     <div>
-      <div
-        className="h2Highlight caps"
-        style={{
-          fontStyle: "normal",
-          backgroundColor: "var(--white)",
-          padding: "0 6px",
-          borderRadius: 20,
-        }}
-      >
+      <div className="h2Highlight caps whiteBox" style={{}}>
         6 <span style={{ color: "var(--light-bg)" }}> out of 10</span>
       </div>
       <div
