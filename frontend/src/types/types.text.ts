@@ -1,5 +1,6 @@
 export type HeadingProps = {
   text: string;
+  headingClass?: string;
   headingStyle?: React.CSSProperties;
   highlightText?: string;
   highlightTextStyle?: React.CSSProperties;

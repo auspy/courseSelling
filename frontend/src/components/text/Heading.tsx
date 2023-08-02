@@ -4,6 +4,7 @@ import { memo } from "react";
 const Heading = ({
   text,
   highlightText,
+  headingClass,
   afterHighlightText,
   type = 1,
   capitalise = false,
@@ -41,15 +42,35 @@ const Heading = ({
   const HeadingElement = () => {
     switch (type) {
       case HeadingType.h1:
-        return <h1 style={headingStyles}>{data}</h1>;
+        return (
+          <h1 className={`${headingClass}`} style={headingStyles}>
+            {data}
+          </h1>
+        );
       case HeadingType.h2:
-        return <h2 style={headingStyles}>{data}</h2>;
+        return (
+          <h2 className={`${headingClass}`} style={headingStyles}>
+            {data}
+          </h2>
+        );
       case HeadingType.h3:
-        return <h3 style={headingStyles}>{data}</h3>;
+        return (
+          <h3 className={`${headingClass}`} style={headingStyles}>
+            {data}
+          </h3>
+        );
       case HeadingType.h4:
-        return <h4 style={headingStyles}>{data}</h4>;
+        return (
+          <h4 className={`${headingClass}`} style={headingStyles}>
+            {data}
+          </h4>
+        );
       case HeadingType.h5:
-        return <h5 style={headingStyles}>{data}</h5>;
+        return (
+          <h5 className={`${headingClass}`} style={headingStyles}>
+            {data}
+          </h5>
+        );
       default:
         return null;
     }

@@ -5,15 +5,27 @@ const CourseCardGrid = ({
   cardData,
   gridClass,
   gridStyle,
+  type,
 }: CourseCardGridProps) => {
+  const defaultStyle =
+    type == "row"
+      ? {
+          display: "flex",
+          gap: 10,
+          overflowX: "auto",
+        }
+      : {
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+          gap: 10,
+        };
   return (
     <>
       <div
-        className={`frc container1200 ${gridClass}`}
+        className={`container1200 scrollbar ${gridClass}`}
         style={{
-          gap: 31,
-          flexWrap: "wrap",
-          justifyContent: cardData.length > 2 ? "space-evenly" : "start",
+          paddingBottom: 7,
+          ...(defaultStyle as React.CSSProperties),
           ...gridStyle,
         }}
       >

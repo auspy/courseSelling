@@ -361,3 +361,22 @@ input[type="submit"]:hover:enabled,
 .bold16 {
   font-size: 1rem;
 }
+
+/* SCROLLBAR */
+.scrollbar {
+  overflow-x: hidden;
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: 0px;
+}
+
+.scrollbar:hover::-webkit-scrollbar {
+  transition: heigth 2s ease;
+  height: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--bg);
+  border-radius: 5px;
+}

@@ -17,6 +17,7 @@ export type CourseCardProps = CardProps & {
 
 export type CourseCardGridProps = {
   cardData: CourseCardProps[];
+  type: "row" | "grid";
   gridClass?: string;
   gridStyle?: React.CSSProperties;
 };

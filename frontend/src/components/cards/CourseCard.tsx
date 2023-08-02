@@ -11,23 +11,27 @@ const CourseCard = ({
     price,
     creator,
     purchaseCount,
-    img: { img, alt },
+    img: { img, alt, style },
   },
+  cardClass,
+  cardStyle,
 }: CourseCardProps) => {
   const avatarStyle = { border: "2px solid #2e2e2e", height: 30, width: 30 };
   return (
     <Link
       href={`/courses/${id}`}
-      className="hover"
+      className={`hover ${cardClass}`}
       style={{
         width: 260,
         border: "1px solid #565656",
         overflow: "hidden",
         borderRadius: 5,
+        flexShrink: 0,
+        ...cardStyle,
       }}
     >
       {/* IMAGE */}
-      <Image src={img} alt={alt} height={150} width={260} />
+      <Image src={img} alt={alt} height={150} width={260} style={style} />
       {/* COURSE DETAILS */}
       <div
         className="fcfs"

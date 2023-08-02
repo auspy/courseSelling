@@ -8,13 +8,21 @@ const ButtonThird = ({
   value,
   onClick = emptyButtonOnClick,
   disabled = false,
+  buttonClass,
+  buttonStyle,
+  buttonTextClass,
+  buttonTextStyle,
 }: ButtonProps) => {
   return (
     <>
-      <div className={styles.buttonThirdWrap}>
+      <div
+        className={`${styles.buttonThirdWrap} ${buttonClass}`}
+        style={{ width: "max-content", ...buttonStyle }}
+      >
         <button
           disabled={disabled}
-          className={styles.buttonThird}
+          className={`${styles.buttonThird} ${buttonTextClass}`}
+          style={{ ...buttonTextStyle }}
           onClick={onClick}
         >
           {disabled ? <CircularProgress color={"inherit"} size={14} /> : value}
