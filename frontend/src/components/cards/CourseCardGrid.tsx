@@ -22,7 +22,6 @@ const CourseCardGrid = ({
             index < 4 && (
               <CourseCard
                 key={index + card.course.title}
-                img={card.img}
                 course={card.course}
               />
             )

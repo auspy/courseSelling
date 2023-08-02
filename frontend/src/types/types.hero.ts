@@ -1,3 +1,4 @@
+import { CourseProps } from "./types.course";
 import { ImgProps } from "./types.img";
 
 export interface HeroImgContainerProps extends ImgProps {
@@ -19,4 +20,8 @@ export type HeroLeftContainerProps = {
   descStyle?: React.CSSProperties;
   buttons?: React.ReactNode;
   containerStyle?: React.CSSProperties;
+};
+
+export type HeroCourseProps = {
+  courseData: CourseProps;
 };

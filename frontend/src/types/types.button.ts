@@ -27,3 +27,11 @@ export type TabButtonProps = ButtonProps & {
         active: string;
       }
   );
+
+export type ButtonTemplateProps = ButtonProps & {
+  buttonTop: React.ReactNode;
+  buttonBottom: React.ReactNode;
+  buttonBody: React.ReactNode;
+  height?: number;
+  width?: number;
+};

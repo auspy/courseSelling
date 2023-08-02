@@ -1,39 +1,19 @@
 import PartBtnBody from "../../static/parts/buttons/PartBtnBody";
 import PartBtnTop from "../../static/parts/buttons/PartBtnTop";
 import PartBtnBtm from "../../static/parts/buttons/PartBtnBtm";
-import styles from "../../static/styles/button.module.scss";
 import { ButtonProps } from "@/types/types.button";
+import ButtonTemplate from "./ButtonTemplate";
 
-const Button = ({
-  value = "Click me",
-  buttonStyle,
-  buttonClass,
-}: ButtonProps) => {
+const Button = (props: ButtonProps) => {
   return (
-    <div style={{ position: "relative" }}>
-      <button
-        style={{
-          height: 54,
-          width: 179,
-          alignSelf: "flex-start",
-          position: "relative",
-          backgroundColor: "transparent",
-          ...buttonStyle,
-        }}
-        className={`${styles.hover} ${styles.parent} zoom ${buttonClass}`}
-      >
-        <div className={styles.bottom}>
-          <PartBtnBtm />
-        </div>
-        <div style={{ position: "relative", zIndex: 2 }}>
-          <div className={styles.text}>{value}</div>
-          <PartBtnBody />
-        </div>
-        <div className={styles.top}>
-          <PartBtnTop />
-        </div>
-      </button>
-    </div>
+    <ButtonTemplate
+      // width={179}
+      // height={54}
+      buttonTop={<PartBtnTop />}
+      buttonBody={<PartBtnBody />}
+      buttonBottom={<PartBtnBtm />}
+      {...props}
+    />
   );
 };
 
