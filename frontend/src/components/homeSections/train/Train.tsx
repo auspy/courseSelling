@@ -26,14 +26,14 @@ const Train = () => {
       },
       {
         course: {
-          id: "2",
+          id: "1",
           title: "creative writing: Crafting personal essays with impact",
-          price: 321,
-          creator: "Josh Doance",
-          purchaseCount: 123000,
+          price: 649,
+          creator: "John Doe",
+          purchaseCount: 156000,
           img: {
-            img: "/images/hero/art.png",
-            alt: "art",
+            img: "/images/hero/business.png",
+            alt: "business",
             height: 1,
             width: 1,
           },
@@ -70,7 +70,17 @@ const Train = () => {
           />
         </div>
         {/* CARDS */}
-        <CourseCardGrid cardData={cardData[active]} gridClass="mt30" />
+        <CourseCardGrid
+          type="row"
+          gridStyle={{
+            // grid: "auto/ repeat(4,minmax(260px,1fr))",
+            // justifyContent: cardData[active].length == 4 ? "center" : "flex-start",
+            gap: 25,
+          }}
+          maxItems={8}
+          cardData={cardData[active]}
+          gridClass="mt30"
+        />
       </div>
     </div>
   );

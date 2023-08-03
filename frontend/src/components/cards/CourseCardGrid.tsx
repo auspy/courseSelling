@@ -6,18 +6,17 @@ const CourseCardGrid = ({
   gridClass,
   gridStyle,
   type,
+  maxItems,
 }: CourseCardGridProps) => {
   const defaultStyle =
     type == "row"
       ? {
           display: "flex",
-          gap: 10,
           overflowX: "auto",
         }
       : {
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-          gap: 10,
+          gridTemplateColumns: "repeat(auto-fit,260px)",
         };
   return (
     <>
@@ -25,13 +24,14 @@ const CourseCardGrid = ({
         className={`container1200 scrollbar ${gridClass}`}
         style={{
           paddingBottom: 7,
+          gap: 10,
           ...(defaultStyle as React.CSSProperties),
           ...gridStyle,
         }}
       >
         {cardData?.map(
           (card, index) =>
-            index < 4 && (
+            (maxItems ? index < maxItems : true) && (
               <CourseCard
                 key={index + card.course.title}
                 course={card.course}

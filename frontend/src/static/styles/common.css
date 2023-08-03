@@ -378,5 +378,6 @@ input[type="submit"]:hover:enabled,
 
 .scrollbar::-webkit-scrollbar-thumb {
   background: var(--bg);
+  border: 1px solid var(--light-bg);
   border-radius: 5px;
 }

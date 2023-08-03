@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import sellerRoutes from "./routes/sellerRoutes.js";
-import verifySellerMW, { verifyUser } from "./src/middleware/verifySeller.js";
+import verifySellerMW from "./src/middleware/verifySeller.js";
 import {
   decryptAccessToken,
   decryptAccessTokenMW,
@@ -47,6 +47,7 @@ app.use(
   "/graphql",
   expressMiddleware(server, {
     context: async ({ req }) => {
+      console.log("Request headers", req.body);
       // Verify and decode JWT token from request headers
       const token = req.headers.authorization || "";
       try {
