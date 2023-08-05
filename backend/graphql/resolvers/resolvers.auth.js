@@ -2,13 +2,21 @@ import { Admin, User } from "../../mongoose/modals/modals.js";
 import { encryptAccessToken } from "../../src/helper/jwtToken.js";
 
 const resolverAuth = {
-  login: async (parent, args) => {
+  login: async (parent, args, context) => {
+    console.log("-- Entered login resolver --");
     let type = User;
     const { username, password, role } = args;
     if (role === "ADMIN") {
       type = Admin;
     }
     const user = await type.findOne({ username });
+    if (!user) {
+      return {
+        msg: "Invalid user, user not found",
+        status: "failed",
+      };
+    }
+    // console.log(user, "in login");
     const token = encryptAccessToken({ username, _id: user._id, role });
     if (!token) {
       return {
@@ -16,18 +24,19 @@ const resolverAuth = {
         status: "failed",
       };
     }
-    if (!user) {
-      return {
-        msg: "Invalid user, user not found",
-        status: "failed",
-      };
-    }
+
     if (password !== user.password) {
       return {
         msg: "Invalid user, wrong password",
         status: "failed",
       };
     }
+    // add token to authorization header
+    context.res.cookie("authToken", token, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    });
+    console.log("Login success");
     return {
       msg: "login success",
       token,
@@ -61,6 +70,17 @@ const resolverAuth = {
       msg: "User created successfully",
       status: "success",
       data: savedUser,
+    };
+  },
+  logout: async (parent, args, context) => {
+    console.log("Entered logout resolver");
+    context.res.cookie("authToken", "", {
+      httpOnly: true,
+      maxAge: 0,
+    });
+    return {
+      msg: "Logout success",
+      status: "success",
     };
   },
 };

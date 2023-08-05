@@ -1,9 +1,7 @@
-"use client";
 import Link from "next/link";
-import ButtonThird from "../buttons/ButtonThird";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { LinkItem } from "@/types/types.text";
+import { cookies } from "next/dist/client/components/headers";
+import ButtonLogin from "../buttons/ButtonLogin";
 
 const linkClass = `semi14-os caps`;
 const items: LinkItem[] = [
@@ -17,8 +15,9 @@ const items: LinkItem[] = [
 // };
 
 const Navigation = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const authToken = cookies().get("authToken");
+  const userLoggedIn = authToken ? true : false;
+  console.log("authToken", authToken);
   return (
     <>
       <div className="frc" style={{ gap: 25 }}>
@@ -34,30 +33,7 @@ const Navigation = () => {
             {item.name}
           </Link>
         ))}
-        {true ? (
-          <ButtonThird
-            value="Login"
-            disabled={loading}
-            onClick={() => {
-              setLoading(true);
-              router.push("/login");
-            }}
-          />
-        ) : (
-          <div
-            style={{
-              height: 40,
-              width: 40,
-              background: `trasparent`,
-              border: "1px solid var(--primary)",
-              borderRadius: "50%",
-              color: "var(--white)",
-            }}
-            className="upper semi16 gcc"
-          >
-            {"username"[0]}
-          </div>
-        )}
+        <ButtonLogin />
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import { CourseProps } from "./types.course";
 import { ImgProps } from "./types.img";
 
-export type CardProps = {
+export type CardStyleProps = {
   cardClass?: string;
   cardStyle?: React.CSSProperties;
   cardImageClass?: string;
@@ -11,7 +11,7 @@ export type CardProps = {
 };
 
 // COURSE
-export type CourseCardProps = CardProps & {
+export type CourseCardProps = CardStyleProps & {
   course: CourseProps;
 };
 
@@ -33,10 +33,17 @@ type PricingFeatures = {
   feature: string;
   available?: boolean;
 };
-export type PricingCardProps = CardProps & {
+export type PricingCardProps = CardStyleProps & {
   type: PricingType;
   price: number;
   features: PricingFeatures[];
   active: PricingType;
   setActive: React.Dispatch<React.SetStateAction<PricingType>>;
 };
+
+export type BuyNowCardProps = CardStyleProps &
+  ImgProps & {
+    price: number;
+    discount?: number;
+    saleAlarm?: React.ReactNode;
+  };

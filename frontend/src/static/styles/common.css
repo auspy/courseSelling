@@ -367,7 +367,8 @@ input[type="submit"]:hover:enabled,
   overflow-x: hidden;
 }
 
-.scrollbar::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar,
+.scrollbarHidden::-webkit-scrollbar {
   height: 0px;
 }
 

@@ -15,11 +15,10 @@ const resolvers = {
   },
   Query: {
     ...resolverCourses,
-    login: resolverAuth.login,
   },
   Mutation: {
     ...resolverMutCourses,
-    register: resolverAuth.register,
+    ...resolverAuth,
   },
 };
 export default resolvers;

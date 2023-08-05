@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
 
 const adminSchema = new Schema({
-  username: String,
-  password: String,
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   createdCourses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
 });
 

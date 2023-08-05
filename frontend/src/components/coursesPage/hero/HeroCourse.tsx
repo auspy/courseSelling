@@ -8,11 +8,27 @@ import { DetailTabProps } from "@/types/types.text";
 const HeroCourse = ({ courseData }: HeroCourseProps) => {
   const detailTabGroupData = (): DetailTabProps[] => {
     const data: DetailTabProps[] = [];
-    const { img, price, desc, title, id, ...rest } = courseData;
+    const {
+      img,
+      price,
+      description,
+      title,
+      _id,
+      creator,
+      published,
+      createdAt,
+      __typename,
+      ...rest
+    } = courseData;
     type Rest = typeof rest & {
-      [key: string]: string | number;
+      [key: string]: string | number | boolean;
     };
     const dt: Rest = rest;
+    data.push({ title: "Creator", value: String(creator?.username) });
+    data.push({
+      title: "Publish Date",
+      value: new Date(Number(createdAt)).toDateString(),
+    });
     for (const key in dt) {
       if (Object.prototype.hasOwnProperty.call(dt, key)) {
         const obj: DetailTabProps = {
@@ -41,15 +57,17 @@ const HeroCourse = ({ courseData }: HeroCourseProps) => {
         <div style={{ width: "100%", paddingInlineEnd: 350 }}>
           <Heading
             headingStyle={{ lineHeight: "125%" }}
-            text="creative writing: Crafting personal essays with impact"
+            text={courseData.title}
           />
           <p className="regu16 os mt15 mb20" style={{ opacity: 0.8 }}>
-            {courseData.desc}
+            {courseData.description &&
+              courseData.description.charAt(0)?.toUpperCase() +
+                courseData.description.slice(1)}
           </p>
           <DetailTabGroup data={detailTabGroupData()} />
         </div>
         {/* BUY BTN CONTAINER */}
-        <BuyNowCard {...courseData.img} />
+        <BuyNowCard price={courseData.price} {...courseData.img} />
       </div>
     </div>
   );

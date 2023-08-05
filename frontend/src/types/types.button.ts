@@ -6,6 +6,8 @@ export type ButtonProps = {
   buttonClass?: string;
   buttonTextStyle?: React.CSSProperties;
   buttonTextClass?: string;
+  loading?: boolean;
+  type?: "button" | "submit" | "reset";
 };
 
 // WAYS TO EXTEND TYPE AND INTERFACE

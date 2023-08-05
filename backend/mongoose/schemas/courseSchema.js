@@ -7,7 +7,7 @@ const courseSchema = new Schema({
   imageLink: String,
   published: Boolean,
   createdAt: Date,
-  creator: Schema.Types.ObjectId,
+  creator: { type: Schema.Types.ObjectId, ref: "Admin" },
 });
 
 export default courseSchema;

@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material";
 const primary = "#cf4e16";
 const white = "#fafafa";
+const lightWhite = "#fafafa50";
 const lightBg = "#484848";
 const muiTheme = createTheme({
   palette: {
@@ -17,6 +18,19 @@ const muiTheme = createTheme({
         root: {
           border: white,
           borderRadius: 4,
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Raleway",
+          color: lightWhite,
+          width: "100%",
+          borderColor: lightBg,
+          "&.Mui-selected": {
+            borderColor: primary + "50",
+          },
         },
       },
     },
@@ -56,7 +70,7 @@ const muiTheme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: "#fafafa50",
+          color: lightWhite,
         },
       },
     },

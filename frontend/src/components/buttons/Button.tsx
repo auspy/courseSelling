@@ -5,13 +5,14 @@ import { ButtonProps } from "@/types/types.button";
 import ButtonTemplate from "./ButtonTemplate";
 
 const Button = (props: ButtonProps) => {
+  const color = props.disabled ? "var(--light-bg)" : "var(--primary)";
   return (
     <ButtonTemplate
       // width={179}
       // height={54}
-      buttonTop={<PartBtnTop />}
-      buttonBody={<PartBtnBody />}
-      buttonBottom={<PartBtnBtm />}
+      buttonTop={<PartBtnTop color={color} />}
+      buttonBody={<PartBtnBody color={color} />}
+      buttonBottom={<PartBtnBtm color={color} />}
       {...props}
     />
   );

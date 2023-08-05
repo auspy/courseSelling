@@ -5,8 +5,8 @@ import IconLeftArrow from "@/../public/icons/IconLeftArrow";
 import IconRightArrow from "@/../public/icons/IconRightArrow";
 import ArrowButtonCurve from "@/static/parts/curves/ArrowButtonCurve";
 import Image from "next/image";
-import { TestiAuthorProps } from "@/types/types.testi";
 import TestiImgCurve from "@/static/parts/curves/TestiImgCurve";
+import { dummyTesties } from "@/data/dummy/data.testi";
 
 const Testi = () => {
   const [active, setActive] = useState(0);
@@ -18,51 +18,17 @@ const Testi = () => {
     zIndex: 2,
     transform: "translateX(-50%)",
   };
-  const testies: TestiAuthorProps[] = [
-    {
-      name: "John Doe",
-      designation: "CEO, ABC Company",
-      img: {
-        img: "/images/testi/user.png",
-        alt: "John Doe",
-        height: 407,
-        width: 253,
-      },
-      msg: {
-        text: "I was struggling to learn a new language, but",
-        highlightText: "Skillz made it so easy.",
-        afterHighlightText:
-          "I was able to learn the basics in just a few weeks.",
-      },
-    },
-    {
-      name: "John Doe 2",
-      designation: "CEO, ABC Company",
-      img: {
-        img: "/images/testi/user.png",
-        alt: "John Doe",
-        height: 407,
-        width: 253,
-      },
-      msg: {
-        text: "I was struggling to learn a new language, but",
-        highlightText: "Skillz made it so easy.",
-        afterHighlightText:
-          "I was able to learn the basics in just a few weeks.",
-      },
-    },
-  ];
   const changeActive = (value: number) => {
     let nextIndex = active + value;
-    if (nextIndex < 0) nextIndex = testies.length - 1;
-    else if (nextIndex > testies.length - 1) nextIndex = 0;
+    if (nextIndex < 0) nextIndex = dummyTesties.length - 1;
+    else if (nextIndex > dummyTesties.length - 1) nextIndex = 0;
     setActive(nextIndex);
     activeRef.current = nextIndex;
   };
   useEffect(() => {
     const interval = setInterval(() => {
       changeActive(activeRef.current + 1);
-      activeRef.current === testies.length - 1;
+      activeRef.current === dummyTesties.length - 1;
     }, 15000);
     return () => clearInterval(interval);
   }, []);
@@ -77,16 +43,16 @@ const Testi = () => {
           headingStyle={{
             lineHeight: "150%",
           }}
-          text={testies[active].msg.text}
-          highlightText={testies[active].msg.highlightText}
-          afterHighlightText={testies[active].msg.afterHighlightText}
+          text={dummyTesties[active].msg.text}
+          highlightText={dummyTesties[active].msg.highlightText}
+          afterHighlightText={dummyTesties[active].msg.afterHighlightText}
         />
         <div className="frcsb w100">
           {/* AUTHOR */}
           <div className="frc">
-            <p className="semi16 mr15">{testies[active].name}</p>
+            <p className="semi16 mr15">{dummyTesties[active].name}</p>
             <p className="regu16" style={{ fontWeight: 300 }}>
-              {testies[active].designation}
+              {dummyTesties[active].designation}
             </p>
           </div>
 
@@ -133,11 +99,11 @@ const Testi = () => {
           }}
         />
         <Image
-          src={testies[active].img.img}
-          alt={testies[active].img.alt}
-          height={testies[active].img.height}
-          width={testies[active].img.width}
-          style={{ ...imgStyle, ...testies[active].img.style }}
+          src={dummyTesties[active].img.src}
+          alt={dummyTesties[active].img.alt}
+          height={dummyTesties[active].img.height}
+          width={dummyTesties[active].img.width}
+          style={{ ...imgStyle, ...dummyTesties[active].img.style }}
         />
         <div style={{ position: "absolute", right: -950, top: 40, zIndex: 0 }}>
           <TestiImgCurve />

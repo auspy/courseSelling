@@ -3,7 +3,7 @@ import { Admin, Course, User } from "../../mongoose/modals/modals.js";
 
 const resolverCourses = {
   getCourses: async () => {
-    const docs = await Course.find({});
+    const docs = await Course.find({}).populate("creator").exec();
     return {
       msg: "Courses fetched successfully",
       status: "success",
@@ -13,8 +13,15 @@ const resolverCourses = {
   getCourse: async (_, args) => {
     try {
       const { id } = args;
-      const data = await Course.findById(id);
-      // console.log(data);
+      const data = await Course.findById(id).populate("creator").exec();
+      if (!data) {
+        return {
+          msg: "Course not found",
+          status: "failed",
+          data: [],
+        };
+      }
+      console.log("getCourse", data);
       return {
         msg: "Courses fetched successfully",
         status: "success",
@@ -35,7 +42,12 @@ const resolverCourses = {
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
       // console.log("getting purchased courses for user", user._id);
       const courses = await User.findById(user._id)
-        .populate("purchasedCourses")
+        .populate({
+          path: "purchasedCourses",
+          populate: {
+            path: "creator",
+          },
+        })
         .exec();
       return {
         msg: "Courses fetched successfully",
@@ -57,8 +69,14 @@ const resolverCourses = {
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
       // console.log("getting courses for user", user._id);
       const courses = await Admin.findById(user._id)
-        .populate("createdCourses")
+        .populate({
+          path: "createdCourses",
+          populate: {
+            path: "creator",
+          },
+        })
         .exec();
+      // console.log("courses", courses);
       return {
         msg: "Courses fetched successfully",
         status: "success",
@@ -90,7 +108,7 @@ const resolverMutCourses = {
         { _id: course.creator },
         { $push: { createdCourses: newCourse._id } }
       );
-      // console.log(updateCreatedCourses);
+      console.log(updateCreatedCourses, course.creator, newCourse._id);
       if (
         updateCreatedCourses.acknowledged === false ||
         updateCreatedCourses.modifiedCount === 0 ||
@@ -98,7 +116,7 @@ const resolverMutCourses = {
       )
         // not updated
         return {
-          msg: "failed to add course to admim",
+          msg: "failed to add course to admim, admin not found",
           status: "failed",
           data: [updateCreatedCourses],
         };

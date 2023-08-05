@@ -1,8 +1,7 @@
-"use client";
 import { emptyButtonOnClick } from "@/helper/common";
 import { ButtonProps } from "@/types/types.button";
 import styles from "@/static/styles/button.module.scss";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from "@/components/thirdParty/mui";
 
 const ButtonThird = ({
   value,

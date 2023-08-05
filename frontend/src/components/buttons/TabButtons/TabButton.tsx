@@ -16,12 +16,13 @@ const TabButton = ({
     <button
       className={`${buttonClass}`}
       style={{
+        height: 50,
         backgroundColor: "transparent",
         borderBottom: `${isActive ? 2 : 1}px solid ${
           isActive ? "var(--primary)" : "#707070"
         }`,
         color: isActive ? "var(--primary)" : "#c2c2c2",
-        padding: "15px 20px",
+        padding: "0px 20px",
         width: "100%",
         ...buttonStyle,
       }}

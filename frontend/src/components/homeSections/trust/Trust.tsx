@@ -1,39 +1,7 @@
 import Heading from "@/components/text/Heading";
-import { ImgProps } from "@/types/types.img";
+import { dummyLogos } from "@/data/dummy/data.logos";
 import Image from "next/image";
 
-const logos: ImgProps[] = [
-  {
-    img: "/images/trust/1.png",
-    alt: "1",
-    width: 100,
-    height: 97,
-  },
-  {
-    img: "/images/trust/2.png",
-    alt: "2",
-    width: 100,
-    height: 112,
-  },
-  {
-    img: "/images/trust/3.png",
-    alt: "3",
-    width: 100,
-    height: 40,
-  },
-  {
-    img: "/images/trust/4.png",
-    alt: "4",
-    width: 100,
-    height: 109,
-  },
-  {
-    img: "/images/trust/5.png",
-    alt: "5",
-    width: 100,
-    height: 105,
-  },
-];
 const Trust = () => {
   return (
     <div className="container1200 fcc pv100" style={{}}>
@@ -45,10 +13,10 @@ const Trust = () => {
         headingStyle={{ textAlign: "center", maxWidth: 730 }}
       />
       <div className="container1200 frcsb mt50">
-        {logos.map((item, index) => (
+        {dummyLogos.map((item, index) => (
           <Image
             key={item.alt + index}
-            src={item.img}
+            src={item.src}
             alt={item.alt}
             height={item.height || 100}
             width={item.width}

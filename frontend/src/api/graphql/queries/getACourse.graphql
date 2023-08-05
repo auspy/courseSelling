@@ -1,0 +1,18 @@
+query($id:ID!) {
+    getCourse(id:$id){
+        msg
+        status
+        data{
+            ...on Course{
+                _id
+                createdAt
+                title
+                price
+                description
+                creator{
+                    username
+                }
+            }
+        }
+    }
+}

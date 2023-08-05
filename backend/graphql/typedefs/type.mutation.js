@@ -1,7 +1,9 @@
 const typeMutation = `#graphql
 type Mutation {
     # AUTH
+    login(username: ID!, password: String!, role: Role!): authResponse!
     register(user: UserInput!): authResponse!
+    logout: authResponse!
 
     # COURSES
     addCourse(course: CreateCourseInput!): courseRes!

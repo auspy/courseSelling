@@ -1,5 +1,5 @@
 import { ApiMethods, FetchProps } from "@/types/types.api";
-import { urlGql } from "./constants";
+import { urlGql } from "./constants.global";
 
 export const emptyButtonOnClick = (event: { stopPropagation: () => void }) => {
   alert("button was clicked");
@@ -30,4 +30,17 @@ export const toFetch = async ({
   } catch (error) {
     console.log(error, "in toFetch");
   }
+};
+
+export const randomAlphabet = (uppercase: boolean = true): string => {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const random = Math.floor(Math.random() * alphabet.length);
+  if (uppercase) {
+    return alphabet[random].toUpperCase();
+  }
+  return alphabet[random];
+};
+
+export const generateRandomInt = (max: number, min: number = 0): number => {
+  return Math.floor(Math.random() * (max - min) + min);
 };

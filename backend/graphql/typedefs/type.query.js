@@ -6,7 +6,5 @@ type Query {
     getPurchasedCourses: courseRes!
     getCreatedCourses: courseRes!
     
-    # AUTH
-    login(username: ID!, password: String!, role: Role!): authResponse!
 }`;
 export default typeQuery;

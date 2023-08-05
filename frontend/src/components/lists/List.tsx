@@ -47,7 +47,7 @@ const List = ({
                     ...item.textStyle, // this can be used for custom styling
                   }}
                 >
-                  {item.text}
+                  {item.text[0].toUpperCase() + item.text.slice(1)}
                 </p>
               </div>
             )

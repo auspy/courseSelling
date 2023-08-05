@@ -18,6 +18,7 @@ import { ApolloServer } from "@apollo/server";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolver.js";
+import cookieParser from "cookie-parser";
 
 // SETUP FOR REST AND GRAPHQL
 const env = process.env.NODE_ENV || "development";
@@ -35,7 +36,11 @@ await server.start();
 
 // PATHS
 // to bypass cors error, accept json data
-app.use(cors(), bodyParser.json());
+app.use(
+  cors({ origin: ["http://localhost:3000"], credentials: true }),
+  bodyParser.json(),
+  cookieParser()
+);
 // user
 app.use("/u", userRoutes);
 // seller
@@ -46,15 +51,16 @@ app.use("/s", decryptAccessTokenMW, verifySellerMW, sellerRoutes); // s stands f
 app.use(
   "/graphql",
   expressMiddleware(server, {
-    context: async ({ req }) => {
+    context: async ({ req, res }) => {
       console.log("Request headers", req.body);
       // Verify and decode JWT token from request headers
-      const token = req.headers.authorization || "";
+      const token = req.cookies.authToken || "";
+      console.log("Token found in request", token);
       try {
-        if (!token) return null;
+        if (!token) return { res };
         const user = decryptAccessToken(token);
         console.log("User found in token", user);
-        return { user };
+        return { user, res };
       } catch (error) {
         // Handle token verification errors, if any
         console.error("Token verification error:", error);

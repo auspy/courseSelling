@@ -12,7 +12,7 @@ const decryptAccessTokenMW = (req, res, next) => {
   if (authHeader) {
     const user = decryptAccessToken(authHeader);
     if (!(user && user.username)) {
-      console.log("Error in decryptAccessToken", user, user.username);
+      console.log("Error in decryptAccessTokenMW", user, user.username);
       return res.status(403).json({
         error: err?.message || "Missing user in token",
         status: "failed",
@@ -28,14 +28,18 @@ const decryptAccessTokenMW = (req, res, next) => {
 const decryptAccessToken = (accessToken) => {
   try {
     if (accessToken) {
-      const token = accessToken.split(" ")[1];
+      const token = accessToken;
       return jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
         if (err || !data || !data.user?.username) {
-          console.log("Error in decryptAccessToken", data, data.user?.username);
+          console.log(
+            "Error is in decryptAccessToken",
+            data,
+            data?.user?.username
+          );
           return null;
         }
-        console.log("User found in token", data.user);
-        return data.user;
+        console.log("User found in token", data?.user);
+        return data?.user;
       });
     }
   } catch (error) {

@@ -2,45 +2,13 @@
 import TabButtonsRow from "@/components/buttons/TabButtons/TabButtonsRow";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import Heading from "@/components/text/Heading";
+import { dummyTrainCardData } from "@/data/dummy/data.courses";
 import { CourseCardProps } from "@/types/types.card";
 import { useState } from "react";
 
 const Train = () => {
-  const [active, setActive] = useState("Designs");
-  const cardData: { [key: string]: CourseCardProps[] } = {
-    Designs: [
-      {
-        course: {
-          id: "1",
-          title: "creative writing: Crafting personal essays with impact",
-          price: 649,
-          creator: "John Doe",
-          purchaseCount: 156000,
-          img: {
-            img: "/images/hero/business.png",
-            alt: "business",
-            height: 1,
-            width: 1,
-          },
-        },
-      },
-      {
-        course: {
-          id: "1",
-          title: "creative writing: Crafting personal essays with impact",
-          price: 649,
-          creator: "John Doe",
-          purchaseCount: 156000,
-          img: {
-            img: "/images/hero/business.png",
-            alt: "business",
-            height: 1,
-            width: 1,
-          },
-        },
-      },
-    ],
-  };
+  const [active, setActive] = useState("design");
+  const cardData: { [key: string]: CourseCardProps[] } = dummyTrainCardData();
   return (
     <div
       className="topContainer"

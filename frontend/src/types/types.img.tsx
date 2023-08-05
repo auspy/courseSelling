@@ -1,7 +1,8 @@
 export type ImgProps = {
-  img: string;
+  src: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  fill?: boolean;
   style?: React.CSSProperties;
 };

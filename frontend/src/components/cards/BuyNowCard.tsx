@@ -1,9 +1,19 @@
-import Button from "@/components/buttons/Button";
-import { ImgProps } from "@/types/types.img";
 import Image from "next/image";
 import ButtonPrimaryLong from "../buttons/ButtonPrimaryLong";
+import { defaultCourseImg } from "@/helper/constants.global";
+import { BuyNowCardProps } from "@/types/types.card";
 
-const BuyNowCard = ({ img, alt }: ImgProps) => {
+const BuyNowCard = ({
+  src = defaultCourseImg.src,
+  alt = defaultCourseImg.alt,
+  price,
+  discount,
+  saleAlarm = (
+    <>
+      Hurry 😱<span className="semi"> 7 hours</span> left at this price!
+    </>
+  ),
+}: BuyNowCardProps) => {
   return (
     <>
       <div
@@ -19,11 +29,28 @@ const BuyNowCard = ({ img, alt }: ImgProps) => {
           backgroundColor: "var(--dark-bg)",
         }}
       >
-        <Image src={img} alt={alt} height={176} width={303} />
+        <div
+          style={{
+            height: 176,
+            width: 303,
+            position: "relative",
+            borderRadius: "5px 5px 0 0",
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src={src || defaultCourseImg.src}
+            alt={alt || defaultCourseImg.alt}
+            fill
+            style={{ objectFit: "cover" }}
+            // height={176}
+            // width={303}
+          />
+        </div>
         {/* BELOW IMAGE DATA */}
         <div className="p20 w100">
           <div className="frc" style={{ gap: 10 }}>
-            <h3 className="os">₹ 699</h3>
+            <h3 className="os">₹ {price}</h3>
             <p
               className="regu16 os"
               style={{ textDecorationLine: "line-through" }}
@@ -32,12 +59,12 @@ const BuyNowCard = ({ img, alt }: ImgProps) => {
             </p>
 
             <p className="mw bold16" style={{ color: "var(--primary)" }}>
-              80% off
+              {discount || 100 - Number(((price / 3129) * 100).toFixed())}% off
             </p>
           </div>
           {/* SALE ALARM */}
           <p className="regu12 mt5" style={{ color: "var(--red)" }}>
-            Hurry 😱<span className="semi"> 7 hours</span> left at this price!
+            {saleAlarm}
           </p>
           {/* BUTTON */}
           <ButtonPrimaryLong value="buy now" buttonClass="mt20" />

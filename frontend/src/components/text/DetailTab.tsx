@@ -6,7 +6,7 @@ const DetailTab = ({ title, value }: DetailTabProps) => {
       <p className="regu12" style={{ opacity: 0.7 }}>
         {title}
       </p>
-      <p className="bold16 os mt10">{value}</p>
+      <p className="bold16 os mt10 caps">{value}</p>
     </div>
   );
 };

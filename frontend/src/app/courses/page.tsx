@@ -1,44 +1,31 @@
+import { getClient } from "@/api/graphql/ApolloClient";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import HeroCourses from "@/components/coursesPage/hero/HeroCourses";
-import { CourseCardProps } from "@/types/types.card";
+import GET_COURSES from "@/api/graphql/queries/getCourses.graphql";
+import { CoursesQueryProps } from "@/types/types.course";
+import { modifyCoursesData } from "@/data/modify/modify.courses";
 
-const Courses = () => {
-  const cardData: CourseCardProps[] = [
-    {
-      course: {
-        img: {
-          img: "/images/hero/business.png",
-          alt: "business",
-          height: 1,
-          width: 1,
-        },
-        id: "1",
-        title: "creative writing: Crafting personal essays with impact",
-        price: 649,
-        creator: "John Doe",
-        purchaseCount: 156000,
-      },
-    },
-    {
-      course: {
-        img: {
-          img: "/images/hero/art.png",
-          alt: "art",
-          height: 1,
-          width: 1,
-        },
-        id: "2",
-        title: "creative writing: Crafting personal",
-        price: 321,
-        creator: "Josh Doance",
-        purchaseCount: 123000,
-      },
-    },
-  ];
+const Courses = async () => {
+  const { data } = await getClient().query<CoursesQueryProps>({
+    query: GET_COURSES,
+  });
+  console.log(JSON.stringify(data.getCourses.data));
+  const foundCourses = data.getCourses.status == "success";
   return (
     <>
       <HeroCourses />
-      <CourseCardGrid cardData={cardData} gridClass="mt60" />
+      {foundCourses && (
+        <CourseCardGrid
+          type="grid"
+          cardData={modifyCoursesData(data.getCourses.data)}
+          gridStyle={{
+            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+            rowGap: 30,
+            paddingBottom: 80,
+          }}
+          gridClass="mt60"
+        />
+      )}
     </>
   );
 };

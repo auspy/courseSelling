@@ -14,7 +14,10 @@ const TabButtonsRow = ({
   buttonList,
 }: TabButtonsRowProps) => {
   return (
-    <div style={{ width: width }} className="frc">
+    <div
+      style={{ width: "100%", maxWidth: width, overflow: "hidden" }}
+      className="frc"
+    >
       {buttonList.map((value, index) => (
         <TabButton
           key={index + value}

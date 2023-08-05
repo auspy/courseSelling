@@ -1,0 +1,13 @@
+mutation($username:ID!,$password:String!,$role:Role!){
+   login(username:$username,password:$password,role:$role){
+       status
+       msg
+       token
+       data{
+           id
+           username
+           password
+           createdCourses
+       }
+   }
+}
