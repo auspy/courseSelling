@@ -2,11 +2,5 @@ mutation($username:ID!,$password:String!,$role:Role!,$firstName:String,$lastName
    register(user:{username:$username,password:$password,role:$role,firstName:$firstName,lastName:$lastName,phone:$phone}){
        status
        msg
-       data{
-           id
-           username
-           password
-            firstName
-       }
    }
 }

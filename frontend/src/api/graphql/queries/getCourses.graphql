@@ -9,6 +9,9 @@ query{
                 title
                 price
                 description
+                category
+                published
+                imageLink
                 creator{
                     username
                 }

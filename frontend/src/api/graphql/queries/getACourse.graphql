@@ -9,6 +9,9 @@ query($id:ID!) {
                 title
                 price
                 description
+                category
+                published
+                imageLink
                 creator{
                     username
                 }

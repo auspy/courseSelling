@@ -1,9 +1,12 @@
 "use client";
 import HeroCourse from "@/components/coursesPage/hero/HeroCourse";
 import List from "@/components/lists/List";
-import { CourseQueryProps, CoursesQueryProps } from "@/types/types.course";
+import {
+  CourseProps,
+  CourseQueryProps,
+  CoursesQueryProps,
+} from "@/types/types.course";
 import { usePathname } from "next/navigation";
-import Header from "@/components/header/Header";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import GET_COURSE from "@/api/graphql/queries/getACourse.graphql";
@@ -26,7 +29,7 @@ const CoursePage = ({ children }: { children: React.ReactNode }) => {
   // mostly will be getting from apollo cache or will store to cache to used later
   const { data: coursesData } =
     useSuspenseQuery<CoursesQueryProps>(GET_COURSES);
-  const foundCourses = coursesData.getCourses.status == "success";
+  const foundCourses = coursesData?.getCourses?.status == "success";
   return (
     <div className="topContainer" style={{ height: "100%", paddingBottom: 80 }}>
       {children}
@@ -74,7 +77,9 @@ const CoursePage = ({ children }: { children: React.ReactNode }) => {
               type={"grid"}
               cardData={
                 foundCourses
-                  ? modifyCoursesData(coursesData.getCourses.data)
+                  ? modifyCoursesData(
+                      coursesData?.getCourses?.data as CourseProps[]
+                    )
                   : dummyCardData(5)
               }
               gridStyle={{

@@ -20,6 +20,9 @@ const TabButtonsRow = ({
     >
       {buttonList.map((value, index) => (
         <TabButton
+          buttonStyle={{
+            padding: 20,
+          }}
           key={index + value}
           type="string"
           value={value}

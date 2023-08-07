@@ -1,5 +1,6 @@
 import { CourseProps } from "./types.course";
 import { ImgProps } from "./types.img";
+import { HeadingProps } from "./types.text";
 
 export interface HeroImgContainerProps extends ImgProps {
   img: string;
@@ -11,11 +12,11 @@ export interface HeroImgContainerProps extends ImgProps {
   heading?: string;
 }
 
-export type HeroLeftContainerProps = {
-  heading: string | React.ReactNode;
+export type HeroProps = Omit<HeadingProps, "text"> & { text?: string } & {
+  heading?: string | React.ReactNode;
   headingClass?: string;
   headingStyle?: React.CSSProperties;
-  desc: string;
+  desc?: string;
   descClass?: string;
   descStyle?: React.CSSProperties;
   buttons?: React.ReactNode;

@@ -11,8 +11,10 @@ const CourseCard = ({
     price,
     creator,
     purchaseCount,
+    imageLink,
     img: { src, ...imgRest },
   },
+  href,
   cardClass,
   cardStyle,
 }: CourseCardProps) => {
@@ -20,7 +22,7 @@ const CourseCard = ({
   const avatarCount = [1, 1, 1];
   return (
     <Link
-      href={`/courses/${_id}`}
+      href={href || `/courses/${_id}`}
       className={`hover ${cardClass}`}
       style={{
         width: 260,

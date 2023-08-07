@@ -4,12 +4,14 @@ export const authLogout = ({
   localStorage,
   sessionStorage,
   logoutApi,
+  setClicked,
 }: {
   router: any;
   setUsername: any;
   localStorage: any;
   sessionStorage: any;
   logoutApi: any;
+  setClicked: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   try {
     // call logout api
@@ -22,6 +24,7 @@ export const authLogout = ({
     // redirect to login page
     router.push("/auth");
   } catch (error) {
+    setClicked(false);
     console.log("error in clientLogout", error);
   }
 };

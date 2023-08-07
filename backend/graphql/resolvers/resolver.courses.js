@@ -76,7 +76,7 @@ const resolverCourses = {
           },
         })
         .exec();
-      // console.log("courses", courses);
+      console.log("get created courses", courses);
       return {
         msg: "Courses fetched successfully",
         status: "success",
@@ -99,16 +99,16 @@ const resolverMutCourses = {
       const { user } = context;
       // console.log(user, "in add course");
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
-      const { course } = args;
-      if (!course.createdAt) course.createdAt = new Date();
-      if (!course.creator) course.creator = user._id;
-      course.creator = new mongoose.Types.ObjectId(course.creator);
-      const newCourse = new Course(course);
+      const { input } = args;
+      if (!input.createdAt) input.createdAt = new Date();
+      if (!input.creator) input.creator = user._id;
+      input.creator = new mongoose.Types.ObjectId(input.creator);
+      const newCourse = new Course(input);
       const updateCreatedCourses = await Admin.updateOne(
-        { _id: course.creator },
+        { _id: input.creator },
         { $push: { createdCourses: newCourse._id } }
       );
-      console.log(updateCreatedCourses, course.creator, newCourse._id);
+      console.log(updateCreatedCourses, input.creator, newCourse._id);
       if (
         updateCreatedCourses.acknowledged === false ||
         updateCreatedCourses.modifiedCount === 0 ||
@@ -147,23 +147,33 @@ const resolverMutCourses = {
       // console.log("data received", input, id, user);
       if (!id) return { msg: "Invalid id", status: "failed" };
       // UPDATING DATA
+      console.log(
+        "updating course",
+        id,
+        user._id,
+        input,
+        new mongoose.Types.ObjectId(user._id)
+      );
       const updateData = await Course.updateOne(
         { _id: id, creator: user._id }, // using creator to make sure that only the creator can update the course
         { $set: input }
       );
-      // console.log("doc found to update", updateData);
+      console.log("doc found to update", updateData);
       // CHECKING IF UPDATED
-      if (
-        updateData.acknowledged === false ||
-        updateData.modifiedCount === 0 ||
-        updateData.matchedCount === 0
-      )
+      if (updateData.matchedCount === 0)
         // not updated
         return {
-          msg: "failed to update course",
+          msg: "Course not found",
           status: "failed",
           data: [updateData],
         };
+      if (updateData.acknowledged === false || updateData.modifiedCount === 0) {
+        return {
+          msg: "Course not updated",
+          status: "failed",
+          data: [updateData],
+        };
+      }
       // RETURNING UPDATED DATA ON SUCCESS
       return {
         msg: "Course updated successfully",
@@ -182,7 +192,11 @@ const resolverMutCourses = {
   purchaseCourse: async (_, args, context) => {
     try {
       const { user } = context;
-      if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
+      if (!(user && user._id))
+        return {
+          msg: "Login with user account to purchase!",
+          status: "failed",
+        };
       const { courseId, amount, payMethod } = args;
       // check if course exists
       const course = await Course.findById(courseId);
@@ -192,21 +206,35 @@ const resolverMutCourses = {
       // Add to purchased courses
       const updatePurchasedCourses = await User.updateOne(
         { _id: user._id },
-        { $push: { purchasedCourses: courseId } }
+        { $addToSet: { purchasedCourses: courseId } }
       );
+      if (
+        updatePurchasedCourses.acknowledged == true &&
+        updatePurchasedCourses.matchedCount == 1 &&
+        updatePurchasedCourses.modifiedCount == 0
+      ) {
+        console.log("Course already purchased!");
+        return {
+          msg: "Course already purchased!",
+          status: "failed",
+          data: [updatePurchasedCourses],
+        };
+      }
       if (
         updatePurchasedCourses.acknowledged === false ||
         updatePurchasedCourses.modifiedCount === 0 ||
         updatePurchasedCourses.matchedCount === 0
-      )
+      ) {
+        console.log("failed to update purchased courses");
         // not updated
         return {
-          msg: "failed to add course to user",
+          msg: "Transaction failed, please try again later!",
           status: "failed",
           data: [updatePurchasedCourses],
         };
+      }
       return {
-        msg: "Course purchased successfully",
+        msg: "Course purchased successfully 👍!",
         status: "success",
         data: [updatePurchasedCourses],
       };

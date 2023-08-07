@@ -35,6 +35,7 @@ const CourseCardGrid = ({
               <CourseCard
                 key={index + card.course.title}
                 course={card.course}
+                href={Boolean(card.href) && card.href + card.course._id}
               />
             )
         )}

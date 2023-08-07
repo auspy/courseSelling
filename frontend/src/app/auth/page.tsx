@@ -1,7 +1,6 @@
 "use client";
 import Logo from "@/components/header/Logo";
 import {
-  Alert,
   FormControl,
   IconButton,
   InputAdornment,
@@ -24,6 +23,7 @@ import { atomUserName } from "@/state/atoms/atom.username";
 // gql imports
 import LOGIN from "@/api/graphql/mutations/login.graphql";
 import REGISTER from "@/api/graphql/mutations/register.graphql";
+import atomToast from "@/state/atoms/atom.toast";
 
 export default function Login() {
   const params = useSearchParams().get("t");
@@ -32,17 +32,17 @@ export default function Login() {
   );
   const isLogin = pageType === "login";
   const [_, setUserState] = useRecoilState(atomUserName);
-  const [role, setRole] = useState("USER");
+  const [role, setRole] = useState<"USER" | "ADMIN">("USER");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [, setToast] = useRecoilState(atomToast);
   const router = useRouter();
   const [clicked, setClicked] = useState<boolean>(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
+    newAlignment: "USER" | "ADMIN"
   ) => {
     setRole(newAlignment);
   };
@@ -63,12 +63,6 @@ export default function Login() {
     // }
     return "";
   };
-  const setErrorMsg = (msg: string, timer: number = 5000) => {
-    setTimeout(() => {
-      setError("");
-    }, timer);
-    setError(msg);
-  };
   const [login, { data, loading }] = useMutation(isLogin ? LOGIN : REGISTER);
   const handleButtonClick = () => {
     console.log(username, password);
@@ -84,28 +78,55 @@ export default function Login() {
         },
         onError: (error) => {
           console.log("error", error);
-          setErrorMsg("Error: Login failed");
+          setToast({
+            text: "Error: Login failed",
+            type: "error",
+            secs: 5000,
+          });
           setClicked(false);
         },
         onCompleted: (data) => {
+          setUsername("");
+          setPassword("");
           console.log("completed 2", data);
           if (
             data?.login?.status == "failed" ||
             data?.register?.status == "failed"
           ) {
-            setUsername("");
-            setPassword("");
-            setErrorMsg(data?.login?.msg || data?.register?.msg);
+            setToast({
+              text: data?.login?.msg || data?.register?.msg,
+              type: "error",
+              secs: 5000,
+            });
             setClicked(false);
             return;
           }
+          if (!isLogin) {
+            setToast({
+              text: "Registration successful. Please login",
+              type: "success",
+              secs: 5000,
+            });
+            setPageType("login");
+            setClicked(false);
+            return;
+          }
+          setToast({
+            text: "Login successful. Welcome To Skillz 🥳",
+            type: "success",
+            secs: 5000,
+          });
           localStorage.setItem("user", JSON.stringify({ username, role }));
           setUserState({ username, role });
+          if (role == "ADMIN") {
+            router.push("/dashboard");
+            return;
+          }
           router.push("/");
         },
       });
     }
-    console.log("query data", data, loading, error);
+    console.log("query data", data, loading);
   };
   return (
     <>
@@ -113,22 +134,6 @@ export default function Login() {
         className="topContainer"
         style={{ height: "100vh", width: "100%", padding: 30 }}
       >
-        {Boolean(error) && (
-          <Alert
-            style={{
-              position: "fixed",
-              top: 40,
-              right: 40,
-              backgroundColor: "var(--red)",
-              fontFamily: "Raleway,sans-serif",
-            }}
-            className="medi14"
-            variant="filled"
-            severity={"error"}
-          >
-            {error[0]?.toUpperCase() + error.slice(1)}
-          </Alert>
-        )}
         <div
           className="fccc"
           style={{
@@ -156,6 +161,7 @@ export default function Login() {
               label="Username"
               variant="outlined"
               type="text"
+              value={username}
               helperText={usernameHelperText()}
               color={"primary"}
               error={username.length > 0 && username?.length < 4}
@@ -172,6 +178,7 @@ export default function Login() {
                 Password
               </InputLabel>
               <OutlinedInput
+                value={password}
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
                 error={password.length > 0 && password?.length < 4}
@@ -201,21 +208,31 @@ export default function Login() {
               onChange={handleChange}
               aria-label="Platform"
             >
-              <ToggleButton value="USER">User</ToggleButton>
-              <ToggleButton value="ADMIN">Creator</ToggleButton>
+              <ToggleButton disabled={role == "USER"} value="USER">
+                User
+              </ToggleButton>
+              <ToggleButton disabled={role == "ADMIN"} value="ADMIN">
+                Creator
+              </ToggleButton>
             </ToggleButtonGroup>
           </ThemeProvider>
-          <Button
-            type="submit"
-            value={pageType}
-            disabled={
-              clicked || loading || username?.length < 4 || password?.length < 4
-            }
-            buttonClass="mt20"
-            loading={clicked || loading}
-            buttonStyle={{ boxShadow: "none" }}
-            onClick={handleButtonClick}
-          />
+          <div>
+            <Button
+              type="submit"
+              value={pageType}
+              disabled={
+                clicked ||
+                loading ||
+                username?.length < 4 ||
+                password?.length < 4 ||
+                !role
+              }
+              buttonClass="mt20"
+              loading={clicked || loading}
+              buttonStyle={{ boxShadow: "none" }}
+              onClick={handleButtonClick}
+            />
+          </div>
           {/* </form> */}
           <SwitchPageType isLogin={isLogin} setPageType={setPageType} />
         </div>

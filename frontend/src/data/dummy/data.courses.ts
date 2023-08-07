@@ -2,6 +2,7 @@ import { generateRandomInt } from "@/helper/common";
 import { CourseCardProps } from "@/types/types.card";
 import { CourseProps } from "@/types/types.course";
 import { ImgProps } from "@/types/types.img";
+import { dummyCategoryList } from "./data.lists";
 
 // TYPES
 type CourseInput = Omit<CourseProps, "_id" | "title" | "price" | "img"> & {
@@ -46,9 +47,19 @@ export const createDummyCourseData = ({
 
 // DATA
 // generates given number of cards
-export const dummyCardData = (totalCards: number = 2): CourseCardProps[] => {
+export const dummyCardData = (
+  totalCards: number = 2,
+  href?: string
+): CourseCardProps[] => {
   const arr: CourseCardProps[] = [];
   for (let index = 0; index < totalCards; index++) {
+    if (href) {
+      arr.push({
+        course: createDummyCourseData({ creator: { username: "John Doe" } }),
+        href,
+      });
+      continue;
+    }
     arr.push({
       course: createDummyCourseData({ creator: { username: "John Doe" } }),
     });
@@ -59,15 +70,7 @@ export const dummyCardData = (totalCards: number = 2): CourseCardProps[] => {
 export const dummyCourseData: CourseProps = createDummyCourseData({});
 
 export const dummyTrainCardData = (): { [key: string]: CourseCardProps[] } => {
-  const arr: string[] = [
-    "design",
-    "management",
-    "marketing",
-    "development",
-    "business",
-    "photography",
-    "music",
-  ];
+  const arr: string[] = dummyCategoryList;
   const obj: { [key: string]: CourseCardProps[] } = {};
   for (const topic of arr) {
     obj[topic] = dummyCardData(5);

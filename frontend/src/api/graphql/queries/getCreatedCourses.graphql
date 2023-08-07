@@ -1,0 +1,21 @@
+query{
+    getCreatedCourses{
+        msg
+        status
+        data{
+            ...on Course{
+                _id
+                createdAt
+                title
+                price
+                description
+                category
+                published
+                imageLink
+                creator{
+                    username
+                }
+            }
+        }
+    }
+}

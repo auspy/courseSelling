@@ -7,6 +7,7 @@ export type ButtonProps = {
   buttonTextStyle?: React.CSSProperties;
   buttonTextClass?: string;
   loading?: boolean;
+  href?: string;
   type?: "button" | "submit" | "reset";
 };
 
@@ -36,4 +37,14 @@ export type ButtonTemplateProps = ButtonProps & {
   buttonBody: React.ReactNode;
   height?: number;
   width?: number;
+};
+
+export type IconButtonProps = Omit<
+  ButtonProps,
+  "value" | "buttonTextClass" | "buttonTextStyle"
+>;
+
+export type ButtonDrawerToggle = IconButtonProps & {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

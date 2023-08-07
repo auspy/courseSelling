@@ -1,7 +1,10 @@
 import { defaultCourseImg } from "@/helper/constants.global";
 import { CourseProps } from "@/types/types.course";
 
-export const modifyCoursesData = (courses: CourseProps[]) => {
+export const modifyCoursesData = (
+  courses: CourseProps[],
+  href: string | false = false
+) => {
   return courses.map((course) => ({
     course: {
       ...course,
@@ -11,5 +14,6 @@ export const modifyCoursesData = (courses: CourseProps[]) => {
         fill: true,
       },
     },
+    href,
   }));
 };

@@ -4,6 +4,7 @@ import "../static/styles/common.css";
 import { Open_Sans } from "next/font/google";
 import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
 import RecoilWrapper from "@/state/RecoilWrapper";
+import ToastWrapper from "@/components/toast/ToastWrapper";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -16,7 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${openSans.className} fcc`}>
         <ApolloWrapper>
-          <RecoilWrapper>{children}</RecoilWrapper>
+          <RecoilWrapper>
+            <ToastWrapper />
+            {children}
+          </RecoilWrapper>
         </ApolloWrapper>
       </body>
     </html>

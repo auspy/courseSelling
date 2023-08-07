@@ -1,0 +1,14 @@
+mutation ($input:CreateCourseInput!){
+    addCourse(input:$input){
+        status
+        msg
+        err
+        data{
+            ...on updateRes{
+                acknowledged
+                matchedCount
+                modifiedCount
+            }
+        }
+    }
+}

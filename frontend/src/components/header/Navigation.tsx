@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { LinkItem } from "@/types/types.text";
-import { cookies } from "next/dist/client/components/headers";
 import ButtonLogin from "../buttons/ButtonLogin";
 
 const linkClass = `semi14-os caps`;
 const items: LinkItem[] = [
-  { name: "courses", href: "/courses", class: linkClass },
-  { name: "purchased", href: "/courses/purchased", class: linkClass },
+  { name: "explore", href: "/courses", class: linkClass },
+  // { name: "purchased", href: "/courses/purchased", class: linkClass },
 ];
 
 // type NavigationProps = {
@@ -15,9 +14,6 @@ const items: LinkItem[] = [
 // };
 
 const Navigation = () => {
-  const authToken = cookies().get("authToken");
-  const userLoggedIn = authToken ? true : false;
-  console.log("authToken", authToken);
   return (
     <>
       <div className="frc" style={{ gap: 25 }}>

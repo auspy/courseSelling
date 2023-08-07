@@ -1,0 +1,14 @@
+mutation($courseId:ID!,$method:String!,$amt:Float!) {
+    purchaseCourse(courseId:$courseId,amount:$amt,payMethod:$method){
+        status
+        msg
+        err
+        data{
+            ...on updateRes{
+                acknowledged
+                matchedCount
+                modifiedCount
+            }
+        }
+    }
+}

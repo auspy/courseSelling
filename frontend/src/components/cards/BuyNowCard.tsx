@@ -1,13 +1,14 @@
 import Image from "next/image";
-import ButtonPrimaryLong from "../buttons/ButtonPrimaryLong";
 import { defaultCourseImg } from "@/helper/constants.global";
 import { BuyNowCardProps } from "@/types/types.card";
+import PurchaseCourse from "@/components/coursesPage/PurchaseCourse";
 
 const BuyNowCard = ({
   src = defaultCourseImg.src,
   alt = defaultCourseImg.alt,
   price,
   discount,
+  _id,
   saleAlarm = (
     <>
       Hurry 😱<span className="semi"> 7 hours</span> left at this price!
@@ -67,7 +68,7 @@ const BuyNowCard = ({
             {saleAlarm}
           </p>
           {/* BUTTON */}
-          <ButtonPrimaryLong value="buy now" buttonClass="mt20" />
+          <PurchaseCourse amount={price} _id={_id} />
         </div>
       </div>
     </>

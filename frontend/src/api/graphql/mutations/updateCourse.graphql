@@ -1,0 +1,15 @@
+mutation($input:UpdateCourseInput!,$id:ID!) {
+    updateCourse(input:$input,id:$id){
+        status
+        msg
+        err
+        data{
+            __typename
+            ...on updateRes{
+                acknowledged
+                matchedCount
+                modifiedCount
+            }
+        }
+    }
+}

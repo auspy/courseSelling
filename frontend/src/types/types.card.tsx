@@ -13,6 +13,7 @@ export type CardStyleProps = {
 // COURSE
 export type CourseCardProps = CardStyleProps & {
   course: CourseProps;
+  href?: string | false;
 };
 
 export type CourseCardGridProps = {
@@ -43,6 +44,7 @@ export type PricingCardProps = CardStyleProps & {
 
 export type BuyNowCardProps = CardStyleProps &
   ImgProps & {
+    _id: string;
     price: number;
     discount?: number;
     saleAlarm?: React.ReactNode;

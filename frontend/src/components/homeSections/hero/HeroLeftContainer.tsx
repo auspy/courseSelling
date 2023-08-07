@@ -1,4 +1,4 @@
-import { HeroLeftContainerProps } from "@/types/types.hero";
+import { HeroProps } from "@/types/types.hero";
 
 const HeroLeftContainer = ({
   heading,
@@ -9,7 +9,7 @@ const HeroLeftContainer = ({
   descStyle,
   buttons,
   containerStyle,
-}: HeroLeftContainerProps) => {
+}: HeroProps) => {
   return (
     <div style={containerStyle}>
       {typeof heading == "string" ? (

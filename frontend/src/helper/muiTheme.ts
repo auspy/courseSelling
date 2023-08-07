@@ -74,6 +74,20 @@ const muiTheme = createTheme({
         },
       },
     },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          color: "#fafafa70",
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          color: lightWhite,
+        },
+      },
+    },
   },
 });
 export default muiTheme;

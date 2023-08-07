@@ -1,20 +1,16 @@
 "use client";
-// import Avatar from "@mui/material/Avatar";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-// import Divider from "@mui/material/Divider";
-// import PersonAdd from "@mui/icons-material/PersonAdd";
-// import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { styled } from "@mui/material";
+import { Divider, styled } from "@mui/material";
 import { authLogout } from "@/api/auth/auth";
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { atomUserName } from "@/state/atoms/atom.username";
 import { useMutation } from "@apollo/client";
 import LOGOUT from "@/api/graphql/mutations/logout.graphql";
-import { Dashboard } from "@mui/icons-material";
+import { Dashboard, MenuBook } from "@mui/icons-material";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -32,16 +28,19 @@ const StyledMenu = styled((props: MenuProps) => (
 ))(({ theme }) => ({
   "& .MuiPaper-root": {
     borderRadius: 6,
-    // marginTop: theme.spacing(1),
-    minWidth: 180,
+    marginTop: theme.spacing(1),
+    minWidth: 280,
     color: "#fafafa",
     backgroundColor: "#2d2d2d",
     boxShadow:
       "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
     "& .MuiMenu-list": {
-      padding: "4px 0",
+      padding: "10px 5px",
     },
     "& .MuiMenuItem-root": {
+      minHeight: 40,
+      fontFamily: "Raleway,sans-serif",
+      fontWeight: 500,
       "& .MuiSvgIcon-root": {
         fontSize: 18,
         color: "#fafafa",
@@ -57,11 +56,15 @@ const StyledMenu = styled((props: MenuProps) => (
 export default function AccountMenu({
   anchorEl,
   setAnchorEl,
+  clicked,
+  setClicked,
 }: {
   anchorEl: HTMLElement | null;
   setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
+  setClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  clicked: boolean;
 }) {
-  const [, setUserState] = useRecoilState(atomUserName);
+  const [userState, setUserState] = useRecoilState(atomUserName);
   const router = useRouter();
   const open = Boolean(anchorEl);
   const [logout] = useMutation(LOGOUT);
@@ -73,48 +76,54 @@ export default function AccountMenu({
     <StyledMenu
       anchorEl={anchorEl}
       id="account-menu"
-      open={open}
+      open={open && !clicked}
       onClose={handleClose}
       onClick={handleClose}
-      //   style={{
-      //     backgroundColor: "var(--dark-bg)",
-      //   }}
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
     >
-      {/* <MenuItem onClick={handleClose}>
-        <Avatar /> Profile
-      </MenuItem>
-      <MenuItem onClick={handleClose}>
-        <Avatar /> My account
+      <MenuItem disabled={true}>
+        <span className="bold16 caps">{userState.username}</span>
       </MenuItem>
       <Divider />
-      <MenuItem onClick={handleClose}>
-        <ListItemIcon>
-          <PersonAdd fontSize="small" />
-        </ListItemIcon>
-        Add another account
-      </MenuItem>*/}
+      {userState.role == "ADMIN" && (
+        <MenuItem
+          onClick={() => {
+            // send to dashboard
+            router.push("/dashboard");
+            handleClose();
+          }}
+        >
+          <ListItemIcon>
+            <Dashboard fontSize="small" />
+          </ListItemIcon>
+          <span className="medi14">Dashboard</span>
+        </MenuItem>
+      )}
+      {userState.role == "USER" && (
+        <MenuItem
+          onClick={() => {
+            // send to dashboard
+            router.push("/purchased");
+            handleClose();
+          }}
+        >
+          <ListItemIcon>
+            <MenuBook fontSize="small" />
+          </ListItemIcon>
+          <span className="medi14">My Learnings</span>
+        </MenuItem>
+      )}
       <MenuItem
         onClick={() => {
-          // send to dashboard
-          router.push("/dashboard");
-          handleClose();
-        }}
-      >
-        <ListItemIcon>
-          <Dashboard fontSize="small" />
-        </ListItemIcon>
-        <span className="semi14">Dashboard</span>
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
+          setClicked(true);
           authLogout({
             router,
             setUsername: setUserState,
             localStorage,
             sessionStorage,
             logoutApi: logout,
+            setClicked,
           });
           handleClose();
         }}
@@ -122,7 +131,7 @@ export default function AccountMenu({
         <ListItemIcon>
           <Logout fontSize="small" />
         </ListItemIcon>
-        <span className="semi14">Logout</span>
+        <span className="medi14">Logout</span>
       </MenuItem>
     </StyledMenu>
   );

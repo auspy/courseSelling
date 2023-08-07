@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import AccountMenu from "../menus/AccountMenu";
+import { CircularProgress } from "@mui/material";
 
 const UserAvatarMenu = ({ username }: { username: string }) => {
+  const [clicked, setCliked] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (anchorEl) {
@@ -25,9 +27,14 @@ const UserAvatarMenu = ({ username }: { username: string }) => {
         onClick={handleClick}
         className="upper semi16 gcc"
       >
-        {username[0]}
+        {clicked ? <CircularProgress color="inherit" size={14} /> : username[0]}
       </button>
-      <AccountMenu setAnchorEl={setAnchorEl} anchorEl={anchorEl} />
+      <AccountMenu
+        setAnchorEl={setAnchorEl}
+        anchorEl={anchorEl}
+        clicked={clicked}
+        setClicked={setCliked}
+      />
     </div>
   );
 };

@@ -1,6 +1,8 @@
+"use client";
 import styles from "../../static/styles/button.module.scss";
 import { ButtonTemplateProps } from "@/types/types.button";
 import { CircularProgress } from "@/components/thirdParty/mui";
+import { useRouter } from "next/navigation";
 
 const ButtonTemplate = ({
   value = "Click me",
@@ -10,14 +12,24 @@ const ButtonTemplate = ({
   buttonTop,
   buttonBody,
   buttonBottom,
+  buttonTextClass,
+  buttonTextStyle,
   height,
+  href,
   onClick,
   width,
   type = "button",
   loading = false,
 }: ButtonTemplateProps) => {
+  const router = useRouter();
+  if (href) {
+    onClick = () => {
+      router.push(href);
+    };
+  }
   return (
-    <div style={{ position: "relative" }}>
+    <>
+      {/* <div style={{ position: "relative" }}> */}
       <button
         type={type}
         onClick={onClick}
@@ -35,14 +47,18 @@ const ButtonTemplate = ({
       >
         <div className={styles.bottom}>{buttonBottom}</div>
         <div style={{ position: "relative", zIndex: 2 }}>
-          <div className={styles.text}>
+          <div
+            className={`${styles.text} ${buttonTextClass}`}
+            style={{ ...buttonTextStyle }}
+          >
             {loading ? <CircularProgress color={"inherit"} size={16} /> : value}
           </div>
           {buttonBody}
         </div>
         <div className={styles.top}>{buttonTop}</div>
       </button>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 

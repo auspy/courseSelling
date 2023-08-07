@@ -16,7 +16,7 @@ const TabButton = ({
     <button
       className={`${buttonClass}`}
       style={{
-        height: 50,
+        // height: 50,
         backgroundColor: "transparent",
         borderBottom: `${isActive ? 2 : 1}px solid ${
           isActive ? "var(--primary)" : "#707070"

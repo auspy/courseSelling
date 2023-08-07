@@ -25,6 +25,7 @@ const ButtonLogin = () => {
     <ButtonThird
       value="Login"
       disabled={loading}
+      loading={loading}
       onClick={() => {
         setLoading(true);
         router.push("/auth");

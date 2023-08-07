@@ -67,7 +67,11 @@ const HeroCourse = ({ courseData }: HeroCourseProps) => {
           <DetailTabGroup data={detailTabGroupData()} />
         </div>
         {/* BUY BTN CONTAINER */}
-        <BuyNowCard price={courseData.price} {...courseData.img} />
+        <BuyNowCard
+          price={courseData.price}
+          {...courseData.img}
+          _id={courseData._id}
+        />
       </div>
     </div>
   );
