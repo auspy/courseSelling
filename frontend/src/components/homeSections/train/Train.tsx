@@ -1,14 +1,28 @@
 "use client";
+import { GET_COURSES } from "@/api/graphql/gql";
 import TabButtonsRow from "@/components/buttons/TabButtons/TabButtonsRow";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import Heading from "@/components/text/Heading";
 import { dummyTrainCardData } from "@/data/dummy/data.courses";
+import { modifyDivideIntoCategories } from "@/data/modify/modify.courses";
 import { CourseCardProps } from "@/types/types.card";
+import {
+  CategoryEnum,
+  CourseCategorySortedProps,
+  CourseProps,
+  CoursesQueryProps,
+} from "@/types/types.course";
+import { useSuspenseQuery } from "@apollo/client";
 import { useState } from "react";
 
 const Train = () => {
-  const [active, setActive] = useState("design");
+  const [active, setActive] = useState<CategoryEnum>(CategoryEnum.design);
   const cardData: { [key: string]: CourseCardProps[] } = dummyTrainCardData();
+  const { data } = useSuspenseQuery<CoursesQueryProps>(GET_COURSES);
+  const foundCourses = data?.getCourses?.status == "success";
+  const courses: CourseCategorySortedProps = modifyDivideIntoCategories(
+    data?.getCourses?.data as CourseProps[]
+  );
   return (
     <div
       className="topContainer"
@@ -29,12 +43,13 @@ const Train = () => {
           afterHighlightText="your team with real world skills and knowledge"
         />
         {/* TAB BUTTONS */}
-        <div className="mt50">
+        <div className="mt50 w100 fcc">
           <TabButtonsRow
             width={918}
             active={active}
             setActive={setActive}
-            buttonList={Object.keys(cardData)}
+            buttonList={Object.keys(cardData).slice(0, 7)}
+            buttonStyle={{ width: "100%" }}
           />
         </div>
         {/* CARDS */}
@@ -46,7 +61,7 @@ const Train = () => {
             gap: 25,
           }}
           maxItems={8}
-          cardData={cardData[active]}
+          cardData={foundCourses ? courses[active] : cardData[active]}
           gridClass="mt30"
         />
       </div>

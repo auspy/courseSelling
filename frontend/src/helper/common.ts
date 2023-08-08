@@ -44,3 +44,7 @@ export const randomAlphabet = (uppercase: boolean = true): string => {
 export const generateRandomInt = (max: number, min: number = 0): number => {
   return Math.floor(Math.random() * (max - min) + min);
 };
+
+export const generatePurchaseCount = (): number => {
+  return Number((Math.random() * 10 ** (Math.random() * 8)).toFixed());
+};

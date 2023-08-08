@@ -1,5 +1,6 @@
 import { getCreatedCourses } from "@/api/graphql/gql";
 import { ImgProps } from "./types.img";
+import { CourseCardProps } from "./types.card";
 
 export type CourseProps2 = {
   id: string;
@@ -23,16 +24,16 @@ export enum CategoryEnum {
   development = "development",
   marketing = "marketing",
   business = "business",
-  it = "it",
-  personalDevelopment = "personalDevelopment",
   photography = "photography",
   music = "music",
-  lifestyle = "lifestyle",
   healthFitness = "healthFitness",
   teacherTraining = "teacherTraining",
   academics = "academics",
   language = "language",
-  testPrep = "testPrep",
+  // it = "it",
+  // personalDevelopment = "personalDevelopment",
+  // lifestyle = "lifestyle",
+  // testPrep = "testPrep",
 }
 type WillAddLater = {
   rating?: string;
@@ -86,4 +87,8 @@ export type CreateCourseInputProps = Omit<
   title: string;
   price: number;
   category: CategoryEnum;
+};
+
+export type CourseCategorySortedProps = {
+  [key in CategoryEnum]: CourseCardProps[];
 };

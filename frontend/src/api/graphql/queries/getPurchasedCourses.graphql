@@ -10,6 +10,7 @@ query{
                 title
                 price
                 description
+                purchaseCount
                 category
                 imageLink
                 published

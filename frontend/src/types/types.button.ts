@@ -11,25 +11,19 @@ export type ButtonProps = {
   type?: "button" | "submit" | "reset";
 };
 
-// WAYS TO EXTEND TYPE AND INTERFACE
-
-// export interface TabButtonProps extends ButtonProps {
-//   active: boolean;
-//   setActive: React.Dispatch<React.SetStateAction<string>>;
-// }
-
-export type TabButtonProps = ButtonProps & {
-  setActive: React.Dispatch<React.SetStateAction<string>>;
-} & (
-    | {
-        type: "bool";
-        active: boolean;
-      }
-    | {
-        type: "string";
-        active: string;
-      }
-  );
+export type TabButtonProps = (
+  | {
+      type: "bool";
+      active: boolean;
+    }
+  | {
+      type: "string";
+      active: string;
+    }
+) &
+  Omit<ButtonProps, "type" | "active"> & {
+    setActive: React.Dispatch<React.SetStateAction<string>>;
+  };
 
 export type ButtonTemplateProps = ButtonProps & {
   buttonTop: React.ReactNode;

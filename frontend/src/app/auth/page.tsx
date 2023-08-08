@@ -40,6 +40,15 @@ export default function Login() {
   const router = useRouter();
   const [clicked, setClicked] = useState<boolean>(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [login, { data, loading }] = useMutation(isLogin ? LOGIN : REGISTER);
+  const buttonDisabled =
+    clicked ||
+    loading ||
+    username?.length < 4 ||
+    password?.length < 4 ||
+    !role ||
+    password?.length > 30 ||
+    username?.length > 70;
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: "USER" | "ADMIN"
@@ -55,6 +64,9 @@ export default function Login() {
     if (username?.length == 0) {
       return "";
     }
+    if (username?.length > 70) {
+      return "Username must be less than 70 characters";
+    }
     if (username?.length < 4) {
       return "Username must be atleast 4 characters";
     }
@@ -63,7 +75,6 @@ export default function Login() {
     // }
     return "";
   };
-  const [login, { data, loading }] = useMutation(isLogin ? LOGIN : REGISTER);
   const handleButtonClick = () => {
     console.log(username, password);
     setClicked(true);
@@ -72,8 +83,8 @@ export default function Login() {
 
       login({
         variables: {
-          username,
-          password,
+          username: username.trim(),
+          password: password.trim(),
           role,
         },
         onError: (error) => {
@@ -116,8 +127,11 @@ export default function Login() {
             type: "success",
             secs: 5000,
           });
-          localStorage.setItem("user", JSON.stringify({ username, role }));
-          setUserState({ username, role });
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ username: data.login.data?.username, role })
+          );
+          setUserState({ username: data.login.data?.username, role });
           if (role == "ADMIN") {
             router.push("/dashboard");
             return;
@@ -164,7 +178,10 @@ export default function Login() {
               value={username}
               helperText={usernameHelperText()}
               color={"primary"}
-              error={username.length > 0 && username?.length < 4}
+              error={
+                (username.length > 0 && username?.length < 4) ||
+                username?.length > 70
+              }
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
@@ -181,7 +198,10 @@ export default function Login() {
                 value={password}
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}
-                error={password.length > 0 && password?.length < 4}
+                error={
+                  (password.length > 0 && password?.length < 4) ||
+                  password?.length > 30
+                }
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -220,13 +240,7 @@ export default function Login() {
             <Button
               type="submit"
               value={pageType}
-              disabled={
-                clicked ||
-                loading ||
-                username?.length < 4 ||
-                password?.length < 4 ||
-                !role
-              }
+              disabled={buttonDisabled}
               buttonClass="mt20"
               loading={clicked || loading}
               buttonStyle={{ boxShadow: "none" }}

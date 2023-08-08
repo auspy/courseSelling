@@ -4,14 +4,16 @@ import { memo } from "react";
 type TabButtonsRowProps = {
   width: number;
   active: string;
-  setActive: React.Dispatch<React.SetStateAction<string>>;
+  setActive: React.Dispatch<React.SetStateAction<any>>;
   buttonList: string[];
+  buttonStyle?: React.CSSProperties;
 };
 const TabButtonsRow = ({
   width,
   active,
   setActive,
   buttonList,
+  buttonStyle,
 }: TabButtonsRowProps) => {
   return (
     <div
@@ -21,7 +23,8 @@ const TabButtonsRow = ({
       {buttonList.map((value, index) => (
         <TabButton
           buttonStyle={{
-            padding: 20,
+            padding: 0,
+            ...buttonStyle,
           }}
           key={index + value}
           type="string"

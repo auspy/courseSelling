@@ -4,10 +4,7 @@ mutation($username:ID!,$password:String!,$role:Role!){
        msg
        token
        data{
-           id
            username
-           password
-           createdCourses
        }
    }
 }

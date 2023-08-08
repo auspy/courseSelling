@@ -25,7 +25,7 @@ const List = ({
         style={{
           display: "grid",
           grid: `auto / repeat(${maxColumns},1fr)`,
-          rowGap: 10,
+          rowGap: 15,
           columnGap: 20,
           ...listStyle,
         }}
@@ -43,6 +43,8 @@ const List = ({
                 <p
                   className={`regu14 os ${textClass} ${item.textClass} `}
                   style={{
+                    opacity: 0.8,
+                    lineHeight: "150%",
                     ...textStyle, // This is the default text style
                     ...item.textStyle, // this can be used for custom styling
                   }}

@@ -3,7 +3,10 @@ import { Admin, Course, User } from "../../mongoose/modals/modals.js";
 
 const resolverCourses = {
   getCourses: async () => {
-    const docs = await Course.find({}).populate("creator").exec();
+    const docs = await Course.find({ published: true })
+      .populate("creator")
+      .limit(100) // just a most easy but bad way to prevent many course get fetched
+      .exec();
     return {
       msg: "Courses fetched successfully",
       status: "success",
@@ -39,6 +42,7 @@ const resolverCourses = {
   getPurchasedCourses: async (_, __, context) => {
     try {
       const { user } = context;
+      console.log(user, "in get purchased courses");
       if (!(user && user._id)) return { msg: "Invalid user", status: "failed" };
       // console.log("getting purchased courses for user", user._id);
       const courses = await User.findById(user._id)
@@ -48,6 +52,7 @@ const resolverCourses = {
             path: "creator",
           },
         })
+        .limit(50) // just a most easy but bad way to prevent many course get fetched
         .exec();
       return {
         msg: "Courses fetched successfully",
@@ -75,6 +80,7 @@ const resolverCourses = {
             path: "creator",
           },
         })
+        .limit(50) // just a most easy but bad way to prevent many course get fetched
         .exec();
       console.log("get created courses", courses);
       return {

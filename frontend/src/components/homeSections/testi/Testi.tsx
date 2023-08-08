@@ -6,7 +6,7 @@ import IconRightArrow from "@/../public/icons/IconRightArrow";
 import ArrowButtonCurve from "@/static/parts/curves/ArrowButtonCurve";
 import Image from "next/image";
 import TestiImgCurve from "@/static/parts/curves/TestiImgCurve";
-import { dummyTesties } from "@/data/dummy/data.testi";
+import { dummyTestimonials } from "@/data/dummy/data.testi";
 
 const Testi = () => {
   const [active, setActive] = useState(0);
@@ -20,15 +20,15 @@ const Testi = () => {
   };
   const changeActive = (value: number) => {
     let nextIndex = active + value;
-    if (nextIndex < 0) nextIndex = dummyTesties.length - 1;
-    else if (nextIndex > dummyTesties.length - 1) nextIndex = 0;
+    if (nextIndex < 0) nextIndex = dummyTestimonials.length - 1;
+    else if (nextIndex > dummyTestimonials.length - 1) nextIndex = 0;
     setActive(nextIndex);
     activeRef.current = nextIndex;
   };
   useEffect(() => {
     const interval = setInterval(() => {
       changeActive(activeRef.current + 1);
-      activeRef.current === dummyTesties.length - 1;
+      activeRef.current === dummyTestimonials.length - 1;
     }, 15000);
     return () => clearInterval(interval);
   }, []);
@@ -43,16 +43,16 @@ const Testi = () => {
           headingStyle={{
             lineHeight: "150%",
           }}
-          text={dummyTesties[active].msg.text}
-          highlightText={dummyTesties[active].msg.highlightText}
-          afterHighlightText={dummyTesties[active].msg.afterHighlightText}
+          text={dummyTestimonials[active].msg.text}
+          highlightText={dummyTestimonials[active].msg.highlightText}
+          afterHighlightText={dummyTestimonials[active].msg.afterHighlightText}
         />
         <div className="frcsb w100">
           {/* AUTHOR */}
           <div className="frc">
-            <p className="semi16 mr15">{dummyTesties[active].name}</p>
+            <p className="semi16 mr15">{dummyTestimonials[active].name}</p>
             <p className="regu16" style={{ fontWeight: 300 }}>
-              {dummyTesties[active].designation}
+              {dummyTestimonials[active].designation}
             </p>
           </div>
 
@@ -98,13 +98,20 @@ const Testi = () => {
             zIndex: 1,
           }}
         />
-        <Image
-          src={dummyTesties[active].img.src}
-          alt={dummyTesties[active].img.alt}
-          height={dummyTesties[active].img.height}
-          width={dummyTesties[active].img.width}
-          style={{ ...imgStyle, ...dummyTesties[active].img.style }}
-        />
+        <div
+          style={{
+            width: dummyTestimonials[active].img.width,
+            height: 407,
+            ...imgStyle,
+          }}
+        >
+          <Image
+            src={dummyTestimonials[active].img.src}
+            alt={dummyTestimonials[active].img.alt}
+            fill
+            style={{ ...dummyTestimonials[active].img.style }}
+          />
+        </div>
         <div style={{ position: "absolute", right: -950, top: 40, zIndex: 0 }}>
           <TestiImgCurve />
         </div>

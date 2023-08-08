@@ -54,11 +54,11 @@ const FormNewCourse = ({
 
   // CREATE/UPDATE COURSE
   const sendData: UpdateCourseInputProps | CreateCourseInputProps = {
-    title: titlee,
-    description: desc,
+    title: titlee?.trim(),
+    description: desc?.trim(),
     price: Number(amt),
     category: catego,
-    imageLink: image,
+    imageLink: image?.trim(),
     published: publish,
   };
   const variables: {

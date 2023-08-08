@@ -18,6 +18,8 @@ const HeroCourse = ({ courseData }: HeroCourseProps) => {
       published,
       createdAt,
       __typename,
+      imageLink,
+      benefits,
       ...rest
     } = courseData;
     type Rest = typeof rest & {

@@ -61,12 +61,12 @@ const CoursePage = ({ children }: { children: React.ReactNode }) => {
           className="w100 fcfs"
         >
           {/* WHAT YOU WILL LEARN */}
-          {false && (
+          {
             <div className="w100">
               <h3 className="semi mb20">What you'll learn</h3>
               <List data={listData} maxColumns={2} maxRows={3} />
             </div>
-          )}
+          }
           <div className="w100">
             <h3 className="semi mb20">
               {foundCourse

@@ -2,16 +2,25 @@
 import TabButtonsRow from "@/components/buttons/TabButtons/TabButtonsRow";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import { dummyCategoryList } from "@/data/dummy/data.lists";
-import { modifyCoursesData } from "@/data/modify/modify.courses";
+import { modifyDivideIntoCategories } from "@/data/modify/modify.courses";
 import { useState } from "react";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import GET_COURSES from "@/api/graphql/queries/getCourses.graphql";
-import { CourseProps, CoursesQueryProps } from "@/types/types.course";
+import {
+  CategoryEnum,
+  CourseCategorySortedProps,
+  CourseProps,
+  CoursesQueryProps,
+} from "@/types/types.course";
 
 const BelowHero = () => {
-  const [active, setActive] = useState<string>("design");
+  const [active, setActive] = useState<CategoryEnum>(CategoryEnum.design);
   const { data } = useSuspenseQuery<CoursesQueryProps>(GET_COURSES);
   const foundCourses = data?.getCourses?.status == "success";
+  const courses: CourseCategorySortedProps = modifyDivideIntoCategories(
+    data?.getCourses?.data as CourseProps[]
+  );
+  // console.log("courses", courses);
   return (
     <>
       {/* TAB BUTTONS */}
@@ -24,7 +33,7 @@ const BelowHero = () => {
       {foundCourses ? (
         <CourseCardGrid
           type="grid"
-          cardData={modifyCoursesData(data?.getCourses?.data as CourseProps[])}
+          cardData={courses[active]}
           gridStyle={{
             gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
             rowGap: 30,

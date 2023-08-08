@@ -1,4 +1,8 @@
-import { generateRandomInt, randomAlphabet } from "@/helper/common";
+import {
+  generatePurchaseCount,
+  generateRandomInt,
+  randomAlphabet,
+} from "@/helper/common";
 import { defaultCourseImg } from "@/helper/constants.global";
 import { CourseCardProps } from "@/types/types.card";
 import Image from "next/image";
@@ -80,10 +84,7 @@ const CourseCard = ({
             ))}
           </AvatarGroup>
           <p className="ml10 regu12 os" style={{ opacity: 0.7 }}>
-            +
-            {purchaseCount ||
-              (Math.random() * 10 ** (Math.random() * 8)).toFixed()}{" "}
-            Students
+            +{purchaseCount || generatePurchaseCount()} Students
           </p>
         </div>
       </div>

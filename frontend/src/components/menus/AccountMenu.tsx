@@ -67,7 +67,7 @@ export default function AccountMenu({
   const [userState, setUserState] = useRecoilState(atomUserName);
   const router = useRouter();
   const open = Boolean(anchorEl);
-  const [logout] = useMutation(LOGOUT);
+  const [logout, { client }] = useMutation(LOGOUT);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -116,16 +116,21 @@ export default function AccountMenu({
       )}
       <MenuItem
         onClick={() => {
-          setClicked(true);
-          authLogout({
-            router,
-            setUsername: setUserState,
-            localStorage,
-            sessionStorage,
-            logoutApi: logout,
-            setClicked,
-          });
-          handleClose();
+          try {
+            setClicked(true);
+            client.clearStore();
+            authLogout({
+              router,
+              setUsername: setUserState,
+              localStorage,
+              sessionStorage,
+              logoutApi: logout,
+              setClicked,
+            });
+            handleClose();
+          } catch (error) {
+            console.log("error in logout", error);
+          }
         }}
       >
         <ListItemIcon>

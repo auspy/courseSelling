@@ -9,7 +9,7 @@ const resolverAuth = {
     if (role === "ADMIN") {
       type = Admin;
     }
-    const user = await type.findOne({ username });
+    const user = await type.findOne({ username: username.toLowerCase() });
     if (!user) {
       return {
         msg: "Invalid user, user not found",
@@ -51,14 +51,14 @@ const resolverAuth = {
     if (role === "ADMIN") {
       type = Admin;
     }
-    const doc = await type.findOne({ username });
+    const doc = await type.findOne({ username: username.toLowerCase() });
     if (doc) {
       return {
         msg: "Invalid user, user already exists",
         status: "failed",
       };
     }
-    const newUser = new type(user);
+    const newUser = new type({ username: username.toLowerCase(), ...user });
     const savedUser = await newUser.save();
     if (!savedUser) {
       return {
