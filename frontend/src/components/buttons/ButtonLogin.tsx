@@ -10,7 +10,7 @@ const ButtonLogin = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useRecoilState(atomUserName);
-  console.log(username, "is the username in button login");
+  // console.log(username, "is the username in button login");
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {

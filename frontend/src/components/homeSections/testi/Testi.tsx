@@ -33,10 +33,20 @@ const Testi = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="pv100 container1200 frcsb" style={{ height: 560 }}>
+    <div
+      id="testiContainer"
+      className="container1200 frcsb"
+      style={{ height: 560 }}
+    >
       {/* DETAILS */}
       <div
-        style={{ maxHeight: 360, height: "100%", maxWidth: 615, width: "100%" }}
+        style={{
+          maxHeight: 360,
+          paddingInline: 20,
+          height: "100%",
+          maxWidth: 615,
+          width: "100%",
+        }}
         className="fcfssb"
       >
         <Heading
@@ -47,11 +57,19 @@ const Testi = () => {
           highlightText={dummyTestimonials[active].msg.highlightText}
           afterHighlightText={dummyTestimonials[active].msg.afterHighlightText}
         />
-        <div className="frcsb w100">
+        <div
+          className="frcsb w100"
+          id="testiAuthorContainer"
+          // style={{ gap: "30px 80px", flexWrap: "wrap" }}
+        >
           {/* AUTHOR */}
-          <div className="frc">
-            <p className="semi16 mr15">{dummyTestimonials[active].name}</p>
-            <p className="regu16" style={{ fontWeight: 300 }}>
+          <div
+            id="testiAuthor"
+            className="frc"
+            style={{ flexWrap: "wrap", gap: 10 }}
+          >
+            <p className="semi16 fs0">{dummyTestimonials[active].name}</p>
+            <p className="regu16 fs0" style={{ fontWeight: 300 }}>
               {dummyTestimonials[active].designation}
             </p>
           </div>
@@ -81,6 +99,7 @@ const Testi = () => {
       </div>
       {/* IMAGE */}
       <div
+        id="testiImgContainer"
         style={{
           height: 395,
           width: 390,

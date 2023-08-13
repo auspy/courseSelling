@@ -2,11 +2,15 @@
 import PURCHASE from "@/api/graphql/mutations/purchaseCourse.graphql";
 import { useMutation } from "@apollo/client";
 import ButtonPrimaryLong from "../buttons/ButtonPrimaryLong";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { atomUserName } from "@/state/atoms/atom.username";
 import { useRecoilState } from "recoil";
 import atomToast from "@/state/atoms/atom.toast";
+import Button from "../buttons/Button";
+import { DeviceTypeContext } from "@/state/contexts/context";
 const ButtonBuyNow = ({ amount, _id }: { amount: number; _id: string }) => {
+  const deviceType = useContext(DeviceTypeContext);
+  const isMobile = deviceType === "mobile";
   const [purchase, { loading }] = useMutation(PURCHASE);
   const [clicked, setClicked] = useState<boolean>(false);
   const [atomUserNme] = useRecoilState(atomUserName);
@@ -45,7 +49,17 @@ const ButtonBuyNow = ({ amount, _id }: { amount: number; _id: string }) => {
       },
     });
   };
-
+  if (isMobile) {
+    return (
+      <Button
+        disabled={loading || clicked}
+        loading={loading || clicked}
+        value="buy now"
+        buttonClass="mt20"
+        onClick={handleClick}
+      />
+    );
+  }
   return (
     <>
       <ButtonPrimaryLong

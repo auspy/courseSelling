@@ -1,5 +1,6 @@
-import { CourseProps } from "./types.course";
+import { CourseDetailsProps, CourseProps } from "./types.course";
 import { ImgProps } from "./types.img";
+import { DeviceTypeProps } from "./types.ui";
 
 export type CardStyleProps = {
   cardClass?: string;
@@ -26,26 +27,38 @@ export type CourseCardGridProps = {
 
 // PRICING
 export enum PricingType {
-  Basic = "Basic",
-  Free = "Free",
-  Premium = "Premium",
+  Free,
+  Basic,
+  Premium,
 }
 type PricingFeatures = {
   feature: string;
   available?: boolean;
 };
+
+export enum RotateType {
+  left = "left",
+  right = "right",
+}
 export type PricingCardProps = CardStyleProps & {
   type: PricingType;
   price: number;
   features: PricingFeatures[];
   active: PricingType;
-  setActive: React.Dispatch<React.SetStateAction<PricingType>>;
+  setActive: (
+    e: React.MouseEvent<HTMLElement>,
+    newAlignment: PricingType
+  ) => void;
+  rotate?: RotateType | false;
+  order?: 1 | 2 | 3 | "unset";
 };
 
 export type BuyNowCardProps = CardStyleProps &
-  ImgProps & {
+  ImgProps &
+  Partial<DeviceTypeProps> & {
     _id: string;
     price: number;
+    courseDetails: CourseDetailsProps;
     discount?: number;
     saleAlarm?: React.ReactNode;
   };

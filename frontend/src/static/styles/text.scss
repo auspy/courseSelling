@@ -30,13 +30,14 @@
   color: var(--primary, #cf4e16);
   text-align: center;
   font-size: 36px;
-  line-height: 50px; /* 138.889% */
   text-transform: capitalize;
+  line-height: 150%;
 }
 
 .h1Highlight {
   color: #1f1f1f;
   font-size: 64px;
+  line-height: 150%;
 }
 
 #logo {
@@ -56,6 +57,7 @@
 .heroImgText {
   position: absolute;
   top: 20px;
+  z-index: 1;
   left: 15px;
   color: var(--dark-bg);
 }

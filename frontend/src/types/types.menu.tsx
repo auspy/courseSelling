@@ -10,16 +10,25 @@ export type LeftMenuItemProps = MenuItemProps & {
   setActive: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export interface LeftMenuProps extends React.PropsWithChildren {
+export type MenuProps = {
   menu: LeftMenuItemProps[];
   active: string;
-  username: string;
   setActive: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export type ExpandingMenuProps = MenuProps & {
   isExpanded: boolean;
   setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+};
+export interface LeftMenuProps
+  extends React.PropsWithChildren,
+    ExpandingMenuProps {
+  username: string;
 }
 
 export type LeftMenuBottomNaviProps = {
   isExpanded: boolean;
   setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type BottomNavigationProps = MenuProps & {};

@@ -1,0 +1,13 @@
+@media (max-width: 992px) {
+  #dashHeader {
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    svg {
+      width: 100%;
+      @media (max-width: 325px) {
+        background-color: var(--primary);
+      }
+    }
+  }
+}

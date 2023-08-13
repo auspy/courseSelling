@@ -1,3 +1,5 @@
+import { DeviceTypeProps } from "./types.ui";
+
 export type HeadingProps = {
   text: string;
   headingClass?: string;
@@ -30,6 +32,6 @@ export type DetailTabProps = {
   value: string;
 };
 
-export type DetailTabGroupProps = {
+export type DetailTabGroupProps = DeviceTypeProps & {
   data: DetailTabProps[];
 };

@@ -59,3 +59,17 @@ export const listData: ListDataProps[] = [
 export const dummyCategoryList: CategoryEnum[] = [
   ...Object.values(CategoryEnum),
 ];
+
+export const dummyLoadingLines = [
+  "Hold tight, we're untangling the knowledge knots!",
+  "Don't worry, we're just sprinkling some digital pixie dust!",
+  "Loading wisdom... it's like downloading a brain upgrade!",
+  "Taking a moment to curate the finest bits of information!",
+  "We're on a byte-sized mission to load your learning journey!",
+  "Patience, grasshopper! We're brewing up a fresh cup of expertise.",
+  "Loading brilliance... it's like charging your mind's battery!",
+  "Sit tight while we assemble a symphony of educational awesomeness.",
+  "Hold on tight while we spin the wheels of wisdom!",
+  "Loading dreams and ambitions... we're almost there!",
+  "Loading knowledge... it's like downloading a brain upgrade!",
+];

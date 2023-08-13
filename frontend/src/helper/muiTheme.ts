@@ -3,16 +3,45 @@ const primary = "#cf4e16";
 const white = "#fafafa";
 const lightWhite = "#fafafa50";
 const lightBg = "#484848";
+const darkBg = "#1f1f1f";
+const red = "#c32828";
+const green = "#0F9E26";
+// const blue = "#2196f3";
+const blue = "#1d85d7";
+
 const muiTheme = createTheme({
   palette: {
     primary: {
       main: "#cf4e16", // Replace with your custom primary color
     },
     secondary: {
-      main: "#00ff00", // Replace with your custom secondary color
+      main: "#383838", // Replace with your custom secondary color
+    },
+    error: {
+      main: red,
+    },
+    success: {
+      main: green,
+    },
+    info: {
+      main: blue,
     },
   },
   components: {
+    MuiAlert: {
+      styleOverrides: {
+        root: ({ ownerState }) => ({
+          ...(ownerState.variant === "outlined" && {
+            backgroundColor: darkBg,
+            color: muiTheme.palette[ownerState.severity!].main,
+          }),
+          ...(ownerState.variant === "filled" && {
+            color: darkBg,
+            border: "1px solid var(--dark-bg)",
+          }),
+        }),
+      },
+    },
     MuiInputBase: {
       styleOverrides: {
         root: {
@@ -85,6 +114,42 @@ const muiTheme = createTheme({
       styleOverrides: {
         root: {
           color: lightWhite,
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: darkBg,
+          minWidth: 280,
+          padding: "30px 20px",
+        },
+      },
+    },
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          height: "auto",
+          backgroundColor: darkBg,
+          borderTop: "1px solid #383838",
+          padding: 5,
+          ".Mui-selected": {
+            backgroundColor: lightBg,
+            borderRadius: 10,
+          },
+        },
+      },
+    },
+    MuiBottomNavigationAction: {
+      styleOverrides: {
+        root: {
+          gap: 3,
+          boxSizing: "content-box",
+          padding: 8,
+        },
+        label: {
+          fontSize: 14,
+          textTransform: "capitalize",
         },
       },
     },

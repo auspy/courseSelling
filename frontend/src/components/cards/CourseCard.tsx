@@ -15,7 +15,6 @@ const CourseCard = ({
     price,
     creator,
     purchaseCount,
-    imageLink,
     img: { src, ...imgRest },
   },
   href,
@@ -29,7 +28,8 @@ const CourseCard = ({
       href={href || `/courses/${_id}`}
       className={`hover ${cardClass}`}
       style={{
-        width: 260,
+        maxWidth: 600,
+        minWidth: 200,
         border: "1px solid #565656",
         overflow: "hidden",
         borderRadius: 5,
@@ -42,12 +42,12 @@ const CourseCard = ({
         className="rPosi"
         style={{
           height: 150,
-          width: 260,
+          width: "100%",
           borderRadius: "5px 5px 0 0",
           overflow: "hidden",
         }}
       >
-        <Image {...imgRest} src={src || defaultCourseImg.src} />
+        <Image fill alt={imgRest.alt} src={src || defaultCourseImg.src} />
       </div>
       {/* COURSE DETAILS */}
       <div

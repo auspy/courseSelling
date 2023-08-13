@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import TabButton from "./TabButton";
-import { memo } from "react";
+import { DeviceTypeContext } from "@/state/contexts/context";
+import { DeviceTypeEnum } from "@/types/types.ui";
 
 type TabButtonsRowProps = {
   width: number;
@@ -15,15 +17,26 @@ const TabButtonsRow = ({
   buttonList,
   buttonStyle,
 }: TabButtonsRowProps) => {
+  const deviceType = useContext(DeviceTypeContext);
+  const isDesktop = deviceType == DeviceTypeEnum.desktop;
+  const smallerDevicesButtonStyle = {
+    padding: 20,
+    flexShrink: 0,
+    width: "unset",
+  };
   return (
     <div
-      style={{ width: "100%", maxWidth: width, overflow: "hidden" }}
+      style={{
+        width: "100%",
+        maxWidth: width,
+        overflow: isDesktop ? "hidden" : "scroll",
+      }}
       className="frc"
     >
-      {buttonList.map((value, index) => (
+      {buttonList?.map((value, index) => (
         <TabButton
           buttonStyle={{
-            padding: 0,
+            ...(isDesktop ? { padding: 0 } : smallerDevicesButtonStyle),
             ...buttonStyle,
           }}
           key={index + value}

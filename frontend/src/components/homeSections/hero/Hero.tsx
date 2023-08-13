@@ -24,6 +24,7 @@ const Hero = () => {
         <Header />
         {/* HERO */}
         <div
+          id="heroContainer"
           className="container1200"
           style={{
             position: "relative",
@@ -33,9 +34,10 @@ const Hero = () => {
         >
           {/* left curve */}
           <div
+            className="heroCurve"
             style={{
               position: "absolute",
-              left: -937,
+              left: -910,
               top: 160,
               zIndex: 0,
             }}
@@ -76,21 +78,26 @@ const Hero = () => {
               descStyle={{
                 opacity: 0.8,
               }}
-              containerStyle={{ maxWidth: 438, maxHeight: "inherit" }}
+              containerStyle={{
+                maxWidth: 438,
+                maxHeight: "inherit",
+                marginRight: 20,
+              }}
               buttons={
-                <div className="frc mt60" style={{ position: "relative" }}>
-                  <Button
-                    buttonStyle={{}}
-                    buttonClass="mr25"
-                    value="Try demo"
-                  />
+                <div
+                  id="heroBtns"
+                  className="frcsb mt60"
+                  style={{ position: "relative", rowGap: 10, columnGap: 20 }}
+                >
+                  <Button buttonStyle={{}} buttonClass="" value="Try demo" />
                   <ButtonSec value="explore" />
                   <div
                     style={{
                       position: "absolute",
-                      right: -280,
+                      right: -310,
                       top: 14,
                     }}
+                    className="heroCurve"
                   >
                     <HeroBtnCurve />
                   </div>

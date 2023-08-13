@@ -1,11 +1,12 @@
 import CoursePage from "@/components/coursesPage/CoursePage";
 import Header from "@/components/header/Header";
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <CoursePage
-        children={
+        id={params.id}
+        header={
           <div
             className="topContainer"
             style={{

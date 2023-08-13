@@ -3,16 +3,43 @@ import LeftMenu from "@/components/menus/leftMenu/LeftMenu";
 import { dummyLeftMenuItems } from "@/data/dummy/data.menu";
 import { atomUserName } from "@/state/atoms/atom.username";
 import { LeftMenuItemProps } from "@/types/types.menu";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRecoilState } from "recoil";
 import HeaderDashboard from "./HeaderDashboard";
 import LoginToContinue from "@/components/fallbacks/LoginToContinue";
+import { DeviceTypeContext } from "@/state/contexts/context";
+import BottomNavigation from "@/components/menus/BottomNavigation";
 
 interface DashLayoutProps extends React.PropsWithChildren {}
 const DashLayout = ({ children }: DashLayoutProps) => {
   const [active, setActive] = useState<string>("Courses");
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
   const [userState] = useRecoilState(atomUserName);
+  const deviceType = useContext(DeviceTypeContext);
+  const isDesktop = deviceType === "desktop";
+  const menu: LeftMenuItemProps[] = dummyLeftMenuItems as LeftMenuItemProps[];
+  const child = userState.role == "ADMIN" ? children : <LoginToContinue />;
+  if (!isDesktop) {
+    return (
+      <>
+        {/* Header */}
+        <HeaderDashboard />
+        {/* children */}
+        <div
+          style={{
+            width: "100vw",
+            paddingInline: 30,
+            paddingTop: 110,
+            paddingBottom: 80,
+          }}
+        >
+          {child}
+        </div>
+        {/* navigation */}
+        <BottomNavigation menu={menu} setActive={setActive} active={active} />
+      </>
+    );
+  }
   return (
     <>
       {/* Header */}
@@ -22,7 +49,7 @@ const DashLayout = ({ children }: DashLayoutProps) => {
         <LeftMenu
           isExpanded={isExpanded}
           setIsExpanded={setIsExpanded}
-          menu={dummyLeftMenuItems as LeftMenuItemProps[]}
+          menu={menu}
           username={userState.username}
           active={active}
           setActive={setActive}
@@ -38,7 +65,7 @@ const DashLayout = ({ children }: DashLayoutProps) => {
             transition: "padding-inline-start 0.25s ease",
           }}
         >
-          {userState.role == "ADMIN" ? children : <LoginToContinue />}
+          {child}
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ const Offer = () => {
   return (
     <div
       className="topContainer"
+      id="offerContainer"
       style={{
         padding: "83px 0",
         backgroundColor: "var(--light-bg)",

@@ -1,4 +1,3 @@
-"use client";
 import HeroCourse from "@/components/coursesPage/hero/HeroCourse";
 import List from "@/components/lists/List";
 import {
@@ -6,33 +5,39 @@ import {
   CourseQueryProps,
   CoursesQueryProps,
 } from "@/types/types.course";
-import { usePathname } from "next/navigation";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import GET_COURSE from "@/api/graphql/queries/getACourse.graphql";
 import GET_COURSES from "@/api/graphql/queries/getCourses.graphql";
 import { dummyCardData } from "@/data/dummy/data.courses";
 import { listData } from "@/data/dummy/data.lists";
 import { defaultCourseImg } from "@/helper/constants.global";
 import { modifyCoursesData } from "@/data/modify/modify.courses";
+import { getClient } from "@/api/graphql/ApolloClient";
+import CourseDetails from "./CourseDesc";
+import { DeviceTypeEnum } from "@/types/types.ui";
 
-const CoursePage = ({ children }: { children: React.ReactNode }) => {
-  const path = usePathname();
-  const courseId = path.split("/")[path.split("/").length - 1];
-  console.log(courseId, "is the id of this course");
-  const { data } = useSuspenseQuery<CourseQueryProps>(GET_COURSE, {
-    variables: { id: courseId },
+const CoursePage = async ({
+  header,
+  id,
+}: {
+  header: React.ReactNode;
+  id: string;
+}) => {
+  const { data } = await getClient().query<CourseQueryProps>({
+    query: GET_COURSE,
+    variables: { id },
   });
   const foundCourse = data.getCourse.status == "success";
   const dataReceived = data.getCourse.data[0];
   // todo can limit the number of courses to be fetched. can add based on recommendations.
   // mostly will be getting from apollo cache or will store to cache to used later
-  const { data: coursesData } =
-    useSuspenseQuery<CoursesQueryProps>(GET_COURSES);
+  const { data: coursesData } = await getClient().query<CoursesQueryProps>({
+    query: GET_COURSES,
+  });
   const foundCourses = coursesData?.getCourses?.status == "success";
   return (
     <div className="topContainer" style={{ height: "100%", paddingBottom: 80 }}>
-      {children}
+      {header}
       <div
         className={`container1200 ${!foundCourse && "fcc"}`}
         style={{ height: "100%" }}
@@ -49,7 +54,13 @@ const CoursePage = ({ children }: { children: React.ReactNode }) => {
                   defaultCourseImg.src,
               },
             }}
-          />
+          >
+            <CourseDetails
+              styleContainer={{ paddingInlineEnd: 350 }}
+              courseData={dataReceived}
+              deviceType={DeviceTypeEnum.desktop}
+            />
+          </HeroCourse>
         )}
         {/* BELOW HERO SECTIONS */}
         <div
@@ -61,12 +72,10 @@ const CoursePage = ({ children }: { children: React.ReactNode }) => {
           className="w100 fcfs"
         >
           {/* WHAT YOU WILL LEARN */}
-          {
-            <div className="w100">
-              <h3 className="semi mb20">What you'll learn</h3>
-              <List data={listData} maxColumns={2} maxRows={3} />
-            </div>
-          }
+          <div className="w100">
+            <h3 className="semi mb20">What you'll learn</h3>
+            <List data={listData} maxColumns={2} maxRows={3} />
+          </div>
           <div className="w100">
             <h3 className="semi mb20">
               {foundCourse
@@ -85,8 +94,8 @@ const CoursePage = ({ children }: { children: React.ReactNode }) => {
               gridStyle={{
                 width: "100%",
                 gap: foundCourse ? 25 : "30px",
+                padding: 0,
               }}
-              // maxColoumns={4}
             />
           </div>
         </div>

@@ -16,13 +16,13 @@ const CourseCardGrid = ({
         }
       : {
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,260px)",
+          gridTemplateColumns: "repeat(auto-fit,minMax(240px,1fr))",
         };
-  const a = cardData?.sort((a, b) => {
-    console.log("a", a.course.purchaseCount, "b", b.course.purchaseCount);
-    return (b.course.purchaseCount || 0) - (a.course.purchaseCount || 0);
-  });
-  console.log(a);
+  // const a = cardData?.sort((a, b) => {
+  //   console.log("a", a.course.purchaseCount, "b", b.course.purchaseCount);
+  //   return (b.course.purchaseCount || 0) - (a.course.purchaseCount || 0);
+  // });
+  // console.log(a);
 
   return (
     <>
@@ -30,7 +30,7 @@ const CourseCardGrid = ({
         className={`container1200 scrollbar ${gridClass}`}
         style={{
           paddingBottom: 7,
-          gap: 10,
+          gap: 20,
           ...(defaultStyle as React.CSSProperties),
           ...gridStyle,
         }}
@@ -46,6 +46,9 @@ const CourseCardGrid = ({
                 <CourseCard
                   key={index + card.course.title}
                   course={card.course}
+                  cardStyle={{
+                    ...(card.cardStyle || {}),
+                  }}
                   href={Boolean(card.href) && card.href + card.course._id}
                 />
               )

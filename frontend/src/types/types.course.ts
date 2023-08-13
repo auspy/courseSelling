@@ -1,6 +1,7 @@
 import { getCreatedCourses } from "@/api/graphql/gql";
 import { ImgProps } from "./types.img";
 import { CourseCardProps } from "./types.card";
+import { DeviceTypeProps } from "./types.ui";
 
 export type CourseProps2 = {
   id: string;
@@ -92,3 +93,8 @@ export type CreateCourseInputProps = Omit<
 export type CourseCategorySortedProps = {
   [key in CategoryEnum]: CourseCardProps[];
 };
+
+export interface CourseDetailsProps extends DeviceTypeProps {
+  courseData: CourseProps;
+  styleContainer?: React.CSSProperties;
+}

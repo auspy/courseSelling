@@ -5,7 +5,11 @@ import DashCourses from "./DashCourses";
 const page = () => {
   return (
     <>
-      <div className="frcsb" style={{ padding: "30px 0" }}>
+      <div
+        id="dashHeader"
+        className="frcsb"
+        style={{ padding: "30px 0", gap: "30px 50px", flexWrap: "wrap" }}
+      >
         <Heading
           text="Skillz"
           highlightText="Dashboard"

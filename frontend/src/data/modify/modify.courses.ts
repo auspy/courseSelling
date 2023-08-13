@@ -1,5 +1,6 @@
 import { generatePurchaseCount } from "@/helper/common";
 import { defaultCourseImg } from "@/helper/constants.global";
+import { CourseCardProps } from "@/types/types.card";
 import {
   CategoryEnum,
   CourseCategorySortedProps,
@@ -25,7 +26,8 @@ export const modifyCoursesData = (
 
 export const modifyDivideIntoCategories = (
   courses: CourseProps[],
-  href: string | false = false
+  href: string | false = false,
+  cardStyle?: React.CSSProperties
 ): CourseCategorySortedProps => {
   const obj: Partial<CourseCategorySortedProps> = {};
   for (const course of courses) {
@@ -35,7 +37,7 @@ export const modifyDivideIntoCategories = (
     if (!obj[CategoryEnum[course.category!]]) {
       obj[CategoryEnum[course.category]] = [];
     }
-    obj[CategoryEnum[course.category]]!.push({
+    const newData: CourseCardProps = {
       course: {
         ...course,
         img: {
@@ -46,7 +48,11 @@ export const modifyDivideIntoCategories = (
         },
       },
       href,
-    });
+    };
+    if (cardStyle) {
+      newData["cardStyle"] = cardStyle || {};
+    }
+    obj[CategoryEnum[course.category]]!.push(newData);
   }
   return obj as CourseCategorySortedProps;
 };

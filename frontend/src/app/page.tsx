@@ -5,10 +5,11 @@ import Offer from "@/components/homeSections/offer/Offer";
 import Train from "@/components/homeSections/train/Train";
 import Pricing from "@/components/homeSections/pricing/Pricing";
 import Testi from "@/components/homeSections/testi/Testi";
+import "@/static/styles/home.scss";
 
 export default function Home() {
   return (
-    <div style={{}} className="fcc">
+    <div style={{}} className="fcc w100">
       <Hero />
       <Trust />
       <Offer />

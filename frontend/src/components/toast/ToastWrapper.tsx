@@ -1,8 +1,15 @@
 "use client";
+import muiTheme from "@/helper/muiTheme";
 import atomToast from "@/state/atoms/atom.toast";
 import { ToastType } from "@/types/types.toast";
 import { CloseRounded } from "@mui/icons-material";
-import { Alert, AlertColor, Collapse, IconButton } from "@mui/material";
+import {
+  Alert,
+  AlertColor,
+  Collapse,
+  IconButton,
+  ThemeProvider,
+} from "@mui/material";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
@@ -28,35 +35,38 @@ const ToastWrapper = ({ children }: { children?: React.PropsWithChildren }) => {
   }
   return (
     <>
-      <Collapse in={!!toast.text}>
-        <Alert
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setToast({ ...toast, text: "", type: ToastType.INFO });
-              }}
-            >
-              <CloseRounded fontSize="inherit" />
-            </IconButton>
-          }
-          style={{
-            position: "fixed",
-            top: 40,
-            right: 40,
-            zIndex: 1000,
-            // backgroundColor: "var(--red)",
-            fontFamily: "Raleway,sans-serif",
-          }}
-          className="medi14"
-          variant="filled"
-          severity={toast.type as AlertColor}
-        >
-          {toast.text[0]?.toUpperCase() + toast.text.slice(1)}
-        </Alert>
-      </Collapse>
+      <ThemeProvider theme={muiTheme}>
+        <Collapse in={!!toast.text}>
+          <Alert
+            action={
+              <IconButton
+                aria-label="close"
+                color="primary"
+                size="small"
+                onClick={() => {
+                  setToast({ ...toast, text: "", type: ToastType.INFO });
+                }}
+              >
+                <CloseRounded fontSize="inherit" />
+              </IconButton>
+            }
+            style={{
+              position: "fixed",
+              top: 100,
+              right: 40,
+              zIndex: 1000,
+              minWidth: 308,
+              // backgroundColor: "var(--red)",
+              fontFamily: "Raleway,sans-serif",
+            }}
+            className="semi14"
+            variant="filled"
+            severity={toast.type as AlertColor}
+          >
+            {toast.text[0]?.toUpperCase() + toast.text.slice(1)}
+          </Alert>
+        </Collapse>
+      </ThemeProvider>
       {children}
     </>
   );

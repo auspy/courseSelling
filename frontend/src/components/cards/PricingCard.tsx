@@ -1,7 +1,7 @@
 import IconStar from "@/../public/icons/IconStar";
 import IconStarBlur from "@/../public/icons/IconStarBlur";
 import PricingCurve from "@/static/parts/curves/PricingCurve";
-import { PricingCardProps, PricingType } from "@/types/types.card";
+import { PricingCardProps, RotateType } from "@/types/types.card";
 
 const PricingCard = ({
   price,
@@ -9,34 +9,52 @@ const PricingCard = ({
   features,
   active,
   setActive,
+  rotate = false,
+  order,
 }: PricingCardProps) => {
   const isActive = active === type;
-  const rotate = () => {
-    switch (type) {
-      case PricingType.Free:
+  const rotateItems = () => {
+    switch (rotate) {
+      case RotateType.left:
         return "rotate(-4.19deg) translate(0px, 10px)";
-      case PricingType.Basic:
-        return "none";
-      case PricingType.Premium:
+      case RotateType.right:
         return "rotate(4.19deg) translate(0px, 10px)";
+      case false:
+        return "none";
       default:
-        break;
+        return "none";
+    }
+  };
+  const activeName = () => {
+    switch (type) {
+      case 0:
+        return "Free";
+      case 1:
+        return "Basic";
+      case 2:
+        return "Premium";
+      default:
+        return "Basic";
     }
   };
   return (
     <div
-      onClick={() => {
-        setActive(type);
+      onClick={(e) => {
+        setActive(e, type);
       }}
       className="hover"
       style={{
-        transition: "opacity 0.3s ease-in-out",
-        transform: rotate(),
+        order: order,
+        position: "relative",
+        zIndex: isActive ? 2 : 0,
+        transition: "0.3s ease-in-out",
+        transform: rotateItems(),
         opacity: isActive ? 1 : 0.6,
         borderRadius: 5,
         width: 310,
         height: 501,
         background: "linear-gradient(135deg, var(--light-bg) 0%, #292929 100%)",
+        boxShadow: isActive ? "0px 5px 25px 0px rgba(4, 4, 4, 0.20)" : "unset",
       }}
     >
       <div
@@ -68,10 +86,11 @@ const PricingCard = ({
               borderRadius: 5,
               width: "min-content",
               position: "relative",
+
               top: 10,
             }}
           >
-            {type}
+            {activeName()}
           </h4>
         </div>
         {/* PRICE */}

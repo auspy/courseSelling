@@ -16,11 +16,13 @@ const OfferBox = () => {
     //   }}
     // >
     <div
+      id="offerBox"
       className={`${styles.hover} ${styles.parent} ${styles.boxTransform}`}
       style={{
         position: "absolute",
         bottom: 8,
         left: "50%",
+        marginInline: 20,
       }}
     >
       <div className={styles.bottom}>

@@ -21,7 +21,9 @@ const Train = () => {
   const { data } = useSuspenseQuery<CoursesQueryProps>(GET_COURSES);
   const foundCourses = data?.getCourses?.status == "success";
   const courses: CourseCategorySortedProps = modifyDivideIntoCategories(
-    data?.getCourses?.data as CourseProps[]
+    data?.getCourses?.data as CourseProps[],
+    false,
+    { width: 260 }
   );
   return (
     <div
@@ -37,6 +39,7 @@ const Train = () => {
           headingStyle={{
             textAlign: "center",
             maxWidth: 630,
+            paddingInline: 25,
           }}
           text=""
           highlightText="Train"
@@ -49,7 +52,7 @@ const Train = () => {
             active={active}
             setActive={setActive}
             buttonList={Object.keys(cardData).slice(0, 7)}
-            buttonStyle={{ width: "100%" }}
+            // buttonStyle={{ width: "100%" }}
           />
         </div>
         {/* CARDS */}

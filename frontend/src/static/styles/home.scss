@@ -1,0 +1,127 @@
+@media (max-width: 930px) {
+  //   OFFER
+  #offerContainer {
+    text-align: center;
+    > div {
+      > :last-child {
+        display: none;
+      }
+    }
+  }
+  #offerBox {
+    left: 70% !important;
+  }
+  // TESTIMONIALS
+  #testiContainer {
+    // flex-direction: column-reverse;
+    height: 100% !important;
+    gap: 30px;
+    padding-block: 80px;
+    margin-bottom: 100px;
+    justify-content: unset;
+    box-sizing: content-box !important;
+    > div {
+      max-width: unset;
+      max-height: unset;
+    }
+    h2,
+    .h2Highlight {
+      font-size: 28px;
+    }
+    h2 {
+      margin-bottom: 30px;
+    }
+  }
+  #testiImgContainer {
+    height: 100vh !important;
+    width: 100% !important;
+    max-width: 390px !important;
+    max-height: 395px !important;
+  }
+}
+@media (max-width: 818px) {
+  #testiContainer {
+    flex-direction: column-reverse;
+    text-align: center;
+    #testiAuthorContainer,
+    #testiAuthor {
+      flex-direction: column;
+    }
+    #testiAuthorContainer {
+      gap: 40px;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  // HERO
+  .herotext {
+    text-align: center;
+  }
+  #heroContainer {
+    height: unset !important;
+    max-height: unset !important;
+    > :last-child {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: flex-start;
+      height: unset !important;
+      padding-block: 80px;
+      gap: 30px;
+      @media (max-width: 473px) {
+        .h1Highlight {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  #heroBtns {
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .heroCurve {
+    display: none;
+  }
+  #heroImgConatiner {
+    span ~ div {
+      width: 180px !important;
+      height: 180px !important;
+    }
+    > div {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+  }
+  //   TRUST
+  #logoListContainer {
+    justify-content: space-evenly;
+  }
+  //   OFFER
+  #offerContainer {
+    max-height: 757px;
+    height: 100%;
+    > div {
+      flex-direction: column;
+      height: 100% !important;
+      gap: 50px;
+      > :last-child {
+        display: block;
+      }
+    }
+  }
+  #offerBox {
+    position: relative !important;
+    top: unset;
+    left: unset !important;
+    transform: unset;
+    svg {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+}
+
+#heroBtns {
+  max-width: 400px;
+}
