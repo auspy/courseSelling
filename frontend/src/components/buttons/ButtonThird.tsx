@@ -3,6 +3,8 @@ import { emptyButtonOnClick } from "@/helper/common";
 import { ButtonProps } from "@/types/types.button";
 import styles from "@/static/styles/button.module.scss";
 import { CircularProgress } from "@/components/thirdParty/mui";
+import { ThemeProvider } from "@mui/material";
+import muiTheme from "@/helper/muiTheme";
 
 const ButtonThird = ({
   value,
@@ -42,7 +44,13 @@ const ButtonThird = ({
           style={{ ...buttonTextStyle, ...disabledStyle }}
           onClick={onClick}
         >
-          {loading ? <CircularProgress color={"inherit"} size={14} /> : value}
+          {loading ? (
+            <ThemeProvider theme={muiTheme}>
+              <CircularProgress color={"primary"} size={14} />{" "}
+            </ThemeProvider>
+          ) : (
+            value
+          )}
         </button>
       </div>
     </>

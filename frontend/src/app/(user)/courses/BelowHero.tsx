@@ -3,7 +3,7 @@ import TabButtonsRow from "@/components/buttons/TabButtons/TabButtonsRow";
 import CourseCardGrid from "@/components/cards/CourseCardGrid";
 import { dummyCategoryList } from "@/data/dummy/data.lists";
 import { modifyDivideIntoCategories } from "@/data/modify/modify.courses";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import GET_COURSES from "@/api/graphql/queries/getCourses.graphql";
 import {
@@ -12,6 +12,7 @@ import {
   CourseProps,
   CoursesQueryProps,
 } from "@/types/types.course";
+import { resetHeader } from "@/helper/common";
 
 const BelowHero = () => {
   const [active, setActive] = useState<CategoryEnum>(CategoryEnum.design);
@@ -20,7 +21,9 @@ const BelowHero = () => {
   const courses: CourseCategorySortedProps = modifyDivideIntoCategories(
     data?.getCourses?.data as CourseProps[]
   );
-  // console.log("courses", courses);
+  useEffect(() => {
+    resetHeader();
+  }, []);
   return (
     <>
       {/* TAB BUTTONS */}

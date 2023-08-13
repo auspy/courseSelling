@@ -14,6 +14,7 @@ import ButtonSec from "../buttons/ButtonSec";
 import { useRecoilState } from "recoil";
 import { atomUserName } from "@/state/atoms/atom.username";
 import { ContextHeaderSticky } from "@/state/contexts/context.header";
+import ButtonsHeroHome from "../buttons/ButtonsHeroHome";
 
 const linkClass = `semi14-os caps`;
 const items: LinkItem[] = [
@@ -69,9 +70,8 @@ const Navigation = () => {
 export default Navigation;
 const list = (sticky: boolean) =>
   sticky ? (
-    <div className="frc" style={{ position: "relative", top: 3 }}>
-      <Button buttonStyle={{}} buttonClass="mr25" value="Try demo" />
-      <ButtonSec value="explore" />
+    <div className="frc" style={{ position: "relative", top: 3, gap: 20 }}>
+      <ButtonsHeroHome />
     </div>
   ) : (
     items.map((item, index) => (

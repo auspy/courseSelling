@@ -31,7 +31,7 @@ export enum PricingType {
   Basic,
   Premium,
 }
-type PricingFeatures = {
+export type PricingFeatures = {
   feature: string;
   available?: boolean;
 };

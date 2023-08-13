@@ -48,3 +48,12 @@ export const generateRandomInt = (max: number, min: number = 0): number => {
 export const generatePurchaseCount = (): number => {
   return Number((Math.random() * 10 ** (Math.random() * 8)).toFixed());
 };
+
+export const resetHeader = () => {
+  const header = document.getElementById("header");
+  if (header) {
+    header.style.opacity = "1";
+    header.classList.remove("sticky");
+    document.body.style.paddingTop = "0px";
+  }
+};

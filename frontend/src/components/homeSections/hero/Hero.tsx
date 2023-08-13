@@ -1,11 +1,10 @@
 import Heading from "@/components/text/Heading";
 import HeroLeftContainer from "./HeroLeftContainer";
 import HeroImgs from "./HeroImgs";
-import Button from "@/components/buttons/Button";
-import ButtonSec from "@/components/buttons/ButtonSec";
 import HeroStyleCurve from "@/static/parts/curves/HeroStyleCurve";
-import HeroBtnCurve from "@/static/parts/curves/HeroBtnCurve";
 import Header from "@/components/header/Header";
+import ButtonsHeroHome from "@/components/buttons/ButtonsHeroHome";
+import HeroBtnCurve from "@/static/parts/curves/HeroBtnCurve";
 
 const Hero = () => {
   return (
@@ -89,8 +88,7 @@ const Hero = () => {
                   className="frcsb mt60"
                   style={{ position: "relative", rowGap: 10, columnGap: 20 }}
                 >
-                  <Button buttonStyle={{}} buttonClass="" value="Try demo" />
-                  <ButtonSec value="explore" />
+                  <ButtonsHeroHome />
                   <div
                     style={{
                       position: "absolute",

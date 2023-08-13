@@ -44,7 +44,7 @@ const CourseHeader = ({
               </h4>
             )}
             {purchaseCount && isDesktop && (
-              <p className="medi14" style={{ opacity: 0.7 }}>
+              <p className="medi14 mt5" style={{ opacity: 0.7 }}>
                 {purchaseCount} students enrolled
               </p>
             )}

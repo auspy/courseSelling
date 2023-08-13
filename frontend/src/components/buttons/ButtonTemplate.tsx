@@ -3,6 +3,7 @@ import styles from "../../static/styles/button.module.scss";
 import { ButtonTemplateProps } from "@/types/types.button";
 import { CircularProgress } from "@/components/thirdParty/mui";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const ButtonTemplate = ({
   value = "Click me",
@@ -22,6 +23,7 @@ const ButtonTemplate = ({
   loading = false,
 }: ButtonTemplateProps) => {
   const router = useRouter();
+  const [clicked, setClicked] = useState(false);
   if (href) {
     onClick = () => {
       router.push(href);
@@ -32,7 +34,10 @@ const ButtonTemplate = ({
       {/* <div style={{ position: "relative" }}> */}
       <button
         type={type}
-        onClick={onClick}
+        onClick={(e) => {
+          setClicked(true);
+          onClick && onClick(e);
+        }}
         disabled={disabled}
         style={{
           height: height,
@@ -51,7 +56,11 @@ const ButtonTemplate = ({
             className={`${styles.text} ${buttonTextClass}`}
             style={{ ...buttonTextStyle }}
           >
-            {loading ? <CircularProgress color={"inherit"} size={16} /> : value}
+            {loading || clicked ? (
+              <CircularProgress color={"inherit"} size={16} />
+            ) : (
+              value
+            )}
           </div>
           {buttonBody}
         </div>
