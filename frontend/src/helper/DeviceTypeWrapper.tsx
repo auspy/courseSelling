@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { DeviceTypeContext } from "../state/contexts/context";
+import { ContextDeviceType } from "../state/contexts/context";
 import { DeviceTypeEnum } from "@/types/types.ui";
 
 // uses recoil and react code
@@ -26,9 +26,9 @@ const DeviceTypeWrapper = ({ children }: React.PropsWithChildren) => {
   }, []);
   return (
     <>
-      <DeviceTypeContext.Provider value={device}>
+      <ContextDeviceType.Provider value={device}>
         {children}
-      </DeviceTypeContext.Provider>
+      </ContextDeviceType.Provider>
     </>
   );
 };

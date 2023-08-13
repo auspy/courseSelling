@@ -6,6 +6,7 @@ import Train from "@/components/homeSections/train/Train";
 import Pricing from "@/components/homeSections/pricing/Pricing";
 import Testi from "@/components/homeSections/testi/Testi";
 import "@/static/styles/home.scss";
+import Footer from "@/components/footer/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Train />
       <Pricing />
       <Testi />
+      <Footer />
     </div>
   );
 }

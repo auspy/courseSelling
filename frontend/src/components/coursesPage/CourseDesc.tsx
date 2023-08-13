@@ -47,7 +47,7 @@ const CourseDetails = ({
   courseData,
   deviceType,
 }: CourseDetailsProps) => {
-  console.log("courseDetails is ssr");
+  // console.log("courseDetails is ssr");
   return (
     <>
       <div style={{ width: "100%", ...styleContainer }}>

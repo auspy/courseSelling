@@ -4,14 +4,14 @@ import CurveSlider from "@/components/slider/CurveSlider";
 import Heading from "@/components/text/Heading";
 import { dummyPricingData } from "@/data/dummy/data.pricing";
 import muiTheme from "@/helper/muiTheme";
-import { DeviceTypeContext } from "@/state/contexts/context";
+import { ContextDeviceType } from "@/state/contexts/context";
 import { PricingType, RotateType } from "@/types/types.card";
 import { ThemeProvider, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useContext, useState } from "react";
 
 const Pricing = () => {
   const [active, setActive] = useState(PricingType.Basic);
-  const deviceType = useContext(DeviceTypeContext);
+  const deviceType = useContext(ContextDeviceType);
   const isDesktop = deviceType === "desktop";
   const isTablet = deviceType === "tablet";
   type OrderType = (1 | 2 | 3)[];

@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { useRecoilState } from "recoil";
 import HeaderDashboard from "./HeaderDashboard";
 import LoginToContinue from "@/components/fallbacks/LoginToContinue";
-import { DeviceTypeContext } from "@/state/contexts/context";
+import { ContextDeviceType } from "@/state/contexts/context";
 import BottomNavigation from "@/components/menus/BottomNavigation";
 
 interface DashLayoutProps extends React.PropsWithChildren {}
@@ -15,7 +15,7 @@ const DashLayout = ({ children }: DashLayoutProps) => {
   const [active, setActive] = useState<string>("Courses");
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
   const [userState] = useRecoilState(atomUserName);
-  const deviceType = useContext(DeviceTypeContext);
+  const deviceType = useContext(ContextDeviceType);
   const isDesktop = deviceType === "desktop";
   const menu: LeftMenuItemProps[] = dummyLeftMenuItems as LeftMenuItemProps[];
   const child = userState.role == "ADMIN" ? children : <LoginToContinue />;

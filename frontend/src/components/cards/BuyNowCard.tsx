@@ -1,15 +1,17 @@
+"use client";
 import Image from "next/image";
 import { defaultCourseImg } from "@/helper/constants.global";
 import { BuyNowCardProps } from "@/types/types.card";
 import PurchaseCourse from "@/components/coursesPage/PurchaseCourse";
-import { DeviceTypeEnum } from "@/types/types.ui";
 import CourseDetails from "../coursesPage/CourseDesc";
+import { useEffect } from "react";
 
 const BuyNowCard = ({
   src = defaultCourseImg.src,
   alt = defaultCourseImg.alt,
   price,
   discount,
+  style,
   _id,
   courseDetails,
   saleAlarm = (
@@ -18,13 +20,29 @@ const BuyNowCard = ({
     </>
   ),
 }: BuyNowCardProps) => {
+  // console.log("is client");
+  useEffect(() => {
+    const handleEvent = () => {
+      const buynowCard = document.getElementById("buynowcard");
+      if (buynowCard && buynowCard.parentElement) {
+        let width = buynowCard.parentElement.offsetWidth - 347;
+        buynowCard.style.setProperty(
+          "--x-buynowcard",
+          width ? `${width}px` : "853px"
+        );
+      }
+    };
+    window.addEventListener("resize", handleEvent);
+    return () => {
+      window.removeEventListener("resize", handleEvent);
+    };
+  }, []);
   const isDesktop = courseDetails.deviceType == "desktop";
   const isTablet = courseDetails.deviceType == "tablet";
   const isMobile = courseDetails.deviceType == "mobile";
   const desktopContainerStyle: React.CSSProperties = {
     width: 307,
-    right: 20,
-    top: 20,
+    transform: "translate(var(--x-buynowcard), -45%)",
     position: "absolute",
   };
   const mobileContainerStyle: React.CSSProperties = {
@@ -33,6 +51,7 @@ const BuyNowCard = ({
   return (
     <>
       <div
+        id="buynowcard"
         className="fcc"
         style={{
           ...(isDesktop ? desktopContainerStyle : mobileContainerStyle),
@@ -40,6 +59,7 @@ const BuyNowCard = ({
           boxShadow: "0px 5px 15px 0px rgba(4, 4, 4, 0.30)",
           borderRadius: 5,
           backgroundColor: "var(--dark-bg)",
+          ...style,
         }}
       >
         <div
@@ -62,7 +82,7 @@ const BuyNowCard = ({
         <div className={`p20 w100 ${""}`}>
           {!isDesktop && <CourseDetails {...courseDetails} />}
           <div
-            className={`w100 mt20 ${isTablet ? "frcsb" : isMobile && "frc"}`}
+            className={`w100 ${isTablet ? "frcsb" : isMobile && "frc"}`}
             style={{
               ...(isMobile ? { flexWrap: "wrap" } : {}),
             }}
@@ -91,7 +111,7 @@ const BuyNowCard = ({
               </p>
             </div>
             {/* BUTTON */}
-            <PurchaseCourse amount={price} _id={_id} />
+            <PurchaseCourse amount={price} _id={_id} buttonClass="mt20" />
           </div>
         </div>
       </div>

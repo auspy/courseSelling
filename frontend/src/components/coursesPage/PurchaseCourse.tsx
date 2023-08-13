@@ -7,9 +7,17 @@ import { atomUserName } from "@/state/atoms/atom.username";
 import { useRecoilState } from "recoil";
 import atomToast from "@/state/atoms/atom.toast";
 import Button from "../buttons/Button";
-import { DeviceTypeContext } from "@/state/contexts/context";
-const ButtonBuyNow = ({ amount, _id }: { amount: number; _id: string }) => {
-  const deviceType = useContext(DeviceTypeContext);
+import { ContextDeviceType } from "@/state/contexts/context";
+const ButtonBuyNow = ({
+  amount,
+  _id,
+  buttonClass,
+}: {
+  amount: number;
+  _id: string;
+  buttonClass?: string;
+}) => {
+  const deviceType = useContext(ContextDeviceType);
   const isMobile = deviceType === "mobile";
   const [purchase, { loading }] = useMutation(PURCHASE);
   const [clicked, setClicked] = useState<boolean>(false);
@@ -55,7 +63,7 @@ const ButtonBuyNow = ({ amount, _id }: { amount: number; _id: string }) => {
         disabled={loading || clicked}
         loading={loading || clicked}
         value="buy now"
-        buttonClass="mt20"
+        buttonClass={buttonClass}
         onClick={handleClick}
       />
     );
@@ -66,7 +74,7 @@ const ButtonBuyNow = ({ amount, _id }: { amount: number; _id: string }) => {
         disabled={loading || clicked}
         loading={loading || clicked}
         value="buy now"
-        buttonClass="mt20"
+        buttonClass={buttonClass}
         onClick={handleClick}
       />
     </>

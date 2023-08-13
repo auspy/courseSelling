@@ -1,22 +1,12 @@
 import CoursePage from "@/components/coursesPage/CoursePage";
-import Header from "@/components/header/Header";
+import HeaderAnimateScrollFadeWrapper from "@/components/header/HeaderAnimateScrollFadeWrapper";
 
 export default function Page({ params }: { params: { id: string } }) {
   return (
     <>
-      <CoursePage
-        id={params.id}
-        header={
-          <div
-            className="topContainer"
-            style={{
-              borderBottom: "1px solid var(--light-bg)",
-            }}
-          >
-            <Header />
-          </div>
-        }
-      />
+      <HeaderAnimateScrollFadeWrapper>
+        <CoursePage id={params.id} />
+      </HeaderAnimateScrollFadeWrapper>
     </>
   );
 }

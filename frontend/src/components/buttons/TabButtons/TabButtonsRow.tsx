@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import TabButton from "./TabButton";
-import { DeviceTypeContext } from "@/state/contexts/context";
+import { ContextDeviceType } from "@/state/contexts/context";
 import { DeviceTypeEnum } from "@/types/types.ui";
 
 type TabButtonsRowProps = {
@@ -17,7 +17,7 @@ const TabButtonsRow = ({
   buttonList,
   buttonStyle,
 }: TabButtonsRowProps) => {
-  const deviceType = useContext(DeviceTypeContext);
+  const deviceType = useContext(ContextDeviceType);
   const isDesktop = deviceType == DeviceTypeEnum.desktop;
   const smallerDevicesButtonStyle = {
     padding: 20,

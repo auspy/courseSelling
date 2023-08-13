@@ -2,7 +2,7 @@
 import { ListProps } from "@/types/types.list";
 import ButtonThird from "../buttons/ButtonThird";
 import { useContext, useState } from "react";
-import { DeviceTypeContext } from "@/state/contexts/context";
+import { ContextDeviceType } from "@/state/contexts/context";
 
 const List = ({
   data,
@@ -15,7 +15,7 @@ const List = ({
   listClass,
   listStyle,
 }: ListProps) => {
-  const deviceType = useContext(DeviceTypeContext);
+  const deviceType = useContext(ContextDeviceType);
   const [showMore, setShowMore] = useState(1);
   const showViewMore =
     maxColumns && maxRows && data.length > maxColumns * maxRows;

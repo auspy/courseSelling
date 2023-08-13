@@ -1,6 +1,6 @@
 import { DeviceTypeEnum } from "@/types/types.ui";
 import { createContext } from "react";
 
-export const DeviceTypeContext = createContext<DeviceTypeEnum>(
+export const ContextDeviceType = createContext<DeviceTypeEnum>(
   DeviceTypeEnum.desktop
 );

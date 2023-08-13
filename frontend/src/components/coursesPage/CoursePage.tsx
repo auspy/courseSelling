@@ -15,14 +15,10 @@ import { modifyCoursesData } from "@/data/modify/modify.courses";
 import { getClient } from "@/api/graphql/ApolloClient";
 import CourseDetails from "./CourseDesc";
 import { DeviceTypeEnum } from "@/types/types.ui";
+import CourseHeader from "../header/CourseHeader";
 
-const CoursePage = async ({
-  header,
-  id,
-}: {
-  header: React.ReactNode;
-  id: string;
-}) => {
+const CoursePage = async ({ id }: { id: string }) => {
+  console.log("course apage is ssr");
   const { data } = await getClient().query<CourseQueryProps>({
     query: GET_COURSE,
     variables: { id },
@@ -37,7 +33,12 @@ const CoursePage = async ({
   const foundCourses = coursesData?.getCourses?.status == "success";
   return (
     <div className="topContainer" style={{ height: "100%", paddingBottom: 80 }}>
-      {header}
+      <CourseHeader
+        heading={dataReceived.title}
+        purchaseCount={dataReceived.purchaseCount}
+        price={dataReceived.price}
+        _id={dataReceived._id}
+      />
       <div
         className={`container1200 ${!foundCourse && "fcc"}`}
         style={{ height: "100%" }}

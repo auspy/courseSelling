@@ -1,29 +1,30 @@
+"use client";
 import Link from "next/link";
 import { LinkItem } from "@/types/types.text";
 import ButtonLogin from "../buttons/ButtonLogin";
 import { DeviceTypeEnum } from "@/types/types.ui";
 import { IconButton, MenuRounded } from "@/components/thirdParty/mui";
 import { useContext, useState } from "react";
-import { DeviceTypeContext } from "@/state/contexts/context";
+import { ContextDeviceType } from "@/state/contexts/context";
 import { Drawer, ThemeProvider } from "@mui/material";
 import muiTheme from "@/helper/muiTheme";
 import { CloseRounded } from "@mui/icons-material";
 import Button from "../buttons/Button";
 import ButtonSec from "../buttons/ButtonSec";
+import { useRecoilState } from "recoil";
+import { atomUserName } from "@/state/atoms/atom.username";
+import { ContextHeaderSticky } from "@/state/contexts/context.header";
 
 const linkClass = `semi14-os caps`;
 const items: LinkItem[] = [
   { name: "explore", href: "/courses", class: linkClass },
-  // { name: "purchased", href: "/courses/purchased", class: linkClass },
 ];
 
-// type NavigationProps = {
-//   active: string;
-//   setActive: React.Dispatch<React.SetStateAction<string>>;
-// };
-
-const Navigation = ({ sticky }: { sticky: boolean }) => {
-  const deviceType = useContext(DeviceTypeContext);
+const Navigation = () => {
+  const sticky = useContext(ContextHeaderSticky);
+  const [userState] = useRecoilState(atomUserName);
+  const loggedIn = userState.username != "" && userState.role != "";
+  const deviceType = useContext(ContextDeviceType);
   const isDesktop = deviceType == DeviceTypeEnum.desktop;
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
@@ -33,7 +34,7 @@ const Navigation = ({ sticky }: { sticky: boolean }) => {
     <>
       <div className="frc" style={{ gap: 25 }}>
         {isDesktop ? (
-          list(sticky)
+          list(sticky && loggedIn)
         ) : (
           <IconButton aria-label="menu" color="inherit" onClick={toggleDrawer}>
             <MenuRounded color="inherit" />
@@ -56,7 +57,7 @@ const Navigation = ({ sticky }: { sticky: boolean }) => {
             <h4 className="upper semi12 mb20" style={{ opacity: 0.4 }}>
               Menu
             </h4>
-            {list(sticky)}
+            {list(sticky && loggedIn)}
           </Drawer>
         </ThemeProvider>
         <ButtonLogin />
