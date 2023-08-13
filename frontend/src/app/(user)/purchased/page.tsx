@@ -8,6 +8,8 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { atomUserName } from "@/state/atoms/atom.username";
 import { useRecoilState } from "recoil";
 import { GET_PURCHASED_COURSES } from "@/api/graphql/gql";
+import { useEffect } from "react";
+import { resetHeader } from "@/helper/common";
 
 // i tried using getClient here but it was not working because cache was being sent with the query
 const Purchased = () => {
@@ -21,6 +23,9 @@ const Purchased = () => {
     !userState.username ||
     userState.role == "ADMIN";
   console.log("purchased courses", JSON.stringify(pCourses));
+  useEffect(() => {
+    resetHeader();
+  }, []);
   const foundCourses = pCourses?.status == "success" && pCourses?.data?.length;
   return (
     <>

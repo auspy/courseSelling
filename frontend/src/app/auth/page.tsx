@@ -11,7 +11,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import muiTheme from "@/helper/muiTheme";
@@ -24,6 +24,7 @@ import { atomUserName } from "@/state/atoms/atom.username";
 import LOGIN from "@/api/graphql/mutations/login.graphql";
 import REGISTER from "@/api/graphql/mutations/register.graphql";
 import atomToast from "@/state/atoms/atom.toast";
+import { resetHeader } from "@/helper/common";
 
 export default function Login() {
   const params = useSearchParams().get("t");
@@ -142,6 +143,9 @@ export default function Login() {
     }
     console.log("query data", data, loading);
   };
+  useEffect(() => {
+    resetHeader();
+  }, []);
   return (
     <>
       <div

@@ -64,6 +64,7 @@ const Hero = () => {
                       backgroundColor: "var(--white)",
                       borderRadius: 20,
                       height: 74,
+                      lineHeight: "80px",
                     }}
                     highlightTextClass="mr10"
                     type={0}
@@ -75,7 +76,9 @@ const Hero = () => {
               }
               descClass="mt20"
               descStyle={{
-                opacity: 0.8,
+                opacity: 0.7,
+                fontWeight: 400,
+                lineHeight: "150%",
               }}
               containerStyle={{
                 maxWidth: 438,
