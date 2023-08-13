@@ -11,7 +11,7 @@ const HeaderAnimateScrollFadeWrapper = ({
     // setActive(path[path.length - 1]);
     const handleHeader = () => {
       const header = document.getElementById("header");
-      if (header) {
+      if (header && document.body.scrollHeight > 1400) {
         const currentScroll = window.scrollY;
         const scrollThreshold = 770;
         const fadeStart = 493; // Adjust as needed
