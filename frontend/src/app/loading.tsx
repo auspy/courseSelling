@@ -14,6 +14,7 @@ const loading = () => {
     >
       <div className="fcc">
         <Image
+          priority
           src={"/images/loading1.gif"}
           alt="loading"
           width={100}

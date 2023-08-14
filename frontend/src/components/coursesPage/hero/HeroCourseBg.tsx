@@ -24,7 +24,7 @@ const HeroCoursesBg = ({
             backgroundImage: "url(/svgs/coursesHeroBg.svg)",
           }}
         >
-          <Header />
+          <Header style={{ paddingInline: 0 }} />
           <div className="gcc" style={{ height: heroHeight }}>
             {children}
           </div>

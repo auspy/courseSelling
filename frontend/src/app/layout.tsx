@@ -31,7 +31,7 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body className={`${openSans.className} fcc`}>
+      <body className={`${openSans.className} fcc`} style={{ height: "100%" }}>
         <ApolloWrapper>
           <RecoilWrapper>
             <DeviceTypeWrapper>

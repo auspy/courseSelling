@@ -125,6 +125,7 @@ const Testi = () => {
           }}
         >
           <Image
+            priority
             src={dummyTestimonials[active].img.src}
             alt={dummyTestimonials[active].img.alt}
             fill

@@ -32,10 +32,16 @@ const resolverAuth = {
       };
     }
     // add token to authorization header
-    context.res.cookie("authToken", token, {
+    const env = process.env.NODE_ENV;
+    const isProd = env === "production";
+    const cookieOptions = {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
-    });
+    };
+    if (isProd) {
+      cookieOptions.secure = true;
+    }
+    context.res.cookie("authToken", token, cookieOptions);
     console.log("Login success");
     return {
       msg: "login success",

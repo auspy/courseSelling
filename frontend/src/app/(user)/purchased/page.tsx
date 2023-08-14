@@ -41,26 +41,30 @@ const Purchased = () => {
           }}
           gridClass="mt60"
         />
-      ) : needLogin ? (
-        <h4 className="mt20">
-          <Link href={"/auth"}>
-            <span style={{ color: "var(--primary)" }}>
-              <u>Login as user</u>
-            </span>
-          </Link>
-          {" to view purchased courses"}
-        </h4>
       ) : (
-        <h4 className="mt20">
-          {"No Courses Found"}
-          <Link
-            href={"/courses"}
-            className="ml5"
-            style={{ color: "var(--primary)" }}
-          >
-            <u>Explore Courses!</u>
-          </Link>
-        </h4>
+        <div className="fcc" style={{ height: "50vh" }}>
+          {needLogin ? (
+            <h4 className="mt20">
+              <Link href={"/auth"}>
+                <span style={{ color: "var(--primary)" }}>
+                  <u>Login as user</u>
+                </span>
+              </Link>
+              {" to view purchased courses"}
+            </h4>
+          ) : (
+            <h4 className="mt20">
+              {"No Courses Found"}
+              <Link
+                href={"/courses"}
+                className="ml5"
+                style={{ color: "var(--primary)" }}
+              >
+                <u>Explore Courses!</u>
+              </Link>
+            </h4>
+          )}
+        </div>
       )}
       {/* <BelowHero /> */}
     </>
