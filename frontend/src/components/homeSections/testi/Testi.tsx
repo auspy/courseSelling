@@ -3,9 +3,9 @@ import Heading from "@/components/text/Heading";
 import { useEffect, useRef, useState } from "react";
 import IconLeftArrow from "@/../public/icons/IconLeftArrow";
 import IconRightArrow from "@/../public/icons/IconRightArrow";
-import ArrowButtonCurve from "@/static/parts/curves/ArrowButtonCurve";
+import ArrowButtonCurve from "../../../static/parts/curves/ArrowButtonCurve";
 import Image from "next/image";
-import TestiImgCurve from "@/static/parts/curves/TestiImgCurve";
+import TestiImgCurve from "../../../static/parts/curves/TestiImgCurve";
 import { dummyTestimonials } from "@/data/dummy/data.testi";
 
 const Testi = () => {

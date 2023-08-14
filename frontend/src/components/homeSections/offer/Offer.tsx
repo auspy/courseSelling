@@ -1,7 +1,7 @@
 import Heading from "@/components/text/Heading";
 import RightText from "./RightText";
 import OfferBox from "./OfferBox";
-import OfferCurve from "@/static/parts/curves/OfferCurve";
+import OfferCurve from "../../../static/parts/curves/OfferCurve";
 
 const Offer = () => {
   return (

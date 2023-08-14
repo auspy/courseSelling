@@ -71,7 +71,7 @@ app.use(
 );
 
 await new Promise((resolve) => httpServer.listen({ port }, resolve));
-console.log(`🚀 Server ready at http://localhost:${port}`);
+console.log(`🚀 Server ready at ${port}`);
 
 // MONGOOSE
 const { connect, connection: conn } = mongoose;
@@ -83,7 +83,7 @@ connect(process.env.MONGO_URI, {
 });
 
 conn.once("open", (_) => {
-  console.log("Database connected:", mongoUrl);
+  console.log("Database connected");
 });
 
 conn.on("error", (err) => {

@@ -1,6 +1,6 @@
 import IconStar from "@/../public/icons/IconStar";
 import IconStarBlur from "@/../public/icons/IconStarBlur";
-import PricingCurve from "@/static/parts/curves/PricingCurve";
+import PricingCurve from "../../static/parts/curves/PricingCurve";
 import { PricingCardProps, RotateType } from "@/types/types.card";
 
 const PricingCard = ({

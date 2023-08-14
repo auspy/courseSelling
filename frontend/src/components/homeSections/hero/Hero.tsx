@@ -1,10 +1,10 @@
 import Heading from "@/components/text/Heading";
 import HeroLeftContainer from "./HeroLeftContainer";
 import HeroImgs from "./HeroImgs";
-import HeroStyleCurve from "@/static/parts/curves/HeroStyleCurve";
+import HeroStyleCurve from "../../../static/parts/curves/HeroStyleCurve";
 import Header from "@/components/header/Header";
 import ButtonsHeroHome from "@/components/buttons/ButtonsHeroHome";
-import HeroBtnCurve from "@/static/parts/curves/HeroBtnCurve";
+import HeroBtnCurve from "../../../static/parts/curves/HeroBtnCurve";
 
 const Hero = () => {
   return (

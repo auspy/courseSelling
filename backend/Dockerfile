@@ -39,4 +39,4 @@ COPY . .
 EXPOSE 3002
 
 # Run the application.
-CMD ["nodemon", "server"]
+CMD ["pnpm", "start"]
