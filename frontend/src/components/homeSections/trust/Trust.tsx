@@ -22,6 +22,7 @@ const Trust = () => {
       >
         {dummyLogos.map((item, index) => (
           <Image
+            priority
             key={item.alt + index}
             src={item.src}
             alt={item.alt}

@@ -36,8 +36,9 @@ const resolverAuth = {
     const isDev = env === "development";
     const cookieOptions = {
       httpOnly: true,
-      domain: isDev ? "localhost" : "https://theskillz.vercel.app",
+      domain: isDev ? "localhost" : "theskillz.vercel.app",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
+      sameSite: "None",
     };
     if (!isDev) {
       cookieOptions.secure = true;
