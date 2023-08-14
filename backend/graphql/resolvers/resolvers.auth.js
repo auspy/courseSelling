@@ -33,12 +33,12 @@ const resolverAuth = {
     }
     // add token to authorization header
     const env = process.env.NODE_ENV;
-    const isProd = env === "production";
+    const isDev = env === "development";
     const cookieOptions = {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     };
-    if (isProd) {
+    if (!isDev) {
       cookieOptions.secure = true;
     }
     context.res.cookie("authToken", token, cookieOptions);
