@@ -36,7 +36,7 @@ const FormNewCourse = ({
   _id,
 }: FormCourse) => {
   const toUpdate = _id ? true : false;
-  console.log("toUpdate", toUpdate);
+  // console.log("toUpdate", toUpdate);
   const [titlee, setTitle] = useState<string>(title);
   const [desc, setDesc] = useState<string>(description);
   const [amt, setAmt] = useState(price);
@@ -91,7 +91,7 @@ const FormNewCourse = ({
     setClicked(false);
   };
   const onCourseCreated = (data: any) => {
-    console.log("data", data);
+    // console.log("data", data);
     if (data?.addCourse?.status === "success") {
       setToast({
         text: "Course Created Successfully 👍",
@@ -135,7 +135,7 @@ const FormNewCourse = ({
     image.length > 250 ||
     image.length < 10 ||
     clicked;
-  console.log(loading, buttonDisabled, data);
+  // console.log(loading, buttonDisabled, data);
   return (
     <>
       <ThemeProvider theme={muiTheme}>
@@ -168,7 +168,7 @@ const FormNewCourse = ({
             value={amt}
             // error={price == 0}
             onChange={(e) => {
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setAmt(e.target.value as unknown as number);
             }}
           />

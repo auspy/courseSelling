@@ -7,7 +7,6 @@
 **/.classpath
 **/.dockerignore
 **/.env.production
-**/.env.development
 **/.env
 **/.git
 **/.gitignore

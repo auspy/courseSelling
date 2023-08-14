@@ -77,10 +77,10 @@ export default function Login() {
     return "";
   };
   const handleButtonClick = () => {
-    console.log(username, password);
+    // console.log(username, password);
     setClicked(true);
     if (username?.length > 3 && password?.length > 3) {
-      console.log("clicked");
+      // console.log("clicked");
 
       login({
         variables: {
@@ -100,7 +100,7 @@ export default function Login() {
         onCompleted: (data) => {
           setUsername("");
           setPassword("");
-          console.log("completed 2", data);
+          // console.log("completed 2", data);
           if (
             data?.login?.status == "failed" ||
             data?.register?.status == "failed"
@@ -141,7 +141,7 @@ export default function Login() {
         },
       });
     }
-    console.log("query data", data, loading);
+    // console.log("query data", data, loading);
   };
   useEffect(() => {
     resetHeader();

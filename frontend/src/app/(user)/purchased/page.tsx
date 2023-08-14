@@ -22,7 +22,7 @@ const Purchased = () => {
     (userState.username && userState.username.length == 0) ||
     !userState.username ||
     userState.role == "ADMIN";
-  console.log("purchased courses", JSON.stringify(pCourses));
+  // console.log("purchased courses", JSON.stringify(pCourses));
   useEffect(() => {
     resetHeader();
   }, []);

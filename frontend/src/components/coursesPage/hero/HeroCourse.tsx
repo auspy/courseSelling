@@ -19,7 +19,7 @@ const HeroCourse = ({ courseData, children }: HeroCourseProps) => {
     transition: "transform 0.4s ease",
   };
   const isDesktop = deviceType == "desktop";
-  console.log("isDesktop", sticky && isDesktop ? stickyStyle : {});
+  // console.log("isDesktop", sticky && isDesktop ? stickyStyle : {});
   return (
     <div className="w100 mt40" id="containerCourse">
       {/* HERO */}

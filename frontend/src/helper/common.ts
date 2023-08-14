@@ -16,7 +16,7 @@ export const toFetch = async ({
   body,
   headers,
 }: FetchProps) => {
-  console.log("in toFetch", url, method, body, headers);
+  // console.log("in toFetch", url, method, body, headers);
   try {
     const data = await fetch(url, {
       method: method,

@@ -28,7 +28,7 @@ const Pricing = () => {
   const handleOrder = (selected: 0 | 1 | 2) => {
     // if order of selected order[PricingType.selected] == 2 no change
     // else incment till not 2
-    console.log(order, selected);
+    // console.log(order, selected);
     if (order[selected] == 2) {
       return;
     } else {
@@ -40,7 +40,7 @@ const Pricing = () => {
           continue;
         }
         ord[i] = arr.pop()!;
-        console.log(ord, arr);
+        // console.log(ord, arr);
       }
       setOrder(ord);
     }

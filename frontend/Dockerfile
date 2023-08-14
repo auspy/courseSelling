@@ -7,12 +7,13 @@ FROM node:${NODE_VERSION}-alpine AS builder
 RUN --mount=type=cache,target=/root/.npm \
     npm install -g pnpm@${PNPM_VERSION}
 
-WORKDIR /usr/src/app
+WORKDIR /usr/wow
 
 # Copy the package.json and pnpm-lock.yaml to leverage caching.
 COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies.
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm install --frozen-lockfile
 
 # Build the application.
@@ -26,12 +27,12 @@ FROM node:${NODE_VERSION}-alpine As runner
 RUN addgroup --system --gid 1001 nodejs \
     && adduser --system --uid 1001 nextjs
 
-WORKDIR /usr/src/app
+WORKDIR /usr/wow
 
 # Copy necessary files from the builder stage.
-COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next ./.next
-COPY --from=builder /usr/src/app/node_modules ./node_modules
-COPY --from=builder /usr/src/app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /usr/wow/.next ./.next
+COPY --from=builder /usr/wow/node_modules ./node_modules
+COPY --from=builder /usr/wow/package.json ./package.json
 
 # Set user and switch to it.
 USER nextjs
@@ -40,4 +41,4 @@ USER nextjs
 EXPOSE 3000
 
 # Run the application.
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]

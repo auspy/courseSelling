@@ -18,7 +18,7 @@ import { DeviceTypeEnum } from "@/types/types.ui";
 import CourseHeader from "../header/CourseHeader";
 
 const CoursePage = async ({ id }: { id: string }) => {
-  console.log("course apage is ssr");
+  // console.log("course apage is ssr");
   const { data } = await getClient().query<CourseQueryProps>({
     query: GET_COURSE,
     variables: { id },
