@@ -37,7 +37,13 @@ await server.start();
 // PATHS
 // to bypass cors error, accept json data
 app.use(
-  cors({ origin: ["http://localhost:3000"], credentials: true }),
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://course-selling-9mk18t0bb-auspy.vercel.app",
+    ],
+    credentials: true,
+  }),
   bodyParser.json(),
   cookieParser()
 );

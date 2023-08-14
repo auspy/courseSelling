@@ -34,6 +34,8 @@ WORKDIR /usr/src/app
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/package.json ./package.json
+COPY --from=builder /usr/src/app/public ./public  
+# Copy the public folder
 
 # Set user and switch to it.
 USER nextjs
@@ -42,4 +44,4 @@ USER nextjs
 EXPOSE 3000
 
 # Run the application.
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
