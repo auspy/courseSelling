@@ -149,6 +149,17 @@
     transform: translateY(0%);
   }
 }
+@keyframes slideInX {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
 .heroImgLeft {
   animation: slideDown 55s ease-in infinite;
 }
@@ -161,5 +172,13 @@
 .heroImgRight {
   &:hover {
     animation-play-state: paused;
+  }
+}
+@media (max-width: 620px) {
+  .heroImgLeft {
+    animation: slideInX 55s ease-in infinite;
+  }
+  .heroImgRight {
+    display: none !important;
   }
 }
