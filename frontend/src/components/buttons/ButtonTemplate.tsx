@@ -26,6 +26,7 @@ const ButtonTemplate = ({
   const [clicked, setClicked] = useState(false);
   if (href) {
     onClick = () => {
+      setClicked(true);
       router.push(href);
     };
   }
@@ -34,10 +35,7 @@ const ButtonTemplate = ({
       {/* <div style={{ position: "relative" }}> */}
       <button
         type={type}
-        onClick={(e) => {
-          setClicked(true);
-          onClick && onClick(e);
-        }}
+        onClick={onClick}
         disabled={disabled}
         style={{
           height: height,

@@ -11,16 +11,9 @@ const ButtonsHeroHome = () => {
         buttonStyle={{}}
         buttonClass=""
         value="Try demo"
-        onClick={() => {
-          router.push("/courses/64d1c6c2abe096cd3b3456b6");
-        }}
+        href="/courses/64d1c6c2abe096cd3b3456b6"
       />
-      <ButtonSec
-        value="explore"
-        onClick={() => {
-          router.push("/courses");
-        }}
-      />
+      <ButtonSec value="explore" href="/courses" />
     </>
   );
 };
