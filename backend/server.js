@@ -41,6 +41,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://course-selling-9mk18t0bb-auspy.vercel.app",
+      "https://course-selling-git-main-auspy.vercel.app",
+      "https://course-selling-pi.vercel.app",
     ],
     credentials: true,
   }),
