@@ -16,7 +16,10 @@ const HeroImgs = () => {
       >
         {/* rows */}
         {dummyHeroImgs.map((row, index) => (
-          <div key={index}>
+          <div
+            className={`heroImg${index == 0 ? "Left" : "Right"}`}
+            key={index}
+          >
             {row.map((item, i) => (
               <HeroImgContainer
                 key={item.alt + i}

@@ -125,3 +125,41 @@
 #heroBtns {
   max-width: 400px;
 }
+
+// SLIDE ANIMATION
+@keyframes slideDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.heroImgLeft {
+  animation: slideDown 55s ease-in infinite;
+}
+
+.heroImgRight {
+  animation: slideIn 55s ease-in infinite;
+}
+
+.heroImgLeft,
+.heroImgRight {
+  &:hover {
+    animation-play-state: paused;
+  }
+}

@@ -34,7 +34,10 @@ const HeroImgContainer = ({
             }}
           />
         )}
-        <span className="heroImgText bold14 caps" style={{ maxWidth: 60 }}>
+        <span
+          className="heroImgText bold14 caps"
+          style={{ maxWidth: 60, zIndex: 2 }}
+        >
           {heading || alt}
         </span>
         <div
