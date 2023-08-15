@@ -42,6 +42,7 @@ app.use(
       "http://localhost:3000",
       "https://course-selling-git-main-auspy.vercel.app",
       "https://theskillz.vercel.app",
+      "https://skillz-jxsk.onrender.com",
     ],
     credentials: true,
   }),
