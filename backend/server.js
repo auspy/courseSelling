@@ -62,7 +62,7 @@ app.use(
     context: async ({ req, res }) => {
       // console.log("Request headers", req.body);
       // Verify and decode JWT token from request headers
-      const token = req.cookies.authToken || "";
+      const token = req.headers.authorization;
       // console.log("Token found in request", token);
       try {
         if (!token) return { res };

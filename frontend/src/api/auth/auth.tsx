@@ -1,3 +1,5 @@
+import { ApolloClient } from "@apollo/client";
+
 export const authLogout = ({
   router,
   setUsername,
@@ -5,13 +7,17 @@ export const authLogout = ({
   sessionStorage,
   logoutApi,
   setClicked,
+  changePage = true,
+  client,
 }: {
   router: any;
   setUsername: any;
   localStorage: any;
   sessionStorage: any;
   logoutApi: any;
-  setClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  setClicked?: React.Dispatch<React.SetStateAction<boolean>>;
+  changePage?: boolean;
+  client: ApolloClient<Object>;
 }) => {
   try {
     // call logout api
@@ -22,9 +28,12 @@ export const authLogout = ({
     // clear atom
     setUsername("");
     // redirect to login page
-    router.push("/auth");
+    if (changePage) {
+      router.push("/auth");
+    }
+    client.clearStore();
   } catch (error) {
-    setClicked(false);
+    setClicked && setClicked(false);
     console.log("error in clientLogout", error);
   }
 };

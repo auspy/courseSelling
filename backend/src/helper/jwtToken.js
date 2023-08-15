@@ -28,7 +28,8 @@ const decryptAccessTokenMW = (req, res, next) => {
 const decryptAccessToken = (accessToken) => {
   try {
     if (accessToken) {
-      const token = accessToken;
+      // const token = accessToken; // if cookie
+      const token = accessToken.split(" ")[1]; // if header
       return jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
         if (err || !data || !data.user?.username) {
           console.log(

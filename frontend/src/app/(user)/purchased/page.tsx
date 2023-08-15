@@ -8,25 +8,34 @@ import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { atomUserName } from "@/state/atoms/atom.username";
 import { useRecoilState } from "recoil";
 import { GET_PURCHASED_COURSES } from "@/api/graphql/gql";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { resetHeader } from "@/helper/common";
+import { ContextAuthLogout } from "@/state/contexts/context.auth";
 
 // i tried using getClient here but it was not working because cache was being sent with the query
 const Purchased = () => {
   const { data } = useSuspenseQuery<CoursesQueryProps>(GET_PURCHASED_COURSES, {
     fetchPolicy: "network-only",
   });
+  const logout = useContext(ContextAuthLogout);
   const pCourses = data?.getPurchasedCourses;
   const [userState] = useRecoilState(atomUserName);
   const needLogin =
     (userState.username && userState.username.length == 0) ||
     !userState.username ||
     userState.role == "ADMIN";
-  // console.log("purchased courses", JSON.stringify(pCourses));
+  console.log("purchased courses", JSON.stringify(pCourses));
   useEffect(() => {
     resetHeader();
   }, []);
   const foundCourses = pCourses?.status == "success" && pCourses?.data?.length;
+  const invalidUser = pCourses?.msg == "Invalid user";
+  useEffect(() => {
+    if (invalidUser) {
+      console.log("invalid user");
+      logout();
+    }
+  }, [invalidUser]);
   return (
     <>
       <HeroCommon text="My" highlightText="Learnings" />

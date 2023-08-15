@@ -6,6 +6,7 @@ import { ApolloWrapper } from "@/api/graphql/ApolloWrapper";
 import RecoilWrapper from "@/state/RecoilWrapper";
 import ToastWrapper from "@/components/toast/ToastWrapper";
 import DeviceTypeWrapper from "@/helper/DeviceTypeWrapper";
+import AuthWrapper from "@/api/auth/AuthWrapper";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -35,8 +36,10 @@ export default function RootLayout({
         <ApolloWrapper>
           <RecoilWrapper>
             <DeviceTypeWrapper>
-              <ToastWrapper />
-              {children}
+              <AuthWrapper>
+                <ToastWrapper />
+                {children}
+              </AuthWrapper>
             </DeviceTypeWrapper>
           </RecoilWrapper>
         </ApolloWrapper>
