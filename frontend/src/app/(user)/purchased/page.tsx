@@ -29,13 +29,13 @@ const Purchased = () => {
     resetHeader();
   }, []);
   const foundCourses = pCourses?.status == "success" && pCourses?.data?.length;
-  const invalidUser = pCourses?.msg == "Invalid user";
-  useEffect(() => {
-    if (invalidUser) {
-      console.log("invalid user");
-      logout();
-    }
-  }, [invalidUser]);
+  // const invalidUser = pCourses?.msg == "Invalid user";
+  // useEffect(() => {
+  //   if (invalidUser) {
+  //     console.log("invalid user");
+  //     logout();
+  //   }
+  // }, [invalidUser]);
   return (
     <>
       <HeroCommon text="My" highlightText="Learnings" />
@@ -56,10 +56,12 @@ const Purchased = () => {
             <h4 className="mt20">
               <Link href={"/auth"}>
                 <span style={{ color: "var(--primary)" }}>
-                  <u>Login as user</u>
+                  <u>Login as user.</u>
                 </span>
               </Link>
-              {" to view purchased courses"}
+              {
+                " to view purchased courses. If already logged in then check internet or purchase courses."
+              }
             </h4>
           ) : (
             <h4 className="mt20">

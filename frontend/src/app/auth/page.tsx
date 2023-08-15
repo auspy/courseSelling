@@ -134,8 +134,17 @@ export default function Login() {
             JSON.stringify({ username: data.login.data?.username, role })
           );
           // set token
+          const token = data?.login?.token;
           localStorage.setItem("authToken", data?.login?.token);
-          console.log("token", data?.login?.token);
+          if (!token) {
+            setToast({
+              text: "Login failed. Try again!",
+              type: "failed",
+              secs: 5000,
+            });
+            return;
+          }
+          // console.log("token", data?.login?.token);
           setUserState({ username: data.login.data?.username, role });
           if (role == "ADMIN") {
             router.push("/dashboard");

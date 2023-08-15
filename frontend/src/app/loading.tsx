@@ -25,7 +25,7 @@ const loading = () => {
           style={{
             opacity: 0.8,
             color: "#d5d5d5",
-            maxWidth: 400,
+            maxWidth: 360,
             textAlign: "center",
           }}
         >
