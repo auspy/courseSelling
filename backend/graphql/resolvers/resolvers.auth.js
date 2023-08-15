@@ -32,18 +32,18 @@ const resolverAuth = {
       };
     }
     // add token to authorization header
-    const env = process.env.NODE_ENV;
-    const isDev = env === "development";
-    const cookieOptions = {
-      httpOnly: true,
-      domain: isDev ? "localhost" : "https://skillz-jxsk.onrender.com",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-      sameSite: "None",
-    };
-    if (!isDev) {
-      cookieOptions.secure = true;
-    }
-    context.res.cookie("authToken", token, cookieOptions);
+    // const env = process.env.NODE_ENV;
+    // const isDev = env === "development";
+    // const cookieOptions = {
+    //   httpOnly: true,
+    //   domain: isDev ? "localhost" : "https://skillz-jxsk.onrender.com",
+    //   maxAge: 24 * 60 * 60 * 1000, // 1 day
+    //   sameSite: "None",
+    // };
+    // if (!isDev) {
+    //   cookieOptions.secure = true;
+    // }
+    // context.res.cookie("authToken", token, cookieOptions);
     console.log("Login success");
     return {
       msg: "login success",

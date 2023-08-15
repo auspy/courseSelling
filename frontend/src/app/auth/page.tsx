@@ -25,6 +25,7 @@ import LOGIN from "@/api/graphql/mutations/login.graphql";
 import REGISTER from "@/api/graphql/mutations/register.graphql";
 import atomToast from "@/state/atoms/atom.toast";
 import { resetHeader } from "@/helper/common";
+import { setCookie } from "cookies-next";
 
 export default function Login() {
   const params = useSearchParams().get("t");
@@ -119,6 +120,7 @@ export default function Login() {
               type: "success",
               secs: 5000,
             });
+
             setPageType("login");
             setClicked(false);
             return;
@@ -132,6 +134,13 @@ export default function Login() {
             "user",
             JSON.stringify({ username: data.login.data?.username, role })
           );
+          // set cookie
+          console.log("setting cookie", process.env.NODE_ENV);
+          setCookie("authToken", data?.login?.token, {
+            maxAge: 60 * 60 * 24 * 1,
+            secure: process.env.NODE_ENV === "production",
+          });
+          console.log("token", data?.login?.token);
           setUserState({ username: data.login.data?.username, role });
           if (role == "ADMIN") {
             router.push("/dashboard");
